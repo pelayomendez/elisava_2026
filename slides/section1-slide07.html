@@ -15,22 +15,22 @@
         <div class="circle-overlay" style="width: 600px; height: 600px; top: -100px; right: -100px; opacity: 0.6;"></div>
         <div class="circle-overlay" style="width: 500px; height: 500px; bottom: -200px; left: -100px; opacity: 0.4;"></div>
         
-        <div class="absolute top-8 left-10 z-20">
+        <div class="absolute top-8 right-10 z-20">
             <div class="borcelle-pill">FULL STACK + AI</div>
         </div>
         
-        <div class="z-10 px-20 pt-16 flex-1 flex flex-col justify-center">
+        <div class="z-10 px-20 pt-16 pb-32 flex-1 flex flex-col justify-center">
             <div class="mb-4">
                 <span class="label-text" style="color: rgba(0, 0, 0, 0.5);">PAGES & ROUTING</span>
             </div>
             
             <h1 class="header-text mb-6" style="font-size: 4rem;">
-                ROUTING<br>AUTOMÁTICO
+                AUTOMATIC<br>ROUTING
             </h1>
             
             <div class="max-w-4xl">
                 <p class="body-text mb-6">
-                    Astro crea rutas automáticamente basándose en la estructura de archivos en la carpeta pages/.
+                    Astro automatically creates routes based on the file structure in the pages/ folder.
                 </p>
                 
                 <div class="code-block">
@@ -39,36 +39,34 @@
 ├── pokedex.astro          →  /pokedex
 ├── about.astro            →  /about
 └── pokemon/
-    └── [id].astro         →  /pokemon/:id (dinámico)
+    └── [id].astro         →  /pokemon/:id (dynamic)
 
 
-// Usar el Layout en una página
+// Use the Layout in a page
 ---
 import Layout from '../layouts/Layout.astro';
 ---
 
-&lt;Layout title="Mi Pokédex"&gt;
-    &lt;h1&gt;¡Bienvenido a la Pokédex!&lt;/h1&gt;
+&lt;Layout title="My Pokédex"&gt;
+    &lt;h1&gt;Welcome to the Pokédex!&lt;/h1&gt;
     &lt;PokemonGallery /&gt;
 &lt;/Layout&gt;</pre>
                 </div>
                 
                 <div class="mt-4 grid grid-cols-2 gap-4">
                     <div style="background-color: rgba(220, 10, 45, 0.1); padding: 1rem; border-radius: 0.5rem;">
-                        <p class="label-text mb-2">ESTÁTICAS</p>
+                        <p class="label-text mb-2">STATIC</p>
                         <p class="body-text" style="font-size: 0.9rem;">index.astro, about.astro</p>
                     </div>
                     <div style="background-color: rgba(120, 200, 80, 0.1); padding: 1rem; border-radius: 0.5rem;">
-                        <p class="label-text mb-2">DINÁMICAS</p>
+                        <p class="label-text mb-2">DYNAMIC</p>
                         <p class="body-text" style="font-size: 0.9rem;">[id].astro, [slug].astro</p>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="absolute bottom-8 left-20 z-20">
-            <p class="website-text">MARCH 2026</p>
-        </div>
+
         
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4">
             <span class="progress-indicator" id="progressText">Slide 7/12</span>

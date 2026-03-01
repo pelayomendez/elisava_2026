@@ -15,13 +15,13 @@
         <div class="circle-overlay" style="width: 600px; height: 600px; top: -100px; right: -100px; opacity: 0.6;"></div>
         <div class="circle-overlay" style="width: 500px; height: 500px; bottom: -200px; left: -100px; opacity: 0.4;"></div>
         
-        <div class="absolute top-8 left-10 z-20">
+        <div class="absolute top-8 right-10 z-20">
             <div class="borcelle-pill">FULL STACK + AI</div>
         </div>
         
-        <div class="z-10 px-20 pt-16 flex-1">
+        <div class="z-10 px-20 pt-16 pb-32 flex-1">
             <div class="mb-4">
-                <span class="label-text" style="color: rgba(0, 0, 0, 0.5);">COMPARACIÓN</span>
+                <span class="label-text" style="color: rgba(0, 0, 0, 0.5);">COMPARISON</span>
             </div>
             
             <h1 class="header-text mb-6" style="font-size: 3.5rem;">
@@ -36,17 +36,17 @@
                     </div>
                     <div class="split-panel" style="height: calc(100% - 60px);">
                         <pre class="code-text" style="font-size: 0.8rem;">// main.js
-const listaPokemon = 
-  document.querySelector("#listaPokemon");
+const pokemonList = 
+  document.querySelector("#pokemonList");
 
-function mostrarPokemon(poke) {
+function showPokemon(poke) {
     const div = document.createElement("div");
     div.classList.add("pokemon");
     div.innerHTML = `
         &lt;img src="${poke.sprites.front_default}"&gt;
         &lt;h3&gt;${poke.name}&lt;/h3&gt;
     `;
-    listaPokemon.append(div);
+    pokemonList.append(div);
 }
 
 for (let i = 1; i <= 10; i++) {
@@ -56,7 +56,7 @@ for (let i = 1; i <= 10; i++) {
 }</pre>
                         <p class="body-text mt-3" style="font-size: 0.9rem; color: rgba(0,0,0,0.6);">
                             <i class="fas fa-exclamation-triangle mr-2"></i>
-                            Manipulación manual del DOM
+                            Manual DOM manipulation
                         </p>
                     </div>
                 </div>
@@ -88,16 +88,14 @@ const results = jsonResponse.results;
 &lt;/div&gt;</pre>
                         <p class="body-text mt-3" style="font-size: 0.9rem; color: rgba(0,0,0,0.6);">
                             <i class="fas fa-check-circle mr-2" style="color: var(--pokemon-grass);"></i>
-                            Declarativo y componentes reutilizables
+                            Declarative and reusable components
                         </p>
                     </div>
                 </div>
             </div>
         </div>
         
-        <div class="absolute bottom-8 left-20 z-20">
-            <p class="website-text">MARCH 2026</p>
-        </div>
+
         
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4">
             <span class="progress-indicator" id="progressText">Slide 5/12</span>

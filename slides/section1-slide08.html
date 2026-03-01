@@ -15,22 +15,22 @@
         <div class="circle-overlay" style="width: 600px; height: 600px; top: -100px; right: -100px; opacity: 0.6;"></div>
         <div class="circle-overlay" style="width: 500px; height: 500px; bottom: -200px; left: -100px; opacity: 0.4;"></div>
         
-        <div class="absolute top-8 left-10 z-20">
+        <div class="absolute top-8 right-10 z-20">
             <div class="borcelle-pill">FULL STACK + AI</div>
         </div>
         
-        <div class="z-10 px-20 pt-16 flex-1 flex flex-col justify-center">
+        <div class="z-10 px-20 pt-16 pb-32 flex-1 flex flex-col justify-center">
             <div class="mb-4">
                 <span class="label-text" style="color: rgba(0, 0, 0, 0.5);">DYNAMIC ROUTES</span>
             </div>
             
             <h1 class="header-text mb-6" style="font-size: 4rem;">
-                RUTAS<br>DINÁMICAS
+                DYNAMIC<br>ROUTES
             </h1>
             
             <div class="max-w-4xl">
                 <p class="body-text mb-6">
-                    Los archivos con [parámetro] crean rutas dinámicas. Perfecto para páginas de detalle como /pokemon/pikachu.
+                    Files with [parameter] create dynamic routes. Perfect for detail pages like /pokemon/pikachu.
                 </p>
                 
                 <div class="code-block">
@@ -38,7 +38,7 @@
 // pages/pokemon/[id].astro
 
 export async function getStaticPaths() {
-    // Genera todas las rutas al build
+    // Generate all routes at build time
     const response = await fetch('https://pokeapi.co/api/v2/pokemon?limit=151');
     const data = await response.json();
     
@@ -63,15 +63,13 @@ const pokemonData = await fetch(url).then(r => r.json());
                 <div class="mt-4">
                     <p class="list-text">
                         <i class="fas fa-route mr-2" style="color: var(--pokemon-blue);"></i>
-                        Genera 151 páginas estáticas al build time
+                        Generates 151 static pages at build time
                     </p>
                 </div>
             </div>
         </div>
         
-        <div class="absolute bottom-8 left-20 z-20">
-            <p class="website-text">MARCH 2026</p>
-        </div>
+
         
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4">
             <span class="progress-indicator" id="progressText">Slide 8/12</span>

@@ -15,22 +15,22 @@
         <div class="circle-overlay" style="width: 600px; height: 600px; top: -100px; right: -100px; opacity: 0.6;"></div>
         <div class="circle-overlay" style="width: 500px; height: 500px; bottom: -200px; left: -100px; opacity: 0.4;"></div>
         
-        <div class="absolute top-8 left-10 z-20">
+        <div class="absolute top-8 right-10 z-20">
             <div class="borcelle-pill">FULL STACK + AI</div>
         </div>
         
-        <div class="z-10 px-20 pt-16 flex-1 flex flex-col justify-center">
+        <div class="z-10 px-20 pt-16 pb-32 flex-1 flex flex-col justify-center">
             <div class="mb-4">
                 <span class="label-text" style="color: rgba(0, 0, 0, 0.5);">STYLING</span>
             </div>
             
             <h1 class="header-text mb-6" style="font-size: 4rem;">
-                ESTILOS<br>EN ASTRO
+                STYLING<br>IN ASTRO
             </h1>
             
             <div class="max-w-4xl">
                 <p class="body-text mb-6">
-                    Astro soporta CSS scoped, global, y CSS-in-JS. Los estilos en componentes se auto-scopean.
+                    Astro supports scoped CSS, global CSS, and CSS-in-JS. Styles in components are auto-scoped.
                 </p>
                 
                 <div class="code-block">
@@ -43,7 +43,7 @@
 &lt;/div&gt;
 
 &lt;style&gt;
-    /* Estos estilos solo afectan a ESTE componente */
+    /* These styles only affect THIS component */
     .pokemon-card {
         border: 2px solid #f7d025;
         border-radius: 12px;
@@ -58,7 +58,7 @@
 &lt;/style&gt;
 
 &lt;style is:global&gt;
-    /* Estilos globales */
+    /* Global styles */
     body {
         font-family: 'Pokemon', sans-serif;
     }
@@ -67,9 +67,7 @@
             </div>
         </div>
         
-        <div class="absolute bottom-8 left-20 z-20">
-            <p class="website-text">MARCH 2026</p>
-        </div>
+
         
         <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex items-center gap-4">
             <span class="progress-indicator" id="progressText">Slide 10/12</span>

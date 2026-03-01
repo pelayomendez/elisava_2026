@@ -88,7 +88,7 @@ body {
 .code-text {
     font-family: 'Courier New', monospace;
     font-weight: 400;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     line-height: 1.5;
     color: #000000;
 }
@@ -208,7 +208,7 @@ body {
     border-radius: 0.5rem;
     padding: 1rem;
     overflow: auto;
-    max-height: 400px;
+    max-height: 280px;
 }
 
 .code-block pre {
@@ -317,6 +317,7 @@ body {
 .px-20 { padding-left: 5rem; padding-right: 5rem; }
 .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
 .pt-20 { padding-top: 5rem; }
+.pb-32 { padding-bottom: 8rem; }
 
 .max-w-3xl { max-width: 48rem; }
 .max-w-4xl { max-width: 56rem; }
