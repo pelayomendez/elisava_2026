@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Evaluation and Tools</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&amp;family=Saira+Condensed:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dot-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(236,236,236,0.6) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.6;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .shape-top {
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 45%;
+            height: 120px;
+            background-color: #ececec;
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%);
+            z-index: 1;
+        }
+        
+        .shape-bottom {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 15%;
+            height: 120px;
+            background-color: #ececec;
+            clip-path: polygon(0 0, 100% 100%, 0 100%);
+            z-index: 1;
+        }
+        
+        .tech-pill {
+            background-color: transparent;
+            border: 2px solid #000000;
+            border-radius: 9999px;
+            padding: 0.4rem 1.2rem;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #000000;
+            font-family: 'Saira Condensed', sans-serif;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        
+        .nav-arrow {
+            background-color: #000000;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s;
+        }
+        
+        .section-title {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 800;
+            color: #000000;
+            font-size: 4.5rem; /* Adjusted for length */
+            line-height: 0.95;
+            letter-spacing: 0px;
+            text-transform: uppercase;
+        }
+        
+        .subtitle {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 700;
+            color: #000000;
+            font-size: 1.4rem;
+            text-transform: uppercase;
+            border-bottom: 2px solid #ececec;
+            padding-bottom: 0.25rem;
+            margin-bottom: 0.75rem;
+            display: inline-block;
+        }
+        
+        .body-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 500;
+            color: #333333;
+            font-size: 1rem;
+            line-height: 1.5;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.5rem;
+        }
+
+        .checklist-icon {
+            color: #000000;
+            margin-top: 0.25rem;
+            margin-right: 0.75rem;
+            font-size: 0.9rem;
+        }
+        
+        /* Tool Grid Styles */
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.25rem;
+            padding: 1rem;
+            background-color: rgba(255,255,255,0.5);
+            border-radius: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .tool-card {
+            background: white;
+            border: 1px solid #e5e5e5;
+            border-radius: 12px;
+            padding: 1rem 0.5rem;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 110px;
+            width: 110px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+            transition: all 0.3s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+            border-color: #000;
+        }
+
+        .tool-icon {
+            font-size: 2.2rem;
+            margin-bottom: 0.75rem;
+            color: #000;
+        }
+
+        .tool-name {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-align: center;
+            color: #000;
+            line-height: 1.1;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background Elements -->
+<div class="dot-pattern"></div>
+<div class="shape-top"></div>
+<div class="shape-bottom"></div>
+<!-- Branding -->
+<div class="absolute top-8 left-10 z-20">
+<!-- Main Content -->
+<div class="z-10 px-16 pt-24 flex flex-1 h-full w-full">
+<!-- Left Side: Content -->
+<div class="w-1/2 pr-8 flex flex-col justify-center">
+<h2 class="section-title mb-8">EVALUATION AND<br/>TOOLS</h2>
+<div class="mb-6">
+<h3 class="subtitle">Quality Pillars</h3>
+<ul class="body-text space-y-2">
+<li class="flex items-center"><i class="fas fa-eye w-6 text-center mr-2"></i> <strong>Readability:</strong> Clean code that communicates intent.</li>
+<li class="flex items-center"><i class="fas fa-tools w-6 text-center mr-2"></i> <strong>Maintainability:</strong> No future technical debt.</li>
+<li class="flex items-center"><i class="fas fa-tachometer-alt w-6 text-center mr-2"></i> <strong>Efficiency:</strong> Resource optimization.</li>
+</ul>
+</div>
+<div>
+<h3 class="subtitle">Checklist Copilot</h3>
+<div class="body-text">
+<div class="checklist-item">
+<i class="fas fa-check-square checklist-icon"></i>
+<span><strong>Prior Manual Effort:</strong> Attempt to solve before asking.</span>
+</div>
+<div class="checklist-item">
+<i class="fas fa-check-square checklist-icon"></i>
+<span><strong>Understanding:</strong> Explain each suggested line.</span>
+</div>
+<div class="checklist-item">
+<i class="fas fa-check-square checklist-icon"></i>
+<span><strong>Documentation:</strong> Use AI to comment complex logic.</span>
+</div>
+<div class="checklist-item">
+<i class="fas fa-check-square checklist-icon"></i>
+<span><strong>Validation:</strong> Verify security and standards.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Side: Tools Grid -->
+<div class="w-1/2 flex items-center justify-center pl-4">
+<div class="tools-grid">
+<!-- Tool 1 -->
+<div class="tool-card">
+<i class="fas fa-robot tool-icon"></i>
+<span class="tool-name">GitHub<br/>Copilot</span>
+</div>
+<!-- Tool 2 -->
+<div class="tool-card">
+<i class="fas fa-rocket tool-icon"></i>
+<span class="tool-name">Astro<br/>Framework</span>
+</div>
+<!-- Tool 3 -->
+<div class="tool-card">
+<i class="fas fa-wind tool-icon"></i>
+<span class="tool-name">Tailwind<br/>CSS</span>
+</div>
+<!-- Tool 4 -->
+<div class="tool-card">
+<i class="fab fa-python tool-icon"></i>
+<span class="tool-name">Flask<br/>Python</span>
+</div>
+<!-- Tool 5 -->
+<div class="tool-card">
+<i class="fab fa-node-js tool-icon"></i>
+<span class="tool-name">Node.js<br/>Runtime</span>
+</div>
+<!-- Tool 6 -->
+<div class="tool-card">
+<i class="fas fa-server tool-icon"></i>
+<span class="tool-name">Vercel<br/>Deploy</span>
+</div>
+<!-- Tool 7 -->
+<div class="tool-card">
+<i class="fas fa-paper-plane tool-icon"></i>
+<span class="tool-name">Postman<br/>Testing</span>
+</div>
+<!-- Tool 8 -->
+<div class="tool-card">
+<i class="fas fa-brain tool-icon"></i>
+<span class="tool-name">Langflow<br/>AI</span>
+</div>
+<!-- Tool 9 -->
+<div class="tool-card">
+<i class="fab fa-github-alt tool-icon"></i>
+<span class="tool-name">GitHub<br/>Pages</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation Arrow -->
+<div class="absolute bottom-8 right-10 z-20">
+<div class="nav-arrow">
+<i class="fas fa-chevron-right text-white text-xl"></i>
+</div>
+</div>
+</div>
+</body>
+</html>

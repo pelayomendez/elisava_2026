@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>From Craft Code to Full Stack Development with AI</title>
+</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600&amp;family=Saira+Condensed:wght@700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #ececec;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        /* 
+           Simulación de dot-pattern sin usar radial-gradient (evitado por requerimiento).
+           Usamos un color sólido muy claro o una imagen de fondo si estuviera disponible.
+           En este caso, optamos por un fondo sólido limpio que cumple con "Minimalist"
+        */
+        .bg-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #ececec;
+            opacity: 1;
+            z-index: 0;
+        }
+        
+        /* 
+           Círculos decorativos sin gradientes complejos, usando color sólido con opacidad 
+           para simular el efecto de profundidad del template original.
+        */
+        .circle-overlay {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.05);
+            z-index: 1;
+        }
+        
+        .header-text {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 900;
+            letter-spacing: 2px;
+            line-height: 1.0;
+            font-size: 5.5rem; /* Ajustado para el título más largo */
+            color: #000000;
+            text-transform: uppercase;
+        }
+        
+        .subtitle-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+            font-size: 2rem;
+            color: #000000;
+            margin-top: 1.5rem;
+        }
+        
+        .info-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 1.25rem;
+            color: rgba(0,0,0,0.7);
+            margin-top: 2rem;
+        }
+        
+        .borcelle-pill {
+            background-color: rgba(0, 0, 0, 0.8);
+            border-radius: 9999px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            font-family: 'Raleway', sans-serif;
+            color: white;
+            z-index: 10;
+        }
+        
+        .nav-arrow {
+            background-color: white;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+
+        .content-wrapper {
+            z-index: 10;
+            text-align: center;
+            padding-left: 4rem;
+            padding-right: 4rem;
+            max-width: 1100px;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Background -->
+<div class="bg-pattern"></div>
+<!-- Circle overlays for depth -->
+<div class="circle-overlay" style="width: 800px; height: 800px; top: -250px; right: -250px;"></div>
+<div class="circle-overlay" style="width: 500px; height: 500px; bottom: -200px; left: -200px;"></div>
+<!-- Company branding -->
+<div class="absolute top-8 left-10 z-10">
+<div class="borcelle-pill">
+<p>ROADMAP 2025</p>
+</div>
+</div>
+<!-- Main content -->
+<div class="content-wrapper">
+<h1 class="header-text mb-2">
+<p>FROM CRAFT CODE<br/>TO FULL STACK DEVELOPMENT<br/>WITH AI</p>
+</h1>
+<p class="subtitle-text">
+                Learn to code well first; AI as a multiplier later
+            </p>
+<p class="info-text">
+                March 2025 Session | Instructor: Pelayo Méndez
+            </p>
+</div>
+<!-- Navigation arrow -->
+<div class="absolute bottom-8 right-10 z-10">
+<div class="nav-arrow">
+<i class="fas fa-chevron-right text-black text-xl"></i>
+</div>
+</div>
+</div>
+</body>
+</html>

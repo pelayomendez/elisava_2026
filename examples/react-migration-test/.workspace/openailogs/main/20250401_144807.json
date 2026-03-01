@@ -1,0 +1,10 @@
+{
+    "messages": [
+        {
+            "role": "user",
+            "content": "execute step 1 of the migration"
+        }
+    ],
+    "output": "",
+    "extra_info": null
+}

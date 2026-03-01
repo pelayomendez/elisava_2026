@@ -1,0 +1,81 @@
+:help
+:tools
+exexute step 1
+execute step 2 of the migration process
+execute step 3 of the migration process
+execute step 4 of the migration process
+App.js file migration seems to be lacking router configuration
+Generate project analisys and documentation
+run step 1 of the migration process
+Execute stage 1.2
+Execute stage 1.1
+:help
+:stats
+Execute step 1 of the migration process
+Create an HTML file in the analisys folder covering the following:
+
+* A high-level overview of the project's routes.
+* A description of the components present on each route.
+* A visualization of the relationships between components and routes using MermaidJS diagrams.
+* Clear descriptions of the application flow, using diagrams where possible.
+
+Create a separate html file for each component in the analisys folder. Include detailed documentation for each component, covering:
+
+* Component Description (purpose, functionality, usage context)
+* Props (name, type, required/optional, default values, possible values)
+* Component State (if applicable, explanation of state and changes)
+* Usage Examples (code snippets)
+* Dependencies (external libraries/components)
+* Accessibility Considerations (ARIA attributes, etc.)
+Create a separate html file  in the analisys folder for each component found in the origin application. Include detailed documentation for each component, covering:
+
+* Component Description (purpose, functionality, usage context)
+* Props (name, type, required/optional, default values, possible values)
+* Component State (if applicable, explanation of state and changes)
+* Usage Examples (code snippets)
+* Dependencies (external libraries/components)
+* Accessibility Considerations (ARIA attributes, etc.)
+Project Structure Analysis & High-Level HTML Documentation
+
+Create an HTML file in the analisys folder covering the following:
+
+* A high-level overview of the project's routes, using MermaidJS diagrams where possible.
+* A description of the components present on each route, using MermaidJS diagrams where possible.
+* A visualization of the relationships between components and routes using MermaidJS diagrams.
+* A visualization for each route showing relationships between components using MermaidJS diagrams.
+* Clear descriptions of the application flow, using diagrams where possible.
+Execute step 1 of the migration process
+Read all the requisites in step 1 and generate the documentation
+document the master component
+Migrate the application
+ls
+generate origin app routes documenation
+Lets initiate the migration process with step 1
+repeat it
+the mermaidjs graphics are not propertly rendered
+generate the app documentation
+:help
+:reset
+execute step 1 of the migration
+generate doc for each component executing step 2 of the migration process
+execute step 2 of the migration
+create a tool that reads all the steps in the instrucctions file and list them
+:tools
+resitra la nueva tool
+list the migration steps
+create a tool that executes each step in order waiting for the one before to finish
+yes build the script
+create a tool that generates documentation from a component following instruction rules
+cant see the tool in the tools folder. did you savedit?
+generate the Master component documentation
+cant find the html file
+cretae a tool to cover step 1 of the migration and generate the app documenattion
+cerate it
+generate the app documentation
+modify the tool to document components to save the documentation in "components/{componentName}.html"
+create the documentation for the master component
+I dont see the file in that location
+the components folder should be inside analisys
+generated html document should follow the instructions in step 2. look at analisys/MasterDocumentation.html for a good example
+generate the documentation for the Master Component
+i cant find analysis/components/Master.htm

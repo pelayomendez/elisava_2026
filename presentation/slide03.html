@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modules 1 and 2 - Fundamentals and API First</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700;900&amp;family=Saira+Condensed:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            min-height: 720px;
+            position: relative;
+            overflow: hidden;
+            background-color: #ececec;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dot-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.05) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.4;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        .circle-overlay {
+            position: absolute;
+            border-radius: 50%;
+            background-color: rgba(0,0,0,0.05);
+            z-index: 0;
+        }
+        
+        .header-text {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 900;
+            letter-spacing: 1px;
+            line-height: 1.0;
+            font-size: 4.5rem;
+            color: #000000;
+            text-transform: uppercase;
+        }
+        
+        .sub-header {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+            color: #000000;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(0,0,0,0.1);
+            padding-bottom: 0.5rem;
+        }
+        
+        .body-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            font-size: 1.1rem;
+            line-height: 1.5;
+            color: #000000;
+        }
+        
+        .list-item {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .list-bullet {
+            color: #000;
+            margin-right: 0.5rem;
+            font-weight: 700;
+        }
+        
+        .techvantage-pill {
+            background-color: rgba(0, 0, 0, 0.1);
+            border-radius: 9999px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000000;
+            font-family: 'Saira Condensed', sans-serif;
+            z-index: 10;
+        }
+        
+        .nav-arrow {
+            background-color: #ffffff;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Dot pattern background -->
+<div class="dot-pattern"></div>
+<!-- Circle overlays for depth -->
+<div class="circle-overlay" style="width: 500px; height: 500px; top: 50px; right: 50px; opacity: 0.7;"></div>
+<div class="circle-overlay" style="width: 400px; height: 400px; bottom: -150px; left: -100px; opacity: 0.5;"></div>
+<!-- TechVantage branding -->
+<div class="absolute top-8 left-10">
+<div class="techvantage-pill">
+                FULL STACK + AI COURSE
+            </div>
+</div>
+<!-- Main content -->
+<div class="z-10 px-20 pt-20 flex-1 flex flex-col justify-center">
+<h1 class="header-text mb-8">MODULES 1 AND 2:<br/>FUNDAMENTALS AND API FIRST</h1>
+<div class="flex mt-4 gap-12">
+<!-- Left Column: Module 1 -->
+<div class="w-1/2">
+<h2 class="sub-header">MODULE 1: MANUAL CODING (POKEDEX EX.1)</h2>
+<div class="body-text">
+<p class="mb-4">The student acts as a craftsman, translating designs into a functional structure without automation.</p>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Figma to CSS Workflow:</strong> Manual export of properties and design.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Semantic Structure:</strong> Solid and accessible DOM hierarchy.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Interactivity:</strong> Use of <code>addEventListener</code> and direct DOM manipulation.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Layouts:</strong> Mastery of Flexbox for alignment and structures.</span></div>
+</div>
+</div>
+<!-- Right Column: Module 2 -->
+<div class="w-1/2">
+<h2 class="sub-header">MODULE 2: INTERACTIVITY AND DATA (API FIRST)</h2>
+<div class="body-text">
+<p class="mb-4">Transition to client-server architecture consuming real data from the PokéAPI.</p>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Endpoints:</strong> Exploration and use of <code>/pokemon</code> and <code>/pokemon-species</code>.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Asynchrony:</strong> HTTP requests with <code>fetch()</code> and JSON response handling.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Error Handling:</strong> Graceful handling of network failures and rate limits.</span></div>
+<div class="list-item"><span class="list-bullet">•</span><span><strong>Data Flow:</strong> User input → JS action → JSON response → DOM update.</span></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Navigation arrow -->
+<div class="absolute bottom-8 right-10">
+<div class="nav-arrow">
+<i class="fas fa-chevron-right text-black text-xl"></i>
+</div>
+</div>
+</div>
+</body>
+</html>
