@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+
+<html data-theme="light" lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Objectives and Philosophy</title>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&amp;family=Saira+Condensed:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            font-family: 'Raleway', sans-serif;
+        }
+        
+        .slide-container {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            background: white;
+            display: flex;
+        }
+        
+        .dot-pattern {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(circle, rgba(0,0,0,0.1) 1px, transparent 1px);
+            background-size: 20px 20px;
+            opacity: 0.4;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+        }
+        
+        .techvantage-pill {
+            background-color: transparent;
+            border: 2px solid #000000;
+            border-radius: 9999px;
+            padding: 0.5rem 1.5rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #000000;
+            font-family: 'Saira Condensed', sans-serif;
+        }
+        
+        .nav-arrow {
+            background-color: white;
+            border-radius: 50%;
+            width: 3rem;
+            height: 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .section-title {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 900;
+            color: #000000;
+            font-size: 3.5rem;
+            line-height: 1;
+            letter-spacing: 1px;
+        }
+        
+        .body-text {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            color: #000000;
+            font-size: 1.1rem;
+            line-height: 1.5;
+        }
+        
+        .quote-box {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 600;
+            color: #000000;
+            font-size: 1.1rem;
+            line-height: 1.4;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(0,0,0,0.2);
+            font-style: italic;
+        }
+        
+        .gray-section {
+            background-color: #ececec;
+            color: #000000;
+            padding: 2.5rem 3rem;
+            height: 100%;
+            clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%, 0 20px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .agenda-title {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 900;
+            color: #000000;
+            font-size: 2.8rem;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+        }
+        
+        .agenda-item {
+            font-family: 'Raleway', sans-serif;
+            font-weight: 400;
+            color: #000000;
+            font-size: 1.05rem;
+            line-height: 1.4;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: flex-start;
+        }
+        
+        .agenda-number {
+            font-family: 'Saira Condensed', sans-serif;
+            font-weight: 900;
+            font-size: 1.2rem;
+            margin-right: 0.8rem;
+            opacity: 0.9;
+            min-width: 1.2rem;
+            color: #333;
+            margin-top: 2px;
+        }
+
+        .highlight-text {
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+<div class="slide-container">
+<!-- Dot pattern background -->
+<div class="dot-pattern"></div>
+<!-- Branding -->
+<div class="absolute top-8 left-10 z-10">
+<div class="techvantage-pill">
+            FULL STACK + AI COURSE
+        </div>
+</div>
+<!-- Main content - Left side -->
+<div class="w-1/2 flex flex-col justify-center pl-20 pr-10">
+<h2 class="section-title mb-6">PHILOSOPHY OF<br/>CRAFT LEARNING</h2>
+<p class="body-text mt-4">
+            This roadmap proposes a journey from manual software construction to advanced AI integration.
+        </p>
+<p class="body-text mt-4">
+            Under the premise of <span class="font-bold">"craft learning"</span>, the goal is not simply to develop projects quickly, but to use AI to learn to code properly.
+        </p>
+<div class="quote-box">
+<p>"Technology does not replace critical thinking; it acts as a multiplier of skills once the student has understood the technical fundamentals."</p>
+<p class="mt-2 text-sm not-italic font-normal">— Prof. Pelayo Méndez</p>
+</div>
+</div>
+<!-- Right side with gray background -->
+<div class="w-1/2 relative h-full">
+<div class="gray-section">
+<h3 class="agenda-title">General Objectives</h3>
+<div class="agenda-item">
+<span class="agenda-number">01</span>
+<p><strong>Software Life Cycle:</strong> Understand from planning and design to deployment and maintenance.</p>
+</div>
+<div class="agenda-item">
+<span class="agenda-number">02</span>
+<p><strong>Technical Base Mastery:</strong> Consolidate the manual use of semantic HTML, CSS, and interactive JavaScript.</p>
+</div>
+<div class="agenda-item">
+<span class="agenda-number">03</span>
+<p><strong>AI as "Pair Programmer":</strong> Integrate Copilot to optimize workflow without losing technical autonomy.</p>
+</div>
+<div class="agenda-item">
+<span class="agenda-number">04</span>
+<p><strong>Architectural Evolution:</strong> Transition from static applications to Full Stack and generative environments.</p>
+</div>
+<div class="agenda-item">
+<span class="agenda-number">05</span>
+<p><strong>Avoid "Vibe Coding":</strong> Replace blind intuition with data-driven methodologies and clear structures.</p>
+</div>
+<!-- Navigation arrows -->
+<div class="absolute bottom-8 right-8 flex gap-4">
+<a href="slide01.html" class="nav-arrow">
+<i class="fas fa-chevron-left text-black text-xl"></i>
+</a>
+<a href="slide03.html" class="nav-arrow">
+<i class="fas fa-chevron-right text-black text-xl"></i>
+</a>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
