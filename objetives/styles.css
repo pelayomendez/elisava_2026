@@ -1,0 +1,271 @@
+/* Common styles for all objective slides */
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    overflow: hidden;
+}
+
+.slide-container {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+}
+
+/* Background patterns */
+.bg-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #ececec;
+    opacity: 1;
+    z-index: 0;
+}
+
+.dot-pattern {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, rgba(236,236,236,0.6) 1px, transparent 1px);
+    background-size: 20px 20px;
+    opacity: 0.6;
+    top: 0;
+    left: 0;
+    z-index: 0;
+}
+
+/* Decorative shapes */
+.circle-overlay {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(0,0,0,0.05);
+    z-index: 1;
+}
+
+.shape-top {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 45%;
+    height: 120px;
+    background-color: #ececec;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%);
+    z-index: 1;
+}
+
+.shape-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 15%;
+    height: 120px;
+    background-color: #ececec;
+    clip-path: polygon(0 0, 100% 100%, 0 100%);
+    z-index: 1;
+}
+
+/* Typography */
+.header-text {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 900;
+    letter-spacing: 2px;
+    line-height: 1.0;
+    font-size: 5.5rem;
+    color: #000000;
+    text-transform: uppercase;
+}
+
+.section-title {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 800;
+    color: #000000;
+    font-size: 4.5rem;
+    line-height: 0.95;
+    letter-spacing: 0px;
+    text-transform: uppercase;
+}
+
+.subtitle-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    letter-spacing: 1px;
+    font-size: 2rem;
+    color: #000000;
+    margin-top: 1.5rem;
+}
+
+.subtitle {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 700;
+    color: #000000;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    border-bottom: 2px solid #ececec;
+    padding-bottom: 0.25rem;
+    margin-bottom: 0.75rem;
+    display: inline-block;
+}
+
+.info-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    font-size: 1.25rem;
+    color: rgba(0,0,0,0.7);
+    margin-top: 2rem;
+}
+
+.body-text {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    color: #333333;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+/* Pills and badges */
+.borcelle-pill {
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Raleway', sans-serif;
+    color: white;
+    z-index: 10;
+}
+
+.tech-pill {
+    background-color: transparent;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #000000;
+    font-family: 'Saira Condensed', sans-serif;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.techvantage-pill {
+    background-color: transparent;
+    border: 2px solid #000000;
+    border-radius: 9999px;
+    padding: 0.5rem 1.5rem;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #000000;
+    font-family: 'Saira Condensed', sans-serif;
+}
+
+/* Navigation */
+.nav-arrow {
+    background-color: white;
+    border-radius: 50%;
+    width: 3rem;
+    height: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    text-decoration: none;
+}
+
+.nav-arrow:hover {
+    transform: scale(1.1);
+}
+
+/* Content elements */
+.agenda-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+}
+
+.agenda-number {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 900;
+    font-size: 2.5rem;
+    color: #000000;
+    margin-right: 1.5rem;
+    line-height: 1;
+    min-width: 3.5rem;
+}
+
+.checklist-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+}
+
+.checklist-icon {
+    color: #000000;
+    margin-top: 0.25rem;
+    margin-right: 0.75rem;
+    font-size: 0.9rem;
+}
+
+/* Tools grid */
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+    padding: 1rem;
+    background-color: rgba(255,255,255,0.5);
+    border-radius: 1rem;
+    backdrop-filter: blur(5px);
+}
+
+.tool-card {
+    background: white;
+    border: 1px solid #e5e5e5;
+    border-radius: 12px;
+    padding: 1rem 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 110px;
+    width: 110px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0,0,0,0.08);
+    border-color: #000;
+}
+
+.tool-icon {
+    font-size: 2.2rem;
+    margin-bottom: 0.75rem;
+    color: #000;
+}
+
+.tool-name {
+    font-family: 'Saira Condensed', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    text-align: center;
+    color: #000;
+    line-height: 1.1;
+    text-transform: uppercase;
+}
+
+/* Content wrapper */
+.content-wrapper {
+    z-index: 10;
+    text-align: center;
+}

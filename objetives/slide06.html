@@ -8,183 +8,20 @@
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet"/>
 <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;600;700;900&amp;family=Saira+Condensed:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
-<style>
-        body {
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: 'Raleway', sans-serif;
-        }
-        
-        .slide-container {
-            width: 1280px;
-            height: 720px;
-            position: relative;
-            overflow: hidden;
-            background: white;
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .dot-pattern {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(circle, rgba(236,236,236,0.6) 1px, transparent 1px);
-            background-size: 20px 20px;
-            opacity: 0.6;
-            top: 0;
-            left: 0;
-            z-index: 0;
-        }
-        
-        .shape-top {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 45%;
-            height: 120px;
-            background-color: #ececec;
-            clip-path: polygon(0 0, 100% 0, 100% 100%, 40% 100%);
-            z-index: 1;
-        }
-        
-        .shape-bottom {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 15%;
-            height: 120px;
-            background-color: #ececec;
-            clip-path: polygon(0 0, 100% 100%, 0 100%);
-            z-index: 1;
-        }
-        
-        .tech-pill {
-            background-color: transparent;
-            border: 2px solid #000000;
-            border-radius: 9999px;
-            padding: 0.4rem 1.2rem;
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: #000000;
-            font-family: 'Saira Condensed', sans-serif;
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-        
-        .nav-arrow {
-            background-color: #fff;
-            border-radius: 50%;
-            width: 3rem;
-            height: 3rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.2s;
-        }
-        
-        .section-title {
-            font-family: 'Saira Condensed', sans-serif;
-            font-weight: 800;
-            color: #000000;
-            font-size: 4.5rem; /* Adjusted for length */
-            line-height: 0.95;
-            letter-spacing: 0px;
-            text-transform: uppercase;
-        }
-        
-        .subtitle {
-            font-family: 'Saira Condensed', sans-serif;
-            font-weight: 700;
-            color: #000000;
-            font-size: 1.4rem;
-            text-transform: uppercase;
-            border-bottom: 2px solid #ececec;
-            padding-bottom: 0.25rem;
-            margin-bottom: 0.75rem;
-            display: inline-block;
-        }
-        
-        .body-text {
-            font-family: 'Raleway', sans-serif;
-            font-weight: 500;
-            color: #333333;
-            font-size: 1rem;
-            line-height: 1.5;
-        }
-
-        .checklist-item {
-            display: flex;
-            align-items: flex-start;
-            margin-bottom: 0.5rem;
-        }
-
-        .checklist-icon {
-            color: #000000;
-            margin-top: 0.25rem;
-            margin-right: 0.75rem;
-            font-size: 0.9rem;
-        }
-        
-        /* Tool Grid Styles */
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 1.25rem;
-            padding: 1rem;
-            background-color: rgba(255,255,255,0.5);
-            border-radius: 1rem;
-            backdrop-filter: blur(5px);
-        }
-
-        .tool-card {
-            background: white;
-            border: 1px solid #e5e5e5;
-            border-radius: 12px;
-            padding: 1rem 0.5rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 110px;
-            width: 110px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.03);
-            transition: all 0.3s ease;
-        }
-
-        .tool-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.08);
-            border-color: #000;
-        }
-
-        .tool-icon {
-            font-size: 2.2rem;
-            margin-bottom: 0.75rem;
-            color: #000;
-        }
-
-        .tool-name {
-            font-family: 'Saira Condensed', sans-serif;
-            font-weight: 700;
-            font-size: 0.85rem;
-            text-align: center;
-            color: #000;
-            line-height: 1.1;
-            text-transform: uppercase;
-        }
-    </style>
+<link href="styles.css" rel="stylesheet"/>
 </head>
 <body>
-<div class="slide-container">
+<div class="slide-container" style="display: flex; flex-direction: column;">
 <!-- Background Elements -->
 <div class="dot-pattern"></div>
 <div class="shape-top"></div>
 <div class="shape-bottom"></div>
 <!-- Branding -->
 <div class="absolute top-8 left-10 z-20">
+<div class="tech-pill">
+FULL STACK + AI COURSE
+</div>
+</div>
 <!-- Main Content -->
 <div class="z-10 px-16 pt-24 flex flex-1 h-full w-full">
 <!-- Left Side: Content -->
@@ -272,7 +109,7 @@
 </div>
 </div>
 <!-- Navigation arrows -->
-<div class="absolute bottom-8 right-8 z-20 flex gap-4">
+<div class="absolute bottom-8 right-10 z-20 flex gap-4">
 <a href="slide05.html" class="nav-arrow">
 <i class="fas fa-chevron-left text-black text-xl"></i>
 </a>
