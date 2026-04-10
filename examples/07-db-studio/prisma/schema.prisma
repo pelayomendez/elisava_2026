@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Game {
+  id        String   @id @default(uuid())
+  name      String
+  votes     Int      @default(0)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("games")
+}

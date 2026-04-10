@@ -1,0 +1,85 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GameList from "../components/GameList.astro";
+import AddGameForm from "../components/AddGameForm.astro";
+import RealtimeBadge from "../components/RealtimeBadge.astro";
+import { getDb } from "../db";
+
+const backend = import.meta.env.DB_BACKEND || "mock";
+const isSupabase = backend === "supabase";
+const db = await getDb();
+const games = await db.getAllGames();
+
+// Pass public keys to the client for Supabase realtime
+const supabaseUrl = import.meta.env.PUBLIC_SUPABASE_URL || "";
+const supabaseKey = import.meta.env.PUBLIC_SUPABASE_ANON_KEY || "";
+---
+
+<Layout title="Favorite Games Voting">
+  <h1>Favorite Games Voting</h1>
+  <p class="subtitle">
+    Backend: <span class={`badge ${backend}`}>{backend}</span>
+    {isSupabase && <RealtimeBadge />}
+  </p>
+  <AddGameForm />
+  <GameList games={games} />
+  <div class="reset-section">
+    <button id="reset-btn" class="reset-btn">Reset Data</button>
+  </div>
+</Layout>
+
+<script>
+  document.getElementById("reset-btn")?.addEventListener("click", async () => {
+    if (!confirm("Reset all games to seed data?")) return;
+    await fetch("/api/seed", { method: "POST" });
+    window.location.reload();
+  });
+</script>
+
+<style>
+  .reset-section {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e5e5;
+  }
+
+  .reset-btn {
+    background: #f5f5f5;
+    color: #666;
+    border: 1px solid #ddd;
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+  }
+
+  .reset-btn:hover {
+    background: #eee;
+    color: #333;
+  }
+</style>
+
+{isSupabase && (
+  <script
+    is:inline
+    type="module"
+    data-supabase-url={supabaseUrl}
+    data-supabase-key={supabaseKey}
+  >
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+    const script = document.querySelector("script[data-supabase-url]");
+    const url = script.dataset.supabaseUrl;
+    const key = script.dataset.supabaseKey;
+
+    if (url && key) {
+      const supabase = createClient(url, key);
+      supabase
+        .channel("games-changes")
+        .on("postgres_changes", { event: "*", schema: "public", table: "games" }, () => {
+          window.location.reload();
+        })
+        .subscribe();
+      console.log("[Realtime] Listening for game changes...");
+    }
+  </script>
+)}

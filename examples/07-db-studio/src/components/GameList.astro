@@ -1,0 +1,43 @@
+---
+import GameCard from "./GameCard.astro";
+import type { Game } from "../db/types";
+
+interface Props {
+  games: Game[];
+}
+
+const { games } = Astro.props;
+---
+
+<section>
+  {games.length === 0 && <p class="empty">No games yet. Add one below!</p>}
+  {games.map((game) => (
+    <GameCard id={game.id} name={game.name} votes={game.votes} />
+  ))}
+</section>
+
+<script>
+  document.addEventListener("click", async (e) => {
+    const target = e.target as HTMLElement;
+
+    if (target.classList.contains("vote-btn")) {
+      const id = target.dataset.id;
+      await fetch(`/api/games/${id}/vote`, { method: "POST" });
+      window.location.reload();
+    }
+
+    if (target.classList.contains("delete-btn")) {
+      const id = target.dataset.id;
+      await fetch(`/api/games/${id}`, { method: "DELETE" });
+      window.location.reload();
+    }
+  });
+</script>
+
+<style>
+  .empty {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+  }
+</style>

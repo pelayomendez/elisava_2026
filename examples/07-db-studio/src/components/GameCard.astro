@@ -1,0 +1,63 @@
+---
+interface Props {
+  id: string;
+  name: string;
+  votes: number;
+}
+
+const { id, name, votes } = Astro.props;
+---
+
+<div class="card">
+  <div class="info">
+    <span class="name">{name}</span>
+    <span class="votes">{votes} votes</span>
+  </div>
+  <div class="actions">
+    <button class="vote-btn" data-id={id}>Vote</button>
+    <button class="delete-btn" data-id={id}>Delete</button>
+  </div>
+</div>
+
+<style>
+  .card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: white;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+  }
+
+  .name {
+    font-weight: 500;
+  }
+
+  .votes {
+    font-size: 0.8rem;
+    color: #888;
+  }
+
+  .actions {
+    display: flex;
+    gap: 0.4rem;
+  }
+
+  .vote-btn {
+    background: #3b82f6;
+    color: white;
+  }
+
+  .delete-btn {
+    background: #ef4444;
+    color: white;
+  }
+</style>
