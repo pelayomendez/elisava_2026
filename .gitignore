@@ -56,3 +56,6 @@ build/
 coverage/
 .coverage
 .pytest_cache/
+
+# Office lock files
+~$*
