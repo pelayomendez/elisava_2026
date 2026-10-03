@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stage 6 - Better Me Agent Class Docs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Stage 6</p>
+          <h2>Final Apps</h2>
+          <p>Simple end-user desktop and mobile apps.</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="./index.html">Overview<span>Story, architecture, flow</span></a>
+          <a class="nav-link" href="./stage-1.html">Stage 1<span>Agent contract</span></a>
+          <a class="nav-link" href="./stage-2.html">Stage 2<span>Runnable backend</span></a>
+          <a class="nav-link" href="./stage-3.html">Stage 3<span>CopilotKit app</span></a>
+          <a class="nav-link" href="./stage-4.html">Stage 4<span>Background agent</span></a>
+          <a class="nav-link" href="./stage-5.html">Stage 5<span>Cloudflare Worker + D1</span></a>
+          <a class="nav-link active" href="./stage-6.html">Stage 6<span>Final desktop + mobile apps</span></a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="hero">
+          <p class="eyebrow">Stage 6</p>
+          <h1>One spec, two apps, one backend.</h1>
+          <p>
+            This stage shows the simplest final product: a desktop React app and a React Native app
+            that both talk to the same deployed Cloudflare backend.
+          </p>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Product rule</p>
+            <h2>Thin clients</h2>
+            <ul>
+              <li>Fetch memory from the Worker</li>
+              <li>Fetch recent runs from the Worker</li>
+              <li>Send a manual message with <code>/agent/run</code></li>
+              <li>Trigger a reminder with <code>/agent/notify</code></li>
+            </ul>
+          </article>
+
+          <article class="grid-card">
+            <p class="eyebrow">Backend URL</p>
+            <h2>Use the deployed Worker</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage6-backend-url">Copy</button>
+              <pre id="stage6-backend-url">https://better-me-agent-worker.mf-pelayo.workers.dev</pre>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Desktop App</p>
+          <h2>Run the React app</h2>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage6-desktop">Copy</button>
+            <pre id="stage6-desktop">cd /Users/pomf/Experimental/elisava_temp/agent-interaction/stage-6-final-apps/desktop-react-app
+npm install
+cp .env.example .env
+# then set:
+# VITE_AGENT_BASE_URL=https://better-me-agent-worker.mf-pelayo.workers.dev
+npm run dev</pre>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Mobile App</p>
+          <h2>Run the Expo app</h2>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage6-mobile">Copy</button>
+            <pre id="stage6-mobile">cd /Users/pomf/Experimental/elisava_temp/agent-interaction/stage-6-final-apps/mobile-react-native-app
+npm install
+cp .env.example .env
+# then set:
+# EXPO_PUBLIC_AGENT_BASE_URL=https://better-me-agent-worker.mf-pelayo.workers.dev
+npx expo start --clear --tunnel</pre>
+          </div>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Specs</p>
+            <h2>Why this stage is teachable</h2>
+            <p>
+              The two apps come from one product spec and one API contract. That makes the frontend
+              layer easier to regenerate later from the written requirements.
+            </p>
+          </article>
+          <article class="grid-card">
+            <p class="eyebrow">Live demo prompt</p>
+            <h2>Good classroom test</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage6-test">Copy</button>
+              <pre id="stage6-test">I forgot to drink water yesterday.</pre>
+            </div>
+          </article>
+        </section>
+
+        <section class="callout green">
+          Final lesson: one deployed agent backend can power many user interfaces if the API contract stays clean.
+        </section>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

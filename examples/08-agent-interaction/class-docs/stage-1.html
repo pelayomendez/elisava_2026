@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stage 1 - Better Me Agent Class Docs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Stage 1</p>
+          <h2>Agent Contract</h2>
+          <p>The agent begins as plain markdown files.</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="./index.html">Overview<span>Story, architecture, flow</span></a>
+          <a class="nav-link active" href="./stage-1.html">Stage 1<span>Agent contract</span></a>
+          <a class="nav-link" href="./stage-2.html">Stage 2<span>Runnable backend</span></a>
+          <a class="nav-link" href="./stage-3.html">Stage 3<span>CopilotKit app</span></a>
+          <a class="nav-link" href="./stage-4.html">Stage 4<span>Background agent</span></a>
+          <a class="nav-link" href="./stage-5.html">Stage 5<span>Cloudflare Worker + D1</span></a>
+          <a class="nav-link" href="./stage-6.html">Stage 6<span>Final desktop + mobile apps</span></a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="hero">
+          <p class="eyebrow">Stage 1</p>
+          <h1>The agent is just a contract.</h1>
+          <p>
+            Before any backend or UI exists, we define the agent with five simple markdown files.
+            This makes the behavior readable, teachable, and easy to revise.
+          </p>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Files</p>
+            <h2>What we define</h2>
+            <ul>
+              <li><code>AGENTS.md</code> for instructions and tone</li>
+              <li><code>TASK.md</code> for the output format</li>
+              <li><code>MEMORY.md</code> for user context</li>
+              <li><code>TOOLS.md</code> for capabilities and limits</li>
+              <li><code>EVALS.md</code> for success criteria</li>
+            </ul>
+          </article>
+
+          <article class="grid-card">
+            <p class="eyebrow">Why It Matters</p>
+            <h2>The agent starts as product thinking</h2>
+            <p>
+              This stage is useful in class because students can read and critique the agent behavior
+              before any code obscures the idea.
+            </p>
+            <div class="callout warm">
+              The key lesson: an agent does not start as a model call. It starts as a contract.
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Open The Files</p>
+          <h2>Quick commands</h2>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage1-open">Copy</button>
+            <pre id="stage1-open">cd /Users/pomf/Experimental/elisava_temp/agent-interaction/stage-1-agent-contract/better-me-agent/agent
+ls
+cat AGENTS.md
+cat TASK.md
+cat MEMORY.md
+cat TOOLS.md
+cat EVALS.md</pre>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Teacher Notes</p>
+          <h2>What to say in class</h2>
+          <div class="step-list">
+            <div class="step"><strong>Start with AGENTS.md</strong> This is the personality, safety boundary, and tone.</div>
+            <div class="step"><strong>Then TASK.md</strong> This is the output contract the runtime will later enforce.</div>
+            <div class="step"><strong>Then MEMORY.md</strong> This is where personalization begins.</div>
+            <div class="step"><strong>End with EVALS.md</strong> This is what “good” means for the agent.</div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

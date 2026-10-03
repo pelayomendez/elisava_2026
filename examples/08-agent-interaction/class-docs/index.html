@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Better Me Agent Class Docs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Class Docs</p>
+          <h2>Better Me Agent</h2>
+          <p>Multi-page documentation and presentation site for the full 6-stage exercise.</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link active" href="./index.html">Overview<span>Story, architecture, flow</span></a>
+          <a class="nav-link" href="./stage-1.html">Stage 1<span>Agent contract</span></a>
+          <a class="nav-link" href="./stage-2.html">Stage 2<span>Runnable backend</span></a>
+          <a class="nav-link" href="./stage-3.html">Stage 3<span>CopilotKit app</span></a>
+          <a class="nav-link" href="./stage-4.html">Stage 4<span>Background agent</span></a>
+          <a class="nav-link" href="./stage-5.html">Stage 5<span>Cloudflare Worker + D1</span></a>
+          <a class="nav-link" href="./stage-6.html">Stage 6<span>Final desktop + mobile apps</span></a>
+        </nav>
+        <div class="sidebar-note">
+          Open any page directly in the browser, or serve the folder with a tiny local web server for class.
+        </div>
+      </aside>
+
+      <main class="content">
+        <section class="hero">
+          <p class="eyebrow">Overview</p>
+          <h1>From markdown specs to a deployed agent and real user apps.</h1>
+          <p>
+            This documentation site is meant to be both a classroom handout and a live presentation.
+            Each page focuses on one stage, the core idea behind it, and the minimum commands needed
+            to run it.
+          </p>
+          <div class="meta-row">
+            <span class="pill">6 stages</span>
+            <span class="pill">Local to cloud</span>
+            <span class="pill">Desktop and mobile</span>
+          </div>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Big Idea</p>
+            <h2>The same agent keeps evolving</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <h3>Stage 1</h3>
+                <p>Define the agent in markdown files: instructions, task, memory, tools, and evaluation.</p>
+              </div>
+              <div class="timeline-item">
+                <h3>Stage 2</h3>
+                <p>Turn those files into a runnable backend that builds prompts and calls a model.</p>
+              </div>
+              <div class="timeline-item">
+                <h3>Stage 3</h3>
+                <p>Wrap the runtime in a real interactive app with CopilotKit.</p>
+              </div>
+              <div class="timeline-item">
+                <h3>Stage 4</h3>
+                <p>Make the agent proactive with background runs and Slack delivery.</p>
+              </div>
+              <div class="timeline-item">
+                <h3>Stage 5</h3>
+                <p>Deploy the same idea to Cloudflare Workers with D1-backed state.</p>
+              </div>
+              <div class="timeline-item">
+                <h3>Stage 6</h3>
+                <p>Build final user-facing apps on top of the deployed backend.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="grid-card">
+            <p class="eyebrow">Architecture</p>
+            <h2>What the final shape looks like</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="overview-arch">Copy</button>
+              <pre id="overview-arch">Markdown contract
+-> Python runtime
+-> CopilotKit runtime
+-> Background agent
+-> Cloudflare Worker + D1
+-> Desktop React app
+-> React Native app</pre>
+            </div>
+            <div class="callout green">
+              By the end, the backend intelligence lives in one place and many frontends can talk to it.
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Useful Commands</p>
+          <h2>Serve this docs site locally</h2>
+          <p>If you want clickable navigation and cleaner browser behavior during class, serve this folder locally:</p>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="serve-docs">Copy</button>
+            <pre id="serve-docs">cd /Users/pomf/Experimental/elisava_temp/agent-interaction/class-docs
+python3 -m http.server 4173</pre>
+          </div>
+          <p>Then open <code>http://localhost:4173</code>.</p>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Teaching Flow</p>
+            <h2>Suggested classroom order</h2>
+            <div class="step-list">
+              <div class="step"><strong>1. Contract first</strong> Show that the agent starts as readable product intent, not code.</div>
+              <div class="step"><strong>2. Runtime second</strong> Show how the markdown becomes a real prompt and response flow.</div>
+              <div class="step"><strong>3. UI third</strong> Show interaction, streaming, and product shape.</div>
+              <div class="step"><strong>4. Cloud and apps last</strong> Show how the same core logic scales into a deployed product.</div>
+            </div>
+          </article>
+
+          <article class="grid-card">
+            <p class="eyebrow">Class Question</p>
+            <h2>What should students remember?</h2>
+            <ul>
+              <li>Good specs make agents easier to build and regenerate.</li>
+              <li>The same backend can power multiple interfaces.</li>
+              <li>You can move from local experiment to cloud product gradually.</li>
+              <li>Agents are not only chatbots; they can become proactive services.</li>
+            </ul>
+          </article>
+        </section>
+
+        <p class="footer">Source repo: <code>/Users/pomf/Experimental/elisava_temp/agent-interaction</code></p>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>

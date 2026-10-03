@@ -1,0 +1,11 @@
+.DS_Store
+__pycache__/
+*.pyc
+
+.env
+.dev.vars
+.venv/
+node_modules/
+dist/
+.wrangler/
+background_status.json

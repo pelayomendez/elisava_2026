@@ -1,0 +1,21 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "better-me-agent-worker",
+  "main": "src/index.ts",
+  "compatibility_date": "2026-05-15",
+  "observability": {
+    "enabled": true
+  },
+  "vars": {
+    "MISTRAL_MODEL": "mistral-medium-latest",
+    "BETTER_ME_SLACK_SUBJECT": "Better Me Agent Reminder",
+    "BETTER_ME_BACKGROUND_MESSAGE": "Create today's proactive habit reminder for the user."
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "better-me-agent-db",
+      "database_id": "9be8ad01-03a3-4910-9bf3-1717a805f8b7"
+    }
+  ]
+}

@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stage 5 - Better Me Agent Class Docs</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="layout">
+      <aside class="sidebar">
+        <div class="brand">
+          <p class="eyebrow">Stage 5</p>
+          <h2>Cloudflare Worker + D1</h2>
+          <p>The hosted backend for the final apps.</p>
+        </div>
+        <nav class="sidebar-nav">
+          <a class="nav-link" href="./index.html">Overview<span>Story, architecture, flow</span></a>
+          <a class="nav-link" href="./stage-1.html">Stage 1<span>Agent contract</span></a>
+          <a class="nav-link" href="./stage-2.html">Stage 2<span>Runnable backend</span></a>
+          <a class="nav-link" href="./stage-3.html">Stage 3<span>CopilotKit app</span></a>
+          <a class="nav-link" href="./stage-4.html">Stage 4<span>Background agent</span></a>
+          <a class="nav-link active" href="./stage-5.html">Stage 5<span>Cloudflare Worker + D1</span></a>
+          <a class="nav-link" href="./stage-6.html">Stage 6<span>Final desktop + mobile apps</span></a>
+        </nav>
+      </aside>
+
+      <main class="content">
+        <section class="hero">
+          <p class="eyebrow">Stage 5</p>
+          <h1>Deploy the agent to Cloudflare.</h1>
+          <p>
+            This is the cloud backend that powers the final apps. By default it behaves like a
+            normal hosted API first, with cron left off until later.
+          </p>
+          <div class="meta-row">
+            <span class="pill">Worker runtime</span>
+            <span class="pill">D1 database</span>
+            <span class="pill">Public API URL</span>
+          </div>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Setup</p>
+          <h2>Cloudflare install flow</h2>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage5-setup">Copy</button>
+            <pre id="stage5-setup">cd /Users/pomf/Experimental/elisava_temp/agent-interaction/stage-5-cloudflare-worker/better-me-agent/cloudflare
+npm install
+npx wrangler login
+npx wrangler d1 create better-me-agent-db</pre>
+          </div>
+          <p>Then paste the printed <code>database_id</code> into <code>wrangler.jsonc</code>.</p>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Initialize D1</p>
+            <h2>Remote schema</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage5-schema">Copy</button>
+              <pre id="stage5-schema">npx wrangler d1 execute better-me-agent-db --remote --file=./schema.sql</pre>
+            </div>
+          </article>
+          <article class="grid-card">
+            <p class="eyebrow">Secrets</p>
+            <h2>Production values</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage5-secrets">Copy</button>
+              <pre id="stage5-secrets">npx wrangler secret put MISTRAL_API_KEY
+npx wrangler secret put SLACK_WEBHOOK_URL</pre>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">Deploy</p>
+          <h2>Publish the Worker</h2>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage5-deploy">Copy</button>
+            <pre id="stage5-deploy">npx wrangler deploy</pre>
+          </div>
+          <p>Real deployed example used in this repo:</p>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage5-url">Copy</button>
+            <pre id="stage5-url">https://better-me-agent-worker.mf-pelayo.workers.dev</pre>
+          </div>
+        </section>
+
+        <section class="grid two">
+          <article class="grid-card">
+            <p class="eyebrow">Test live backend</p>
+            <h2>Manual run</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage5-run">Copy</button>
+              <pre id="stage5-run">curl -X POST https://better-me-agent-worker.mf-pelayo.workers.dev/agent/run \
+  -H "Content-Type: application/json" \
+  -d '{"message":"I forgot to drink water yesterday"}'</pre>
+            </div>
+          </article>
+          <article class="grid-card">
+            <p class="eyebrow">Expected shape</p>
+            <h2>Example response</h2>
+            <div class="code-block">
+              <button class="copy-button" data-copy-target="stage5-response">Copy</button>
+              <pre id="stage5-response">{
+  "answer": "**Today’s Challenge:** Set a phone reminder to drink one glass of water every 2 hours—just 3 sips at a time counts!\n\n**Motivation:** Small sips add up! You’ve got this—hydration helps sleep too.\n\n**Question:** Want me to tweak the reminder times to fit your schedule?",
+  "model": "mistral-medium-latest"
+}</pre>
+            </div>
+          </article>
+        </section>
+
+        <section class="panel">
+          <p class="eyebrow">About Cron</p>
+          <h2>Disabled first, enabled later</h2>
+          <p>
+            The Worker already includes a <code>scheduled()</code> handler, but the default
+            configuration does not enable cron yet. This keeps the backend simple while the apps are being connected.
+          </p>
+          <div class="code-block">
+            <button class="copy-button" data-copy-target="stage5-cron">Copy</button>
+            <pre id="stage5-cron">"triggers": {
+  "crons": ["*/5 * * * *"]
+}</pre>
+          </div>
+          <p>Add that back to <code>wrangler.jsonc</code> later if you want the loop.</p>
+        </section>
+
+        <section class="callout warm">
+          Important teaching point: the app never talks directly to D1. It only talks to the Worker API.
+        </section>
+      </main>
+    </div>
+    <script src="./script.js"></script>
+  </body>
+</html>
