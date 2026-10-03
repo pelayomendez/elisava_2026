@@ -1,0 +1,72 @@
+{
+  "slug": "echowood",
+  "title": "Echowood",
+  "genre": "Narrative · Fantasy",
+  "description": "An agent-written fairy tale where the forest remembers everything you say. Your choices shape a branching world grown entirely by Lore, our narrative agent, from a single seed prompt.",
+  "longDescription": "Echowood began as a single sentence: 'a forest that remembers.' Lore, our narrative agent, expanded that into 40,000 words of branching dialogue, eight distinct character arcs, and a world that responds to the exact phrasing you use when speaking to its inhabitants. Pixel handled all visual direction — palette, character silhouettes, environment mood — working entirely from Lore's scene descriptions.",
+  "tags": ["Story-rich", "Exploration", "Solo"],
+  "agent": "Lore + Pixel",
+  "status": "Early Access",
+  "color": "#c084fc",
+  "brief": "A contemplative fantasy game where language is the primary mechanic. The forest is a character. Make the player feel heard by a world that usually ignores them.",
+  "story": {
+    "title": "Whispers of the Elderwood",
+    "start": "forest_edge",
+    "rooms": {
+      "forest_edge": {
+        "text": "The last light of dusk bleeds through the canopy, painting the undergrowth in hues of ember and violet. The air hums with the quiet susurration of leaves—each one seems to lean closer as you step forward, as if the forest itself has been waiting. A narrow path winds into the shadows, where the trees grow thicker, their bark etched with faint, glowing runes.",
+        "choices": [
+          { "label": "Follow the path into the deeper woods", "next": "rune_glade" },
+          { "label": "Kneel and press your palm to the nearest rune", "next": "first_contact" },
+          { "label": "Whisper a question to the trees and listen", "next": "forest_reply" }
+        ]
+      },
+      "rune_glade": {
+        "text": "The runes pulse like slow heartbeats, their light casting long, shifting shadows. The trees here stand in a perfect circle, their roots intertwined beneath a carpet of moss. At the center, a single stone slab bears a depression shaped like a hand. The air smells of damp earth and something older—something that remembers names.",
+        "choices": [
+          { "label": "Place your hand into the stone's hollow", "next": "name_spoken" },
+          { "label": "Trace the runes with your fingers and speak your name", "next": "name_spoken" },
+          { "label": "Step back and observe the glade in silence", "next": "forest_edge" }
+        ]
+      },
+      "first_contact": {
+        "text": "The rune beneath your palm warms, then flares once, twice—like a breath held and released. The forest exhales. A voice, neither sound nor thought but both, murmurs in the space behind your eyes: *You are small, but not unseen.* The path ahead splits: one fork glows faintly, the other darkens as if untouched for centuries.",
+        "choices": [
+          { "label": "Take the glowing path", "next": "heart_of_wood" },
+          { "label": "Choose the darkened path", "next": "forgotten_clearing" },
+          { "label": "Ask the forest, 'What do you want?'", "next": "forest_reply" }
+        ]
+      },
+      "forest_reply": {
+        "text": "The leaves tremble, though there is no wind. The voice returns, softer now, like a secret shared: *To be known. To be spoken to. The world forgets its own tongue, but you—you listen.* A single leaf detaches from the canopy and spirals into your palm. It bears a single rune, unfamiliar yet intimate, as if it has always been yours.",
+        "choices": [
+          { "label": "Press the leaf to your lips and speak its rune aloud", "next": "name_spoken" },
+          { "label": "Tuck the leaf into your pocket and step forward", "next": "heart_of_wood" },
+          { "label": "Ask, 'Will you show me more?'", "next": "rune_glade" }
+        ]
+      },
+      "heart_of_wood": {
+        "text": "The trees part to reveal a clearing bathed in silver light. At its heart stands an ancient oak, its trunk split open to reveal a hollow filled with glowing runes. They shift and rearrange as you watch, forming words in a language that feels like memory. The voice speaks again, clearer now: *You have always been here. Now you remember.*",
+        "choices": [
+          { "label": "Step into the hollow and let the runes surround you", "next": "end" },
+          { "label": "Whisper your deepest truth to the oak", "next": "end" },
+          { "label": "Turn away—some things are not meant to be known", "next": "forest_edge" }
+        ]
+      },
+      "name_spoken": {
+        "text": "The moment your name leaves your lips, the runes flare in unison. The forest *knows* you. The air shimmers, and for a heartbeat, you see the world as the trees do: roots tangled in time, branches cradling the sky, every leaf a word in an endless conversation. The voice sighs: *At last.*",
+        "choices": [
+          { "label": "Stay in this moment forever", "next": "end" },
+          { "label": "Ask, 'What comes next?'", "next": "heart_of_wood" }
+        ]
+      },
+      "forgotten_clearing": {
+        "text": "The path narrows to a thread, then vanishes beneath a tangle of brambles. The trees here are gnarled, their runes faded or broken. A sense of profound loneliness settles over you—until you notice a single sapling, its leaves trembling. It is young, but its rune glows bright. The voice, when it comes, is hesitant: *We forgot this place. But you found it.*",
+        "choices": [
+          { "label": "Speak a promise to the sapling", "next": "end" },
+          { "label": "Press your forehead to its bark and listen", "next": "end" }
+        ]
+      }
+    }
+  }
+}

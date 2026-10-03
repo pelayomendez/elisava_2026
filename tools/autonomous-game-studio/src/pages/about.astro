@@ -1,0 +1,265 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const agents = [
+  {
+    name: "Atlas",
+    role: "Game Designer",
+    description: "Generates game concepts, mechanics, and balancing rules from high-level prompts.",
+  },
+  {
+    name: "Pixel",
+    role: "Art Director",
+    description: "Produces sprite sheets, tilesets, and UI assets using diffusion models.",
+  },
+  {
+    name: "Lore",
+    role: "Narrative Writer",
+    description: "Builds worlds, writes dialogue trees, and maintains story consistency across sessions.",
+  },
+  {
+    name: "Compile",
+    role: "Engineer",
+    description: "Translates game logic into runnable code, handles state machines and physics.",
+  },
+];
+
+const milestones = [
+  { year: "2024", event: "Studio founded. First agentic pipeline prototype." },
+  { year: "2025 Q1", event: "Multi-agent framework reaches stable v1.0." },
+  { year: "2025 Q3", event: "First fully agent-built game ships on catalog." },
+  { year: "2026", event: "Open agent SDK released for third-party studios." },
+];
+---
+
+<Layout>
+  <section class="hero">
+    <p class="eyebrow">About the project</p>
+    <h1>Games made by agents,<br />for everyone.</h1>
+    <p class="lead">
+      Autonomous Game Studio is an experiment in delegating the entire game
+      development lifecycle — design, art, code, and narrative — to a
+      collaborative network of AI agents. Humans set the vision. Agents do the
+      rest.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>How it works</h2>
+    <div class="steps">
+      <div class="step">
+        <span class="step-num">01</span>
+        <h3>Prompt</h3>
+        <p>A human submits a game brief — genre, mood, constraints, target audience.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">02</span>
+        <h3>Plan</h3>
+        <p>The orchestrator agent decomposes the brief into tasks and assigns them to specialist agents.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">03</span>
+        <h3>Build</h3>
+        <p>Agents work in parallel — generating art, writing code, crafting story — and review each other's output.</p>
+      </div>
+      <div class="step">
+        <span class="step-num">04</span>
+        <h3>Ship</h3>
+        <p>The finished game is automatically tested, packaged, and published to the catalog.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Meet the agents</h2>
+    <div class="agents">
+      {agents.map((agent) => (
+        <div class="agent-card">
+          <div class="agent-avatar">{agent.name[0]}</div>
+          <div>
+            <h3>{agent.name}</h3>
+            <p class="role">{agent.role}</p>
+            <p class="desc">{agent.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Timeline</h2>
+    <ol class="timeline">
+      {milestones.map((m) => (
+        <li>
+          <span class="year">{m.year}</span>
+          <span class="event">{m.event}</span>
+        </li>
+      ))}
+    </ol>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    padding: 5rem 0 3rem;
+    max-width: 680px;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c6ff7;
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+    color: #fff;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.6);
+    margin: 0;
+  }
+
+  .section {
+    padding: 3.5rem 0;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+
+  h2 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin: 0 0 2rem;
+  }
+
+  /* Steps */
+  .steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .step {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 1.5rem;
+  }
+
+  .step-num {
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: #7c6ff7;
+  }
+
+  .step h3 {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0.5rem 0 0.5rem;
+  }
+
+  .step p {
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+  }
+
+  /* Agents */
+  .agents {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1rem;
+  }
+
+  .agent-card {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-start;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 12px;
+    padding: 1.25rem;
+  }
+
+  .agent-avatar {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #7c6ff7, #c084fc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    color: #fff;
+  }
+
+  .agent-card h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 0.15rem;
+  }
+
+  .role {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #7c6ff7;
+    margin: 0 0 0.5rem;
+  }
+
+  .desc {
+    font-size: 0.85rem;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.55);
+    margin: 0;
+  }
+
+  /* Timeline */
+  .timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .timeline li {
+    display: flex;
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .year {
+    flex-shrink: 0;
+    width: 80px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: #c084fc;
+  }
+
+  .event {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.7);
+    line-height: 1.5;
+  }
+</style>

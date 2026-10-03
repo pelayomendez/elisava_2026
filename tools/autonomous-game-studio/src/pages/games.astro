@@ -1,0 +1,79 @@
+---
+import Layout from "../layouts/Layout.astro";
+import GameCard from "../components/GameCard.astro";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const storiesDir = resolve("src/data/stories");
+const slugs: string[] = JSON.parse(readFileSync(`${storiesDir}/index.json`, "utf-8"));
+const games = slugs.map((slug) =>
+  JSON.parse(readFileSync(`${storiesDir}/${slug}.json`, "utf-8"))
+);
+---
+
+<Layout>
+  <section class="hero">
+    <p class="eyebrow">Games Catalog</p>
+    <h1>Built by agents.<br />Played by you.</h1>
+    <p class="lead">Every game below was designed, written, and coded by our agent network — with a human setting only the initial brief.</p>
+  </section>
+
+  <ul class="catalog">
+    {games.map((game) => (
+      <li>
+        <GameCard
+          slug={game.slug}
+          title={game.title}
+          genre={game.genre}
+          description={game.description}
+          tags={game.tags}
+          agent={game.agent}
+          status={game.status}
+          color={game.color}
+        />
+      </li>
+    ))}
+  </ul>
+</Layout>
+
+<style>
+  .hero {
+    padding: 5rem 0 3rem;
+    max-width: 640px;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c6ff7;
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+    color: #fff;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+  }
+
+  .catalog {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 1.25rem;
+    padding-bottom: 4rem;
+  }
+</style>

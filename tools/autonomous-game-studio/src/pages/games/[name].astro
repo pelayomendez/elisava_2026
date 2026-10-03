@@ -1,0 +1,242 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Terminal from "../../components/Terminal.astro";
+import { readFileSync } from "node:fs";
+import { resolve } from "node:path";
+
+const { name } = Astro.params;
+
+const storiesDir = resolve("src/data/stories");
+
+let game: {
+  slug: string; title: string; genre: string; description: string;
+  longDescription: string; tags: string[]; agent: string;
+  status: string; color: string; brief: string;
+  story: unknown;
+} | null = null;
+
+try {
+  game = JSON.parse(readFileSync(`${storiesDir}/${name}.json`, "utf-8"));
+} catch {
+  return Astro.redirect("/games");
+}
+
+const g = game!;
+---
+
+<Layout>
+  <div class="back-row">
+    <a class="back" href="/games">← All games</a>
+  </div>
+
+  <article>
+    <header class="game-header" style={`--accent: ${g.color}`}>
+      <div class="meta">
+        <span class="genre">{g.genre}</span>
+        <span class={`status ${g.status === "Playable" ? "playable" : "early"}`}>
+          {g.status}
+        </span>
+      </div>
+      <h1>{g.title}</h1>
+      <p class="subtitle">{g.description}</p>
+
+      <div class="tags">
+        {g.tags.map((tag) => <span class="tag">{tag}</span>)}
+      </div>
+
+    </header>
+
+    <Terminal />
+
+    <div class="body">
+      <section class="section">
+        <h2>About</h2>
+        <p>{g.longDescription}</p>
+      </section>
+
+      <section class="section brief-section">
+        <h2>Original brief</h2>
+        <blockquote>"{g.brief}"</blockquote>
+        <p class="brief-meta">Submitted by a human. Everything else built by <strong>{g.agent}</strong>.</p>
+      </section>
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .back-row {
+    padding-top: 2rem;
+  }
+
+  .back {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  .back:hover {
+    color: #fff;
+  }
+
+  article {
+    max-width: 780px;
+    padding-bottom: 5rem;
+  }
+
+  .game-header {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    margin-bottom: 2.5rem;
+  }
+
+  .meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .genre {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  .status {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 999px;
+  }
+
+  .status.playable {
+    background: rgba(52, 211, 153, 0.15);
+    color: #34d399;
+  }
+
+  .status.early {
+    background: rgba(251, 191, 36, 0.15);
+    color: #fbbf24;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
+    color: #fff;
+    margin: 0 0 1rem;
+  }
+
+  .subtitle {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 1.5rem;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-bottom: 2rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .section {
+    padding: 2.5rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+  }
+
+  .section h2 {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0 0 1rem;
+  }
+
+  .section p {
+    font-size: 0.95rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.65);
+    margin: 0;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .feature-list li {
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.65);
+    padding-left: 1.25rem;
+    position: relative;
+    line-height: 1.5;
+  }
+
+  .feature-list li::before {
+    content: "→";
+    position: absolute;
+    left: 0;
+    color: var(--accent);
+    font-weight: 700;
+  }
+
+  blockquote {
+    font-size: 1.1rem;
+    font-style: italic;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
+    border-left: 3px solid var(--accent);
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+  }
+
+  .brief-meta {
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.35);
+    margin: 0;
+  }
+
+  .brief-meta strong {
+    color: var(--accent);
+  }
+</style>
+
+<script is:inline define:vars={{ initialStory: g.story }}>
+  // Bridge: pass server data to the shared engine loaded below
+  window.__storyData = initialStory;
+</script>
+
+<script>
+  import { GameEngine } from "../../scripts/game-engine";
+  import type { Story } from "../../scripts/game-engine";
+
+  const storyData = (window as any).__storyData as Story | undefined;
+  if (storyData) {
+    const bodyEl = document.getElementById("terminal-body")!;
+    const titleEl = document.getElementById("terminal-title");
+    const engine = new GameEngine(storyData, bodyEl, titleEl);
+    engine.render();
+  }
+</script>

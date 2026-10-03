@@ -1,0 +1,155 @@
+---
+---
+
+<div class="vote-panel" id="vote-panel">
+  <button class="vote-toggle" id="vote-toggle" aria-label="Toggle vote panel">🎮</button>
+  <div class="vote-content" id="vote-content">
+    <h3>Vote your favorite game</h3>
+    <div class="vote-buttons">
+      <button class="vote-btn" data-game="Void Protocol">Void Protocol</button>
+      <button class="vote-btn" data-game="Echowood">Echowood</button>
+    </div>
+    <h4>Results</h4>
+    <ul class="vote-results" id="results"></ul>
+  </div>
+</div>
+
+<style>
+  .vote-panel {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    z-index: 10;
+  }
+
+  .vote-toggle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(20, 16, 40, 0.85);
+    backdrop-filter: blur(12px);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .vote-toggle:hover {
+    transform: scale(1.1);
+    border-color: #7c6ff7;
+  }
+
+  .vote-content {
+    display: none;
+    position: absolute;
+    bottom: 60px;
+    right: 0;
+    width: 280px;
+    background: rgba(20, 16, 40, 0.92);
+    backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  }
+
+  .vote-panel.open .vote-content {
+    display: block;
+  }
+
+  h3 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 1rem;
+  }
+
+  h4 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 1rem 0 0.5rem;
+  }
+
+  .vote-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .vote-btn {
+    padding: 0.6rem 1rem;
+    background: rgba(124, 111, 247, 0.15);
+    border: 1px solid rgba(124, 111, 247, 0.3);
+    color: #c4bfff;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    text-align: left;
+  }
+
+  .vote-btn:hover {
+    background: rgba(124, 111, 247, 0.3);
+    border-color: #7c6ff7;
+    color: #fff;
+  }
+
+  .vote-results {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+  }
+
+  .vote-results :global(li) {
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.3rem 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('vote-toggle')!;
+  const panel = document.getElementById('vote-panel')!;
+  const resultsEl = document.getElementById('results')!;
+
+  toggle.addEventListener('click', () => {
+    panel.classList.toggle('open');
+  });
+
+  document.querySelectorAll('.vote-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const game = (btn as HTMLElement).dataset.game;
+      await fetch('/api/vote', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ game })
+      });
+      loadResults();
+    });
+  });
+
+  async function loadResults() {
+    const res = await fetch('/api/results');
+    const data = await res.json();
+
+    resultsEl.innerHTML = '';
+    data.forEach((r: { game: string; votes: number }) => {
+      const li = document.createElement('li');
+      li.textContent = `${r.game}: ${r.votes} votos`;
+      resultsEl.appendChild(li);
+    });
+  }
+
+  loadResults();
+</script>

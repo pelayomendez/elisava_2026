@@ -1,0 +1,108 @@
+---
+interface Props {
+  title?: string;
+}
+
+const { title = "adventure.exe" } = Astro.props;
+---
+
+<div class="terminal">
+  <div class="terminal-bar">
+    <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+    <span class="terminal-title" id="terminal-title">{title}</span>
+  </div>
+  <div class="terminal-body" id="terminal-body">
+    <p class="idle-msg">Loading…</p>
+  </div>
+</div>
+
+<style is:global>
+  .terminal {
+    background: #070710;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: "Menlo", "Monaco", "Consolas", monospace;
+  }
+
+  .terminal-bar {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 0.9rem;
+    background: rgba(255, 255, 255, 0.04);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  }
+
+  .dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .terminal-title {
+    font-size: 0.72rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin-left: 0.25rem;
+  }
+
+  .terminal-body {
+    padding: 1.25rem 1.5rem;
+    min-height: 140px;
+  }
+
+  .idle-msg {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.3);
+    margin: 0;
+  }
+
+  /* Game engine styles */
+  .engine-scene {
+    color: #e2e2e8;
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin: 0 0 1.25rem;
+  }
+
+  .engine-choices {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+  }
+
+  .engine-choice {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 6px;
+    padding: 0.5rem 0.85rem;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.82rem;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .engine-choice:hover {
+    background: rgba(255, 255, 255, 0.09);
+  }
+
+  .engine-end {
+    color: #c084fc;
+    font-size: 0.9rem;
+    margin: 0 0 1rem;
+    font-style: italic;
+  }
+
+  .engine-restart {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #e2e2e8;
+    padding: 0.4rem 0.9rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+  }
+</style>

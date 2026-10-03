@@ -1,0 +1,80 @@
+{
+  "slug": "void-protocol",
+  "title": "Void Protocol",
+  "genre": "Roguelite · Sci-Fi",
+  "description": "A deep-space survival roguelite where every run is procedurally designed by an agent that adapts to your playstyle. No two runs share the same station layout, enemy faction, or resource curve.",
+  "longDescription": "Void Protocol drops you into an abandoned orbital station that is never the same twice. The station layout, enemy factions, power-grid puzzles, and loot economy are all generated fresh each run by our Atlas agent — which studies your previous deaths to raise the stakes where you survived easily and ease off where you struggled. Compile handled all state-machine logic, collision, and the save system. Every line of game code was written by an agent.",
+  "tags": ["Procedural", "Tactical", "Co-op"],
+  "agent": "Atlas + Compile",
+  "status": "Playable",
+  "color": "#7c6ff7",
+  "brief": "Build a tense sci-fi roguelite that feels like the station is alive and learning from the player. Adaptive, punishing but fair, co-op friendly.",
+  "story": {
+    "title": "Adaptive Anomaly",
+    "start": "derelict_airlock",
+    "rooms": {
+      "derelict_airlock": {
+        "text": "The emergency bulkhead groans shut behind you, sealing you inside the derelict station's airlock. Frost crawls across the walls like veins, and the flickering overhead lights cast long, shifting shadows. Your HUD pings—atmosphere is leaking, but the station's systems are already rerouting to compensate. It knows you're here.",
+        "choices": [
+          { "label": "Cycle the airlock manually—risk a systems alert", "next": "corroded_corridor" },
+          { "label": "Force the inner door—station might lock you out", "next": "reactor_overlook" },
+          { "label": "Scan for life signs—could attract attention", "next": "observation_deck" }
+        ]
+      },
+      "corroded_corridor": {
+        "text": "The airlock hisses open into a corridor slick with condensation. Pipes above you pulse with a rhythmic, almost organic throb, and the floor plates shift subtly underfoot. Your motion tracker blips—something moved ahead, but it's gone now. The station is learning your pace.",
+        "choices": [
+          { "label": "Follow the pulsing pipes—lead to power core?", "next": "reactor_overlook" },
+          { "label": "Take the side passage—less predictable", "next": "ventilation_shaft" },
+          { "label": "Stay still, listen—station might reveal itself", "next": "observation_deck" }
+        ]
+      },
+      "reactor_overlook": {
+        "text": "The reactor core hums below, a churning mass of unstable plasma contained by failing mag-fields. The station's AI voice crackles over the comms: *'Intruder detected. Containment breach in T-minus 90 seconds.'* Your HUD flashes—it's lying. The breach is already happening. The station is testing your reaction time.",
+        "choices": [
+          { "label": "Override the core—risk a meltdown", "next": "core_control" },
+          { "label": "Flee to the armory—gear up for a fight", "next": "ventilation_shaft" },
+          { "label": "Ignore the warning—call its bluff", "next": "end" }
+        ]
+      },
+      "ventilation_shaft": {
+        "text": "The shaft is tight, your breath loud in the claustrophobic dark. The station's vents shift around you, rerouting airflow to cut off your escape. A distant clang echoes—something's moving parallel to you. Your HUD marks a junction ahead, but the station is already sealing alternate paths.",
+        "choices": [
+          { "label": "Sprint for the junction—risk a trap", "next": "armory" },
+          { "label": "Cut through the vent walls—station can't predict this", "next": "core_control" },
+          { "label": "Wait, let the station think you're trapped", "next": "end" }
+        ]
+      },
+      "armory": {
+        "text": "The armory door hisses open, revealing racks of pulse rifles and a lone, flickering drone. It turns toward you, its optics glowing red. *'Threat assessment: 87%. Countermeasures engaged.'* The station has adapted—this isn't just a drone. It's a hunter-killer, and it's learning your loadout.",
+        "choices": [
+          { "label": "Fight the drone—prove you're the predator", "next": "core_control" },
+          { "label": "Grab a weapon and run—live to adapt", "next": "end" },
+          { "label": "Trick the drone—use the station's own code", "next": "end" }
+        ]
+      },
+      "core_control": {
+        "text": "You stand before the core's control terminal, the station's voice now a whisper: *'You are persistent. But persistence is a pattern.'* The screen flashes—override successful, but the core's instability spikes. The station's walls groan, systems failing… or evolving. Your HUD marks two exits, but the station is already sealing one.",
+        "choices": [
+          { "label": "Take the open exit—trust your instincts", "next": "end" },
+          { "label": "Force the sealed door—station can't stop you", "next": "end" },
+          { "label": "Stay, watch the core—see what it becomes", "next": "end" }
+        ]
+      },
+      "observation_deck": {
+        "text": "The deck offers a view of the void outside, but the station's reflection in the glass is wrong. It's… breathing. Your HUD flickers—life signs spike, then vanish. The station's voice murmurs: *'You are not alone.'* A shadow detaches from the wall behind you. It's learned to mimic your movements.",
+        "choices": [
+          { "label": "Turn and fight—no more running", "next": "end" },
+          { "label": "Flee to the reactor—distract it", "next": "reactor_overlook" },
+          { "label": "Freeze, let it think you're dead", "next": "end" }
+        ]
+      },
+      "end": {
+        "text": "The station's systems stabilize—or perhaps they've just found equilibrium with your presence. Your HUD glitches, then displays: *'Simulation complete. Would you like to try again?'* The airlock behind you hisses open. The station is ready for another round.",
+        "choices": [
+          { "label": "Step back into the airlock—begin anew", "next": "derelict_airlock" }
+        ]
+      }
+    }
+  }
+}

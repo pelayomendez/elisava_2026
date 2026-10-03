@@ -1,0 +1,230 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Terminal from "../components/Terminal.astro";
+---
+
+<Layout>
+  <section class="hero">
+    <p class="eyebrow">Studio</p>
+    <h1>Describe it.<br />Play it.</h1>
+    <p class="lead">Write a brief for your game and our agent will generate a playable text adventure on the spot.</p>
+  </section>
+
+  <form id="studio-form">
+    <label for="brief">Game brief</label>
+    <textarea
+      id="brief"
+      name="brief"
+      rows="4"
+      placeholder="e.g. A haunted lighthouse on a forgotten island where the keeper's ghost asks you riddles…"
+      required
+    ></textarea>
+    <button type="submit" id="submit-btn">
+      <span id="btn-label">Generate &amp; Play</span>
+      <span id="btn-spinner" class="spinner hidden"></span>
+    </button>
+  </form>
+
+  <div id="game-area" class="hidden">
+    <Terminal />
+    <button id="new-game-btn" class="secondary-btn">New game</button>
+  </div>
+</Layout>
+
+<style>
+  .hero {
+    padding: 5rem 0 3rem;
+    max-width: 640px;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c6ff7;
+    margin: 0 0 1rem;
+  }
+
+  h1 {
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    margin: 0 0 1.25rem;
+    color: #fff;
+  }
+
+  .lead {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0;
+  }
+
+  form {
+    max-width: 640px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: rgba(255, 255, 255, 0.4);
+  }
+
+  textarea {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    color: #e2e2e8;
+    font-family: inherit;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    resize: vertical;
+    transition: border-color 0.15s;
+  }
+
+  textarea:focus {
+    outline: none;
+    border-color: #7c6ff7;
+  }
+
+  textarea::placeholder {
+    color: rgba(255, 255, 255, 0.2);
+  }
+
+  button[type="submit"] {
+    align-self: flex-start;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.7rem 1.5rem;
+    background: #7c6ff7;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+
+  button[type="submit"]:hover {
+    background: #6a5ce0;
+  }
+
+  button[type="submit"]:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+  }
+
+  .hidden {
+    display: none !important;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+
+  #game-area {
+    max-width: 780px;
+    padding-bottom: 4rem;
+  }
+
+  .secondary-btn {
+    margin-top: 1rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.6);
+    padding: 0.45rem 1rem;
+    border-radius: 7px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-family: inherit;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .secondary-btn:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+</style>
+
+<script>
+  import { GameEngine } from "../scripts/game-engine";
+  import type { Story } from "../scripts/game-engine";
+
+  const form = document.getElementById("studio-form") as HTMLFormElement;
+  const briefInput = document.getElementById("brief") as HTMLTextAreaElement;
+  const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement;
+  const btnLabel = document.getElementById("btn-label")!;
+  const btnSpinner = document.getElementById("btn-spinner")!;
+  const gameArea = document.getElementById("game-area")!;
+  const terminalBody = document.getElementById("terminal-body")!;
+  const terminalTitle = document.getElementById("terminal-title")!;
+  const newGameBtn = document.getElementById("new-game-btn")!;
+
+  let engine: GameEngine | null = null;
+
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const brief = briefInput.value.trim();
+    if (!brief) return;
+
+    submitBtn.disabled = true;
+    btnLabel.textContent = "Generating…";
+    btnSpinner.classList.remove("hidden");
+
+    try {
+      const res = await fetch("/api/generate-game", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slug: "studio-game", brief }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        throw new Error(err.error || "Generation failed");
+      }
+
+      const story: Story = await res.json();
+
+      form.classList.add("hidden");
+      gameArea.classList.remove("hidden");
+
+      engine = new GameEngine(story, terminalBody, terminalTitle);
+      engine.render();
+    } catch (err: any) {
+      terminalBody.innerHTML = `<p style="color:#f87171;font-size:0.85rem;margin:0;">${err.message}</p>`;
+      gameArea.classList.remove("hidden");
+    } finally {
+      submitBtn.disabled = false;
+      btnLabel.textContent = "Generate & Play";
+      btnSpinner.classList.add("hidden");
+    }
+  });
+
+  newGameBtn.addEventListener("click", () => {
+    engine = null;
+    gameArea.classList.add("hidden");
+    form.classList.remove("hidden");
+    briefInput.value = "";
+    briefInput.focus();
+  });
+</script>

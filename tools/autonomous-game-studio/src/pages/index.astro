@@ -1,0 +1,351 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Vote from '../components/Vote.astro';
+---
+
+<Layout>
+  <canvas id="space-canvas"></canvas>
+
+  <section class="hero-overlay">
+    <p class="eyebrow">Autonomous Game Studio</p>
+    <h1>Games born<br />from the void.</h1>
+    <p class="lead">AI agents design, write, and code entire games — from a single human brief. Explore what they've built, or create your own.</p>
+    <div class="cta-row">
+      <a class="btn-primary" href="/games">Browse games</a>
+      <a class="btn-secondary" href="/studio">Open Studio</a>
+    </div>
+  </section>
+
+  <Vote />
+</Layout>
+
+<style>
+  #space-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(124, 111, 247, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 75% 30%, rgba(192, 132, 252, 0.06) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 80%, rgba(80, 70, 180, 0.05) 0%, transparent 50%);
+  }
+
+  .hero-overlay {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    padding: 18vh 0 4rem;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #7c6ff7;
+    margin: 0 0 1.25rem;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 4.5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    color: #fff;
+    margin: 0 0 1.5rem;
+  }
+
+  .lead {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0 0 2.5rem;
+    max-width: 480px;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  .btn-primary {
+    padding: 0.75rem 1.6rem;
+    background: #7c6ff7;
+    color: #fff;
+    font-weight: 700;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: background 0.15s;
+  }
+
+  .btn-primary:hover {
+    background: #6a5ce0;
+  }
+
+  .btn-secondary {
+    padding: 0.75rem 1.6rem;
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: border-color 0.15s, color 0.15s;
+  }
+
+  .btn-secondary:hover {
+    border-color: rgba(255, 255, 255, 0.4);
+    color: #fff;
+  }
+</style>
+
+<script>
+  import * as THREE from "three";
+
+  const canvas = document.getElementById("space-canvas") as HTMLCanvasElement;
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setClearColor(0x000000, 0);
+
+  const scene = new THREE.Scene();
+
+  const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 2000);
+  camera.position.z = 1;
+
+  // --- Starfield ---
+  const STAR_COUNT = 10000;
+  const starGeo = new THREE.BufferGeometry();
+  const positions = new Float32Array(STAR_COUNT * 3);
+  const velocities = new Float32Array(STAR_COUNT);
+  const sizes = new Float32Array(STAR_COUNT);
+  const starColors = new Float32Array(STAR_COUNT * 3);
+  const twinkleOffsets = new Float32Array(STAR_COUNT);
+
+  const palette = [
+    [1.0, 1.0, 1.0],       // white
+    [0.9, 0.88, 1.0],      // cool white
+    [0.486, 0.435, 0.969],  // purple
+    [0.753, 0.518, 0.988],  // light purple
+    [0.6, 0.7, 1.0],       // blue-white
+    [1.0, 0.85, 0.7],      // warm star
+  ];
+
+  for (let i = 0; i < STAR_COUNT; i++) {
+    positions[i * 3] = (Math.random() - 0.5) * 1400;
+    positions[i * 3 + 1] = (Math.random() - 0.5) * 1400;
+    positions[i * 3 + 2] = -Math.random() * 2000;
+    velocities[i] = 0.2 + Math.random() * 1.2;
+    sizes[i] = 0.5 + Math.random() * 3.0;
+    twinkleOffsets[i] = Math.random() * Math.PI * 2;
+    const c = palette[Math.floor(Math.random() * palette.length)];
+    starColors[i * 3] = c[0];
+    starColors[i * 3 + 1] = c[1];
+    starColors[i * 3 + 2] = c[2];
+  }
+
+  starGeo.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+  starGeo.setAttribute("size", new THREE.BufferAttribute(sizes, 1));
+  starGeo.setAttribute("color", new THREE.BufferAttribute(starColors, 3));
+  starGeo.setAttribute("twinkleOffset", new THREE.BufferAttribute(twinkleOffsets, 1));
+
+  const starMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uTime: { value: 0 },
+    },
+    vertexShader: `
+      attribute float size;
+      attribute vec3 color;
+      attribute float twinkleOffset;
+      uniform float uTime;
+      varying float vAlpha;
+      varying vec3 vColor;
+      void main() {
+        vColor = color;
+        vec4 mvPos = modelViewMatrix * vec4(position, 1.0);
+        float depth = clamp(1.0 - (-mvPos.z / 2000.0), 0.15, 1.0);
+        // twinkle: each star pulses at its own rate
+        float twinkle = 0.6 + 0.4 * sin(uTime * (1.5 + size * 0.5) + twinkleOffset);
+        gl_PointSize = size * twinkle * (300.0 / -mvPos.z);
+        gl_Position = projectionMatrix * mvPos;
+        vAlpha = depth * twinkle;
+      }
+    `,
+    fragmentShader: `
+      varying float vAlpha;
+      varying vec3 vColor;
+      void main() {
+        float d = length(gl_PointCoord - 0.5) * 2.0;
+        if (d > 1.0) discard;
+        // sharp bright core + wider soft halo
+        float core = exp(-d * d * 10.0);
+        float halo = exp(-d * 1.5) * 0.3;
+        float brightness = core + halo;
+        gl_FragColor = vec4(vColor * brightness, brightness * vAlpha);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+  });
+
+  const stars = new THREE.Points(starGeo, starMat);
+  scene.add(stars);
+
+  // --- Shooting stars ---
+  const TRAIL_COUNT = 5;
+
+  interface Meteor {
+    mesh: THREE.Mesh;
+    active: boolean;
+    speed: number;
+    dir: THREE.Vector3;
+    life: number;
+    maxLife: number;
+  }
+
+  const meteorMat = new THREE.ShaderMaterial({
+    uniforms: {
+      uOpacity: { value: 1.0 },
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = projectionMatrix * modelViewMatrix * vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      uniform float uOpacity;
+      varying vec2 vUv;
+      void main() {
+        // trail fades from head (right) to tail (left)
+        float trail = smoothstep(0.0, 1.0, vUv.x);
+        // thin across the y-axis
+        float thin = 1.0 - abs(vUv.y - 0.5) * 2.0;
+        thin = pow(max(thin, 0.0), 2.0);
+        float a = trail * thin * uOpacity;
+        vec3 col = mix(vec3(0.486, 0.435, 0.969), vec3(1.0), trail * 0.7);
+        gl_FragColor = vec4(col, a);
+      }
+    `,
+    transparent: true,
+    depthWrite: false,
+    blending: THREE.AdditiveBlending,
+    side: THREE.DoubleSide,
+  });
+
+  const meteors: Meteor[] = [];
+  for (let i = 0; i < TRAIL_COUNT; i++) {
+    const geo = new THREE.PlaneGeometry(1, 1);
+    const mat = meteorMat.clone();
+    const mesh = new THREE.Mesh(geo, mat);
+    mesh.visible = false;
+    scene.add(mesh);
+    meteors.push({ mesh, active: false, speed: 0, dir: new THREE.Vector3(), life: 0, maxLife: 0 });
+  }
+
+  function spawnMeteor(m: Meteor) {
+    // start from random edge
+    const side = Math.random() > 0.5 ? 1 : -1;
+    m.mesh.position.set(
+      side * (200 + Math.random() * 300),
+      150 + Math.random() * 300,
+      -300 - Math.random() * 800
+    );
+    m.dir.set(-side * (0.6 + Math.random() * 0.4), -(0.4 + Math.random() * 0.4), -0.2).normalize();
+    m.speed = 8 + Math.random() * 12;
+    m.maxLife = 0.6 + Math.random() * 0.8;
+    m.life = 0;
+    m.active = true;
+    m.mesh.visible = true;
+    // orient the plane along the direction of travel
+    const len = 40 + Math.random() * 80;
+    m.mesh.scale.set(len, 2 + Math.random() * 2, 1);
+    m.mesh.lookAt(m.mesh.position.clone().add(m.dir));
+    m.mesh.rotateY(Math.PI / 2);
+  }
+
+  let nextMeteorTime = 1 + Math.random() * 2;
+
+  // --- Slow central rotation for depth ---
+  const starPivot = new THREE.Group();
+  starPivot.add(stars);
+  scene.add(starPivot);
+
+  // --- Mouse parallax ---
+  let mouseX = 0;
+  let mouseY = 0;
+  document.addEventListener("mousemove", (e) => {
+    mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+    mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+  });
+
+  // --- Resize ---
+  window.addEventListener("resize", () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // --- Animate ---
+  const clock = new THREE.Clock();
+
+  function animate() {
+    requestAnimationFrame(animate);
+    const dt = clock.getDelta();
+    const elapsed = clock.getElapsedTime();
+
+    // Move stars toward camera
+    const pos = starGeo.attributes.position as THREE.BufferAttribute;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      pos.array[i * 3 + 2] += velocities[i];
+      if (pos.array[i * 3 + 2] > 1) {
+        pos.array[i * 3 + 2] = -2000;
+      }
+    }
+    pos.needsUpdate = true;
+
+    starMat.uniforms.uTime.value = elapsed;
+
+    // Very slow rotation — gives a sense of scale
+    starPivot.rotation.z = elapsed * 0.005;
+    starPivot.rotation.x = Math.sin(elapsed * 0.01) * 0.02;
+
+    // Shooting stars
+    nextMeteorTime -= dt;
+    if (nextMeteorTime <= 0) {
+      const idle = meteors.find(m => !m.active);
+      if (idle) spawnMeteor(idle);
+      nextMeteorTime = 1.5 + Math.random() * 4;
+    }
+
+    for (const m of meteors) {
+      if (!m.active) continue;
+      m.life += dt;
+      m.mesh.position.addScaledVector(m.dir, m.speed);
+      const progress = m.life / m.maxLife;
+      (m.mesh.material as THREE.ShaderMaterial).uniforms.uOpacity.value =
+        progress < 0.2 ? progress / 0.2 : 1.0 - ((progress - 0.2) / 0.8);
+      if (m.life >= m.maxLife) {
+        m.active = false;
+        m.mesh.visible = false;
+      }
+    }
+
+    // Gentle parallax
+    camera.position.x += (mouseX * 40 - camera.position.x) * 0.015;
+    camera.position.y += (-mouseY * 40 - camera.position.y) * 0.015;
+    camera.lookAt(0, 0, -1000);
+
+    renderer.render(scene, camera);
+  }
+
+  animate();
+</script>
