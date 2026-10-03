@@ -1,0 +1,475 @@
+---
+const localWebhookUrl =
+  import.meta.env.PUBLIC_LOCAL_N8N_WEBHOOK_URL ??
+  import.meta.env.PUBLIC_N8N_WEBHOOK_URL ??
+  "http://localhost:5678/webhook/temperature-alert";
+const remoteWebhookUrl =
+  import.meta.env.PUBLIC_REMOTE_N8N_WEBHOOK_URL ??
+  "https://iaio.app.n8n.cloud/webhook/temperature-alert";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A local webhook demo for temperature alerts." />
+    <title>Temperature Alert Demo</title>
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Webhook classroom demo</p>
+        <h1 id="page-title">Temperature Alert Demo</h1>
+        <p class="lede">
+          Send a sensor reading to n8n, let the workflow classify it, and read
+          the JSON response returned by the webhook. Warning and critical readings
+          can use the local Docker workflow or the remote n8n Cloud workflow.
+        </p>
+      </section>
+
+      <section class="workspace" aria-label="Temperature webhook tester">
+        <form
+          id="temperature-form"
+          class="form"
+          data-local-webhook-url={localWebhookUrl}
+          data-remote-webhook-url={remoteWebhookUrl}
+        >
+          <label>
+            <span>Server</span>
+            <select id="server-target" name="serverTarget">
+              <option value="local" selected>Local Docker n8n</option>
+              <option value="remote">Remote n8n Cloud</option>
+            </select>
+          </label>
+
+          <label id="remote-url-field" class="remote-url-field" hidden>
+            <span>Remote webhook URL</span>
+            <input
+              id="remoteWebhookUrl"
+              name="remoteWebhookUrl"
+              type="url"
+              value={remoteWebhookUrl}
+              autocomplete="off"
+            />
+          </label>
+
+          <label>
+            <span>Device ID</span>
+            <input
+              id="deviceId"
+              name="deviceId"
+              type="text"
+              value="sensor-1"
+              autocomplete="off"
+              required
+            />
+          </label>
+
+          <label>
+            <span>Temperature</span>
+            <input
+              id="temperature"
+              name="temperature"
+              type="number"
+              value="42"
+              step="0.1"
+              required
+            />
+          </label>
+
+          <button id="submit-button" type="submit">Send reading</button>
+          <p id="server-note" class="server-note">
+            Sending to local n8n at {localWebhookUrl}
+          </p>
+        </form>
+
+        <aside class="result-panel" aria-live="polite">
+          <div class="result-header">
+            <h2>Webhook response</h2>
+            <span id="status-pill" class="status-pill">Ready</span>
+          </div>
+          <pre id="result-output">Submit a reading to see the JSON response.</pre>
+          <p class="mailpit-link">
+            Local email inbox:
+            <a href="http://localhost:8025" target="_blank" rel="noreferrer">
+              http://localhost:8025
+            </a>
+          </p>
+        </aside>
+      </section>
+    </main>
+
+    <script>
+      const form = document.querySelector(
+        "#temperature-form",
+      ) as HTMLFormElement | null;
+      const output = document.querySelector(
+        "#result-output",
+      ) as HTMLPreElement | null;
+      const statusPill = document.querySelector(
+        "#status-pill",
+      ) as HTMLSpanElement | null;
+      const submitButton = document.querySelector(
+        "#submit-button",
+      ) as HTMLButtonElement | null;
+      const serverTarget = document.querySelector(
+        "#server-target",
+      ) as HTMLSelectElement | null;
+      const remoteWebhookInput = document.querySelector(
+        "#remoteWebhookUrl",
+      ) as HTMLInputElement | null;
+      const remoteUrlField = document.querySelector(
+        "#remote-url-field",
+      ) as HTMLLabelElement | null;
+      const serverNote = document.querySelector(
+        "#server-note",
+      ) as HTMLParagraphElement | null;
+
+      const savedRemoteWebhookUrl = localStorage.getItem("remoteWebhookUrl");
+      if (savedRemoteWebhookUrl && remoteWebhookInput) {
+        remoteWebhookInput.value = savedRemoteWebhookUrl;
+      }
+
+      const setResult = (
+        label: string,
+        payload: string | Record<string, unknown>,
+        state = "ready",
+      ) => {
+        if (!statusPill || !output) return;
+
+        statusPill.textContent = label;
+        statusPill.dataset.state = state;
+        output.textContent =
+          typeof payload === "string" ? payload : JSON.stringify(payload, null, 2);
+      };
+
+      const getWebhookUrl = () => {
+        if (!form || !serverTarget) return "";
+
+        if (serverTarget.value === "remote") {
+          return remoteWebhookInput?.value.trim() || form.dataset.remoteWebhookUrl || "";
+        }
+
+        return form.dataset.localWebhookUrl || "";
+      };
+
+      const updateServerUi = () => {
+        if (!serverTarget || !remoteUrlField || !serverNote) return;
+
+        const webhookUrl = getWebhookUrl();
+        const isRemote = serverTarget.value === "remote";
+        remoteUrlField.hidden = !isRemote;
+        serverNote.textContent = `Sending to ${isRemote ? "remote n8n Cloud" : "local n8n"} at ${webhookUrl}`;
+      };
+
+      serverTarget?.addEventListener("change", updateServerUi);
+      remoteWebhookInput?.addEventListener("input", () => {
+        localStorage.setItem("remoteWebhookUrl", remoteWebhookInput.value);
+        updateServerUi();
+      });
+      updateServerUi();
+
+      form?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!submitButton) return;
+
+        const formData = new FormData(form);
+        const payload = {
+          deviceId: String(formData.get("deviceId") ?? ""),
+          temperature: Number(formData.get("temperature")),
+        };
+        const webhookUrl = getWebhookUrl();
+
+        submitButton.disabled = true;
+        setResult("Sending", `Waiting for n8n at ${webhookUrl}...`, "loading");
+
+        try {
+          const response = await fetch(webhookUrl, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(payload),
+          });
+
+          const data = await response.json();
+
+          if (!response.ok) {
+            throw new Error(data.message ?? `Request failed with ${response.status}`);
+          }
+
+          setResult(data.severity ?? "OK", data, data.severity ?? "ready");
+        } catch (error) {
+          setResult(
+            "Error",
+            {
+              message:
+                error instanceof Error
+                  ? error.message
+                  : "Could not reach the n8n webhook.",
+              hint: "Check that Docker is running and n8n is available at the configured webhook URL.",
+            },
+            "error",
+          );
+        } finally {
+          submitButton.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
+
+<style>
+  :root {
+    color-scheme: light;
+    --bg: #f8faf6;
+    --ink: #17191f;
+    --muted: #59616f;
+    --line: #cad2dc;
+    --panel: #ffffff;
+    --field: #f4f7fb;
+    --green: #147a55;
+    --blue: #155ea8;
+    --yellow: #9b6414;
+    --red: #b42318;
+    --shadow: 0 18px 45px rgba(23, 25, 31, 0.12);
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    min-width: 320px;
+    min-height: 100vh;
+    color: var(--ink);
+    background:
+      linear-gradient(90deg, rgba(20, 122, 85, 0.08) 0 1px, transparent 1px 100%),
+      linear-gradient(180deg, rgba(21, 94, 168, 0.07) 0 1px, transparent 1px 100%),
+      var(--bg);
+    background-size: 42px 42px;
+    font-family:
+      Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+  }
+
+  button,
+  select,
+  input {
+    font: inherit;
+  }
+
+  .shell {
+    width: min(1080px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 56px 0;
+  }
+
+  .intro {
+    max-width: 760px;
+    margin-bottom: 28px;
+  }
+
+  .eyebrow {
+    margin: 0 0 10px;
+    color: var(--blue);
+    font-size: 0.9rem;
+    font-weight: 800;
+    letter-spacing: 0;
+    text-transform: uppercase;
+  }
+
+  h1,
+  h2,
+  p {
+    overflow-wrap: anywhere;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2.1rem, 7vw, 5.2rem);
+    line-height: 0.95;
+    letter-spacing: 0;
+  }
+
+  .lede {
+    max-width: 660px;
+    margin: 20px 0 0;
+    color: var(--muted);
+    font-size: 1.12rem;
+    line-height: 1.65;
+  }
+
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(280px, 380px) minmax(0, 1fr);
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  .form,
+  .result-panel {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--panel);
+    box-shadow: var(--shadow);
+  }
+
+  .form {
+    display: grid;
+    gap: 18px;
+    align-content: start;
+    padding: 22px;
+  }
+
+  label {
+    display: grid;
+    gap: 8px;
+    color: var(--muted);
+    font-weight: 700;
+  }
+
+  input,
+  select {
+    width: 100%;
+    min-height: 46px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 10px 12px;
+    color: var(--ink);
+    background: var(--field);
+  }
+
+  input:focus,
+  select:focus {
+    border-color: var(--blue);
+    outline: 3px solid rgba(21, 94, 168, 0.18);
+  }
+
+  select {
+    cursor: pointer;
+  }
+
+  .server-note {
+    margin: -4px 0 0;
+    color: var(--muted);
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
+
+  button {
+    min-height: 48px;
+    border: 0;
+    border-radius: 6px;
+    padding: 12px 16px;
+    color: #ffffff;
+    background: var(--ink);
+    font-weight: 800;
+    cursor: pointer;
+  }
+
+  button:focus-visible {
+    outline: 3px solid rgba(21, 94, 168, 0.3);
+    outline-offset: 3px;
+  }
+
+  button:disabled {
+    cursor: wait;
+    opacity: 0.62;
+  }
+
+  .result-panel {
+    min-width: 0;
+    padding: 22px;
+  }
+
+  .result-header {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 1.2rem;
+    letter-spacing: 0;
+  }
+
+  .status-pill {
+    min-width: 82px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 10px;
+    color: var(--blue);
+    background: #eef5ff;
+    font-size: 0.84rem;
+    font-weight: 800;
+    text-align: center;
+    text-transform: capitalize;
+  }
+
+  .status-pill[data-state="normal"] {
+    color: var(--green);
+    background: #e9f8f0;
+  }
+
+  .status-pill[data-state="warning"] {
+    color: var(--yellow);
+    background: #fff5df;
+  }
+
+  .status-pill[data-state="critical"],
+  .status-pill[data-state="error"] {
+    color: var(--red);
+    background: #fff0ed;
+  }
+
+  .status-pill[data-state="loading"] {
+    color: var(--blue);
+    background: #eef5ff;
+  }
+
+  pre {
+    min-height: 220px;
+    margin: 0;
+    overflow: auto;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 16px;
+    color: #f4f7fb;
+    background: #17191f;
+    font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+    font-size: 0.94rem;
+    line-height: 1.55;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+  }
+
+  .mailpit-link {
+    margin: 14px 0 0;
+    color: var(--muted);
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .mailpit-link a {
+    color: var(--blue);
+    font-weight: 800;
+  }
+
+  @media (max-width: 760px) {
+    .shell {
+      width: min(100% - 24px, 1080px);
+      padding: 34px 0;
+    }
+
+    .workspace {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

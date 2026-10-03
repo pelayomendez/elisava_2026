@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "flowbite/plugin";
+
+@theme {
+	--color-brand: #2563eb;
+	--color-brand-light: #dbeafe;
+	--color-accent: #f59e0b;
+	--font-display: "Inter", sans-serif;
+	--spacing-card: 2rem;
+}

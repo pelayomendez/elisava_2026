@@ -1,0 +1,98 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Centered Element — Plain HTML/CSS">
+	<div class="cv-wrapper">
+		<div class="cv-card">
+			<div class="cv-icon">&#10038;</div>
+			<h1 class="cv-title">Centered with CSS</h1>
+			<p class="cv-text">This card is perfectly centered using hand-written Flexbox CSS — same result, more code.</p>
+			<div class="cv-tags">
+				<span class="cv-tag">display: flex</span>
+				<span class="cv-tag">align-items: center</span>
+				<span class="cv-tag">justify-content: center</span>
+			</div>
+			<a href="/centered-flowbite" class="cv-link">
+				See the Tailwind version &rarr;
+			</a>
+		</div>
+	</div>
+</Layout>
+
+<style>
+	.cv-wrapper {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: #f9fafb;
+	}
+
+	.cv-card {
+		text-align: center;
+		padding: 2.5rem;
+		background: #fff;
+		border-radius: 1rem;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+		border: 1px solid #e5e7eb;
+		max-width: 28rem;
+		width: 100%;
+		margin: 0 1rem;
+	}
+
+	.cv-icon {
+		width: 4rem;
+		height: 4rem;
+		background: #dcfce7;
+		color: #16a34a;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1.5rem;
+		font-size: 1.5rem;
+		font-weight: 700;
+	}
+
+	.cv-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		color: #111827;
+		margin-bottom: 0.5rem;
+	}
+
+	.cv-text {
+		color: #6b7280;
+		margin-bottom: 1.5rem;
+	}
+
+	.cv-tags {
+		display: flex;
+		gap: 0.75rem;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.cv-tag {
+		background: #dcfce7;
+		color: #166534;
+		font-size: 0.75rem;
+		font-weight: 500;
+		padding: 0.25rem 0.625rem;
+		border-radius: 9999px;
+	}
+
+	.cv-link {
+		display: inline-block;
+		margin-top: 2rem;
+		font-size: 0.875rem;
+		color: #2563eb;
+		font-weight: 500;
+		text-decoration: none;
+	}
+
+	.cv-link:hover {
+		text-decoration: underline;
+	}
+</style>

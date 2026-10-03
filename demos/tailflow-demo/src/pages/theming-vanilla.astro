@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+import '../styles/theming-vanilla.css';
+---
+
+<Layout title="Theming — CSS Custom Properties">
+	<main class="tv">
+
+		<span class="tv-badge">Plain CSS Theming</span>
+
+		<section class="tv-content">
+			<h1 class="tv-heading-1">Theming with CSS Variables</h1>
+			<p class="tv-intro">
+				CSS custom properties (variables) let you define reusable values on <code>:root</code> and reference them throughout your stylesheet. It's the native equivalent of a design token system.
+			</p>
+
+			<!-- HOW IT WORKS -->
+			<div class="tv-block">
+				<h2 class="tv-heading-2">How it works</h2>
+				<div class="tv-code">
+					<p class="tv-code-comment">/* styles.css — CSS custom properties */</p>
+					<p><span class="tv-code-selector">:root</span> &#123;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">--color-brand</span>: <span class="tv-code-val">#2563eb</span>;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">--color-brand-light</span>: <span class="tv-code-val">#dbeafe</span>;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">--color-accent</span>: <span class="tv-code-val">#f59e0b</span>;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">--font-display</span>: <span class="tv-code-val">"Inter", sans-serif</span>;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">--spacing-card</span>: <span class="tv-code-val">2rem</span>;</p>
+					<p>&#125;</p>
+					<br />
+					<p class="tv-code-comment">/* usage */</p>
+					<p><span class="tv-code-selector">.card</span> &#123;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">background</span>: <span class="tv-code-val">var(--color-brand-light)</span>;</p>
+					<p class="tv-code-indent"><span class="tv-code-prop">padding</span>: <span class="tv-code-val">var(--spacing-card)</span>;</p>
+					<p>&#125;</p>
+				</div>
+				<p class="tv-note">Every component that needs the value references it with <code>var(--token-name)</code>.</p>
+			</div>
+
+			<!-- LIVE DEMO -->
+			<div class="tv-block">
+				<h2 class="tv-heading-2">Live demo</h2>
+				<p class="tv-subtitle">These cards use the CSS variables defined above.</p>
+				<div class="tv-card-grid">
+					<div class="tv-card tv-card-brand">
+						<h3 class="tv-card-title tv-card-title-brand">Brand Color</h3>
+						<p class="tv-card-text">Uses <code>var(--color-brand-light)</code> for background and <code>var(--color-brand)</code> for text.</p>
+					</div>
+					<div class="tv-card tv-card-accent">
+						<h3 class="tv-card-title tv-card-title-accent">Accent Color</h3>
+						<p class="tv-card-text">Uses <code>var(--color-accent)</code>. Opacity requires <code>rgba()</code> or a separate variable.</p>
+					</div>
+					<div class="tv-card tv-card-spacing">
+						<h3 class="tv-card-title">Custom Spacing</h3>
+						<p class="tv-card-text">Uses <code>var(--spacing-card)</code> for padding.</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- COMPARISON TABLE -->
+			<div class="tv-block">
+				<h2 class="tv-heading-2">CSS Variables vs Tailwind @theme</h2>
+				<div class="tv-table-wrap">
+					<table class="tv-table">
+						<thead>
+							<tr>
+								<th></th>
+								<th>CSS Variables</th>
+								<th>Tailwind @theme</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Define tokens</td>
+								<td><code>:root &#123; --color-brand: #2563eb; &#125;</code></td>
+								<td><code>@theme &#123; --color-brand: #2563eb; &#125;</code></td>
+							</tr>
+							<tr>
+								<td>Use in CSS</td>
+								<td><code>color: var(--color-brand);</code></td>
+								<td>Not needed — use utility class</td>
+							</tr>
+							<tr>
+								<td>Use in HTML</td>
+								<td><code>style="color: var(--color-brand)"</code></td>
+								<td><code>class="text-brand"</code></td>
+							</tr>
+							<tr>
+								<td>Opacity</td>
+								<td>Needs extra variable or <code>rgba()</code></td>
+								<td><code>bg-brand/50</code> built-in</td>
+							</tr>
+							<tr>
+								<td>Auto utilities</td>
+								<td>No — write each class manually</td>
+								<td>Yes — bg, text, border, etc. generated</td>
+							</tr>
+							<tr>
+								<td>Runtime changes</td>
+								<td>Yes — JS can update <code>:root</code></td>
+								<td>Yes — CSS vars under the hood</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+
+			<!-- LINK -->
+			<div class="tv-footer">
+				<p>
+					<a href="/theming-flowbite" class="tv-link">See the Tailwind @theme version &rarr;</a>
+				</p>
+			</div>
+		</section>
+	</main>
+</Layout>

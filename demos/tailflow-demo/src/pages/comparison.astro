@@ -1,0 +1,420 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Side-by-Side — Tailwind vs CSS">
+	<main class="max-w-7xl mx-auto px-6 py-10">
+
+		<h1 class="text-4xl font-extrabold tracking-tight text-center mb-2">Tailwind vs Plain CSS</h1>
+		<p class="text-lg text-gray-500 text-center mb-12 max-w-2xl mx-auto">
+			Same result, different approach. Compare the code side by side.
+		</p>
+
+		<!-- BUTTON -->
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold mb-6">Button</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<!-- Tailwind -->
+				<div class="rounded-xl border-2 border-blue-200 bg-blue-50 overflow-hidden">
+					<div class="px-5 py-3 bg-blue-100 border-b border-blue-200 flex items-center justify-between">
+						<span class="font-semibold text-blue-800">Tailwind</span>
+						<span class="text-xs text-blue-600 font-mono">0 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+							Get Started
+						</button>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;button class="text-white bg-blue-700
+  hover:bg-blue-800 focus:ring-4
+  focus:ring-blue-300 font-medium
+  rounded-lg text-sm px-5 py-2.5"&gt;
+  Get Started
+&lt;/button&gt;</code></pre>
+				</div>
+				<!-- CSS -->
+				<div class="rounded-xl border-2 border-green-200 bg-green-50 overflow-hidden">
+					<div class="px-5 py-3 bg-green-100 border-b border-green-200 flex items-center justify-between">
+						<span class="font-semibold text-green-800">Plain CSS</span>
+						<span class="text-xs text-green-600 font-mono">10 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<button type="button" class="demo-btn-primary">Get Started</button>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;button class="btn-primary"&gt;
+  Get Started
+&lt;/button&gt;
+
+/* CSS */
+.btn-primary {
+  background: #1d4ed8;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.5rem;
+  border: none;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background: #1e40af;
+}</code></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- CARD -->
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold mb-6">Card</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<!-- Tailwind -->
+				<div class="rounded-xl border-2 border-blue-200 bg-blue-50 overflow-hidden">
+					<div class="px-5 py-3 bg-blue-100 border-b border-blue-200 flex items-center justify-between">
+						<span class="font-semibold text-blue-800">Tailwind</span>
+						<span class="text-xs text-blue-600 font-mono">0 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+							<h5 class="mb-2 text-xl font-bold text-gray-900">Card Title</h5>
+							<p class="mb-3 text-gray-700">Some descriptive text about this card component.</p>
+							<a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800">Read more &rarr;</a>
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;div class="max-w-sm p-6 bg-white
+  border border-gray-200 rounded-lg
+  shadow-sm"&gt;
+  &lt;h5 class="mb-2 text-xl font-bold
+    text-gray-900"&gt;Card Title&lt;/h5&gt;
+  &lt;p class="mb-3 text-gray-700"&gt;
+    Some descriptive text...
+  &lt;/p&gt;
+  &lt;a href="#" class="inline-flex
+    items-center px-3 py-2 text-sm
+    font-medium text-white bg-blue-700
+    rounded-lg hover:bg-blue-800"&gt;
+    Read more &amp;rarr;
+  &lt;/a&gt;
+&lt;/div&gt;</code></pre>
+				</div>
+				<!-- CSS -->
+				<div class="rounded-xl border-2 border-green-200 bg-green-50 overflow-hidden">
+					<div class="px-5 py-3 bg-green-100 border-b border-green-200 flex items-center justify-between">
+						<span class="font-semibold text-green-800">Plain CSS</span>
+						<span class="text-xs text-green-600 font-mono">20 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="demo-card">
+							<h5 class="demo-card-title">Card Title</h5>
+							<p class="demo-card-text">Some descriptive text about this card component.</p>
+							<a href="#" class="demo-card-link">Read more &rarr;</a>
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;div class="card"&gt;
+  &lt;h5 class="card-title"&gt;Card Title&lt;/h5&gt;
+  &lt;p class="card-text"&gt;Some descriptive text...&lt;/p&gt;
+  &lt;a href="#" class="card-link"&gt;Read more&lt;/a&gt;
+&lt;/div&gt;
+
+/* CSS */
+.card {
+  max-width: 24rem;
+  padding: 1.5rem;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+}
+.card-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+.card-text {
+  color: #374151;
+  margin-bottom: 0.75rem;
+}
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #fff;
+  background: #1d4ed8;
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+}
+.card-link:hover { background: #1e40af; }</code></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- FORM INPUT -->
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold mb-6">Form Input</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<!-- Tailwind -->
+				<div class="rounded-xl border-2 border-blue-200 bg-blue-50 overflow-hidden">
+					<div class="px-5 py-3 bg-blue-100 border-b border-blue-200 flex items-center justify-between">
+						<span class="font-semibold text-blue-800">Tailwind</span>
+						<span class="text-xs text-blue-600 font-mono">0 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="max-w-sm">
+							<label for="tw-email" class="block mb-2 text-sm font-medium text-gray-900">Email</label>
+							<input type="email" id="tw-email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" />
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;label class="block mb-2 text-sm
+  font-medium text-gray-900"&gt;
+  Email
+&lt;/label&gt;
+&lt;input type="email"
+  class="bg-gray-50 border border-gray-300
+  text-gray-900 text-sm rounded-lg
+  focus:ring-blue-500 focus:border-blue-500
+  block w-full p-2.5"
+  placeholder="name@company.com" /&gt;</code></pre>
+				</div>
+				<!-- CSS -->
+				<div class="rounded-xl border-2 border-green-200 bg-green-50 overflow-hidden">
+					<div class="px-5 py-3 bg-green-100 border-b border-green-200 flex items-center justify-between">
+						<span class="font-semibold text-green-800">Plain CSS</span>
+						<span class="text-xs text-green-600 font-mono">15 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="demo-form-group" style="max-width: 24rem;">
+							<label for="css-email">Email</label>
+							<input type="email" id="css-email" placeholder="name@company.com" />
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;label for="email"&gt;Email&lt;/label&gt;
+&lt;input type="email"
+  placeholder="name@company.com" /&gt;
+
+/* CSS */
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+input {
+  width: 100%;
+  padding: 0.625rem;
+  font-size: 0.875rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  background: #f9fafb;
+  box-sizing: border-box;
+}
+input:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+}</code></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- RESPONSIVE GRID -->
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold mb-6">Responsive Grid</h2>
+			<div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+				<!-- Tailwind -->
+				<div class="rounded-xl border-2 border-blue-200 bg-blue-50 overflow-hidden">
+					<div class="px-5 py-3 bg-blue-100 border-b border-blue-200 flex items-center justify-between">
+						<span class="font-semibold text-blue-800">Tailwind</span>
+						<span class="text-xs text-blue-600 font-mono">0 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+							<div class="bg-blue-100 rounded-lg p-4 text-center text-blue-800 font-medium">1</div>
+							<div class="bg-blue-100 rounded-lg p-4 text-center text-blue-800 font-medium">2</div>
+							<div class="bg-blue-100 rounded-lg p-4 text-center text-blue-800 font-medium">3</div>
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;div class="grid grid-cols-1
+  md:grid-cols-3 gap-4"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+				</div>
+				<!-- CSS -->
+				<div class="rounded-xl border-2 border-green-200 bg-green-50 overflow-hidden">
+					<div class="px-5 py-3 bg-green-100 border-b border-green-200 flex items-center justify-between">
+						<span class="font-semibold text-green-800">Plain CSS</span>
+						<span class="text-xs text-green-600 font-mono">10 lines CSS</span>
+					</div>
+					<div class="p-5">
+						<p class="text-sm text-gray-500 mb-3">Preview:</p>
+						<div class="demo-grid">
+							<div class="demo-grid-item">1</div>
+							<div class="demo-grid-item">2</div>
+							<div class="demo-grid-item">3</div>
+						</div>
+					</div>
+					<pre class="bg-gray-900 text-gray-100 text-sm p-5 overflow-x-auto"><code>&lt;div class="grid"&gt;
+  &lt;div&gt;1&lt;/div&gt;
+  &lt;div&gt;2&lt;/div&gt;
+  &lt;div&gt;3&lt;/div&gt;
+&lt;/div&gt;
+
+/* CSS */
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+@media (min-width: 768px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}</code></pre>
+				</div>
+			</div>
+		</section>
+
+		<!-- SUMMARY TABLE -->
+		<section class="mb-16">
+			<h2 class="text-2xl font-bold mb-6 text-center">Summary</h2>
+			<div class="overflow-x-auto">
+				<table class="w-full text-sm text-left text-gray-600 border border-gray-200 rounded-lg overflow-hidden">
+					<thead class="bg-gray-100 text-gray-700 uppercase text-xs">
+						<tr>
+							<th class="px-6 py-4">Aspect</th>
+							<th class="px-6 py-4 text-blue-700">Tailwind CSS</th>
+							<th class="px-6 py-4 text-green-700">Plain CSS</th>
+						</tr>
+					</thead>
+					<tbody class="divide-y divide-gray-200 bg-white">
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Custom CSS needed</td>
+							<td class="px-6 py-4">0 lines</td>
+							<td class="px-6 py-4">~180 lines</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Where styles live</td>
+							<td class="px-6 py-4">In the HTML (utility classes)</td>
+							<td class="px-6 py-4">Separate stylesheet</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Responsive design</td>
+							<td class="px-6 py-4">Built-in prefixes (<code class="text-xs bg-gray-100 px-1 rounded">md:</code>, <code class="text-xs bg-gray-100 px-1 rounded">lg:</code>)</td>
+							<td class="px-6 py-4">Manual <code class="text-xs bg-gray-100 px-1 rounded">@media</code> queries</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Design consistency</td>
+							<td class="px-6 py-4">Enforced via design tokens</td>
+							<td class="px-6 py-4">Manual — easy to drift</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Hover / Focus states</td>
+							<td class="px-6 py-4"><code class="text-xs bg-gray-100 px-1 rounded">hover:</code>, <code class="text-xs bg-gray-100 px-1 rounded">focus:</code> modifiers</td>
+							<td class="px-6 py-4">Separate pseudo-class rules</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">Learning curve</td>
+							<td class="px-6 py-4">Need to learn class names</td>
+							<td class="px-6 py-4">Standard CSS knowledge</td>
+						</tr>
+						<tr>
+							<td class="px-6 py-4 font-medium text-gray-900">HTML readability</td>
+							<td class="px-6 py-4">Longer class strings</td>
+							<td class="px-6 py-4">Short, semantic class names</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+
+	</main>
+</Layout>
+
+<style>
+	/* Demo styles for the CSS previews */
+	.demo-btn-primary {
+		background: #1d4ed8;
+		color: #fff;
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding: 0.625rem 1.25rem;
+		border-radius: 0.5rem;
+		border: none;
+		cursor: pointer;
+	}
+	.demo-btn-primary:hover { background: #1e40af; }
+
+	.demo-card {
+		max-width: 24rem;
+		padding: 1.5rem;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 0.5rem;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+	}
+	.demo-card-title {
+		font-size: 1.25rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+	}
+	.demo-card-text {
+		color: #374151;
+		margin-bottom: 0.75rem;
+	}
+	.demo-card-link {
+		display: inline-flex;
+		align-items: center;
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: #fff;
+		background: #1d4ed8;
+		padding: 0.5rem 0.75rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+	}
+	.demo-card-link:hover { background: #1e40af; }
+
+	.demo-form-group label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+	.demo-form-group input {
+		width: 100%;
+		padding: 0.625rem;
+		font-size: 0.875rem;
+		border: 1px solid #d1d5db;
+		border-radius: 0.5rem;
+		background: #f9fafb;
+		box-sizing: border-box;
+	}
+	.demo-form-group input:focus {
+		outline: none;
+		border-color: #3b82f6;
+		box-shadow: 0 0 0 3px rgba(59,130,246,0.3);
+	}
+
+	.demo-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1rem;
+	}
+	.demo-grid-item {
+		background: #dcfce7;
+		border-radius: 0.5rem;
+		padding: 1rem;
+		text-align: center;
+		color: #166534;
+		font-weight: 500;
+	}
+</style>

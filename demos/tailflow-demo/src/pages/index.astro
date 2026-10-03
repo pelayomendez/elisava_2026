@@ -1,0 +1,84 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="TailFlow Demo — Flowbite vs Plain CSS">
+	<main class="max-w-4xl mx-auto px-6 py-20 text-center">
+		<h1 class="text-4xl font-extrabold tracking-tight mb-4 md:text-5xl">
+			TailFlow Demo
+		</h1>
+		<p class="text-lg text-gray-500 mb-12 max-w-2xl mx-auto">
+			Two pages, same design — one built with <strong>Flowbite + Tailwind</strong> utility classes,
+			the other with <strong>plain HTML and custom CSS</strong>. Compare the developer experience side by side.
+		</p>
+
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+			<!-- Flowbite card -->
+			<a href="/flowbite" class="block p-8 bg-blue-50 border-2 border-blue-200 rounded-xl hover:border-blue-400 transition-colors group">
+				<div class="text-4xl mb-4">&#9889;</div>
+				<h2 class="text-xl font-bold text-blue-800 mb-2 group-hover:text-blue-900">Flowbite + Tailwind</h2>
+				<p class="text-sm text-blue-600">Pre-built components, utility classes, zero custom CSS.</p>
+				<span class="inline-block mt-4 text-sm font-medium text-blue-700">View page &rarr;</span>
+			</a>
+
+			<!-- Vanilla card -->
+			<a href="/vanilla" class="block p-8 bg-green-50 border-2 border-green-200 rounded-xl hover:border-green-400 transition-colors group">
+				<div class="text-4xl mb-4">&#9998;</div>
+				<h2 class="text-xl font-bold text-green-800 mb-2 group-hover:text-green-900">Plain HTML / CSS</h2>
+				<p class="text-sm text-green-600">Same layout, hand-written stylesheet, ~180 lines of CSS.</p>
+				<span class="inline-block mt-4 text-sm font-medium text-green-700">View page &rarr;</span>
+			</a>
+		</div>
+
+		<!-- Centered element demo -->
+		<h2 class="text-2xl font-bold mt-16 mb-6">Centered Element</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+			<a href="/centered-flowbite" class="block p-6 bg-blue-50 border-2 border-blue-200 rounded-xl hover:border-blue-400 transition-colors group">
+				<h3 class="text-lg font-bold text-blue-800 mb-1 group-hover:text-blue-900">Centered — Tailwind</h3>
+				<p class="text-sm text-blue-600">Flexbox centering with utility classes.</p>
+				<span class="inline-block mt-3 text-sm font-medium text-blue-700">View page &rarr;</span>
+			</a>
+			<a href="/centered-vanilla" class="block p-6 bg-green-50 border-2 border-green-200 rounded-xl hover:border-green-400 transition-colors group">
+				<h3 class="text-lg font-bold text-green-800 mb-1 group-hover:text-green-900">Centered — Plain CSS</h3>
+				<p class="text-sm text-green-600">Same result, hand-written Flexbox CSS.</p>
+				<span class="inline-block mt-3 text-sm font-medium text-green-700">View page &rarr;</span>
+			</a>
+		</div>
+
+		<!-- Theming demo -->
+		<h2 class="text-2xl font-bold mt-16 mb-6">Theming / Variables</h2>
+		<div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-2xl mx-auto">
+			<a href="/theming-flowbite" class="block p-6 bg-blue-50 border-2 border-blue-200 rounded-xl hover:border-blue-400 transition-colors group">
+				<h3 class="text-lg font-bold text-blue-800 mb-1 group-hover:text-blue-900">Theming — Tailwind</h3>
+				<p class="text-sm text-blue-600">Design tokens via @theme, auto-generated utilities.</p>
+				<span class="inline-block mt-3 text-sm font-medium text-blue-700">View page &rarr;</span>
+			</a>
+			<a href="/theming-vanilla" class="block p-6 bg-green-50 border-2 border-green-200 rounded-xl hover:border-green-400 transition-colors group">
+				<h3 class="text-lg font-bold text-green-800 mb-1 group-hover:text-green-900">Theming — CSS Vars</h3>
+				<p class="text-sm text-green-600">CSS custom properties with comparison table.</p>
+				<span class="inline-block mt-3 text-sm font-medium text-green-700">View page &rarr;</span>
+			</a>
+		</div>
+
+		<!-- Side-by-side comparison -->
+		<h2 class="text-2xl font-bold mt-16 mb-6">Side-by-Side Comparison</h2>
+		<div class="max-w-2xl mx-auto">
+			<a href="/comparison" class="block p-8 bg-purple-50 border-2 border-purple-200 rounded-xl hover:border-purple-400 transition-colors group">
+				<div class="text-4xl mb-4">&#9878;</div>
+				<h3 class="text-xl font-bold text-purple-800 mb-2 group-hover:text-purple-900">Tailwind vs CSS — Side by Side</h3>
+				<p class="text-sm text-purple-600">See the same components built both ways, with code snippets and a summary table.</p>
+				<span class="inline-block mt-4 text-sm font-medium text-purple-700">View comparison &rarr;</span>
+			</a>
+		</div>
+
+		<div class="mt-16 p-6 bg-gray-50 rounded-lg border border-gray-200 max-w-2xl mx-auto text-left">
+			<h3 class="font-bold text-lg mb-3">What to look for</h3>
+			<ul class="space-y-2 text-sm text-gray-600">
+				<li><strong>Lines of CSS:</strong> The Flowbite page uses 0 custom CSS lines vs ~180 on the vanilla page.</li>
+				<li><strong>Interactivity:</strong> The Flowbite accordion uses data attributes (no JS). The vanilla one needs custom JS.</li>
+				<li><strong>Consistency:</strong> Tailwind's design tokens (colors, spacing, typography) keep things uniform automatically.</li>
+				<li><strong>Readability:</strong> Compare the HTML — utility classes in markup vs class names pointing to a stylesheet.</li>
+			</ul>
+		</div>
+	</main>
+</Layout>

@@ -1,0 +1,148 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Flowbite + Tailwind Demo">
+	<main class="max-w-6xl mx-auto px-6 py-10">
+
+		<!-- Badge: identifies the approach -->
+		<span class="bg-blue-100 text-blue-800 text-sm font-medium me-2 px-3 py-1 rounded-full">Flowbite + Tailwind</span>
+
+		<!-- HERO SECTION -->
+		<section class="py-16 text-center">
+			<h1 class="mb-4 text-4xl font-extrabold tracking-tight text-gray-900 md:text-5xl lg:text-6xl">
+				Build with <span class="text-blue-600">Flowbite</span> + Tailwind
+			</h1>
+			<p class="mb-8 text-lg font-normal text-gray-500 lg:text-xl max-w-2xl mx-auto">
+				Pre-built components, utility classes, and interactive behaviors — all without writing custom CSS.
+			</p>
+			<div class="flex justify-center gap-4">
+				<button type="button" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5">
+					Get Started
+				</button>
+				<button type="button" class="text-gray-900 bg-white border border-gray-300 hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-5 py-2.5">
+					Learn More
+				</button>
+			</div>
+		</section>
+
+		<!-- CARD GRID -->
+		<section class="py-10">
+			<h2 class="text-3xl font-bold mb-8 text-center">Features</h2>
+			<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+				<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Rapid Prototyping</h5>
+					<p class="mb-3 font-normal text-gray-700">Use pre-built components to go from idea to prototype in minutes, not hours.</p>
+					<a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+						Read more
+						<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+						</svg>
+					</a>
+				</div>
+				<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Consistent Design</h5>
+					<p class="mb-3 font-normal text-gray-700">Flowbite's design system ensures visual consistency across all your pages.</p>
+					<a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+						Read more
+						<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+						</svg>
+					</a>
+				</div>
+				<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm">
+					<h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900">Interactive UI</h5>
+					<p class="mb-3 font-normal text-gray-700">Dropdowns, modals, tooltips — interactive components with zero custom JS.</p>
+					<a href="#" class="inline-flex items-center px-3 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300">
+						Read more
+						<svg class="rtl:rotate-180 w-3.5 h-3.5 ms-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 5h12m0 0L9 1m4 4L9 9"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- ACCORDION (Flowbite interactive component) -->
+		<section class="py-10">
+			<h2 class="text-3xl font-bold mb-8 text-center">FAQ</h2>
+			<div id="accordion-flush" data-accordion="collapse" data-active-classes="bg-white text-gray-900" data-inactive-classes="text-gray-500">
+				<h3 id="accordion-flush-heading-1">
+					<button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-1" aria-expanded="true" aria-controls="accordion-flush-body-1">
+						<span>What is Flowbite?</span>
+						<svg data-accordion-icon class="w-3 h-3 rotate-180 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+						</svg>
+					</button>
+				</h3>
+				<div id="accordion-flush-body-1" class="" aria-labelledby="accordion-flush-heading-1">
+					<div class="py-5 border-b border-gray-200">
+						<p class="text-gray-500">Flowbite is an open-source library of UI components built on top of Tailwind CSS. It provides ready-to-use elements like buttons, cards, modals, and more.</p>
+					</div>
+				</div>
+				<h3 id="accordion-flush-heading-2">
+					<button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-2" aria-expanded="false" aria-controls="accordion-flush-body-2">
+						<span>Why use Tailwind instead of plain CSS?</span>
+						<svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+						</svg>
+					</button>
+				</h3>
+				<div id="accordion-flush-body-2" class="hidden" aria-labelledby="accordion-flush-heading-2">
+					<div class="py-5 border-b border-gray-200">
+						<p class="text-gray-500">Tailwind provides utility classes that let you style elements directly in HTML, reducing context-switching and making designs easier to maintain and iterate on.</p>
+					</div>
+				</div>
+				<h3 id="accordion-flush-heading-3">
+					<button type="button" class="flex items-center justify-between w-full py-5 font-medium text-left text-gray-500 border-b border-gray-200" data-accordion-target="#accordion-flush-body-3" aria-expanded="false" aria-controls="accordion-flush-body-3">
+						<span>Can I customize the components?</span>
+						<svg data-accordion-icon class="w-3 h-3 shrink-0" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+							<path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5 5 1 1 5"/>
+						</svg>
+					</button>
+				</h3>
+				<div id="accordion-flush-body-3" class="hidden" aria-labelledby="accordion-flush-heading-3">
+					<div class="py-5 border-b border-gray-200">
+						<p class="text-gray-500">Absolutely! Every Flowbite component is built with Tailwind utility classes, so you can override or extend any style by simply changing the classes.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CONTACT FORM -->
+		<section class="py-10 max-w-lg mx-auto">
+			<h2 class="text-3xl font-bold mb-8 text-center">Contact Us</h2>
+			<form>
+				<div class="mb-5">
+					<label for="name" class="block mb-2 text-sm font-medium text-gray-900">Your name</label>
+					<input type="text" id="name" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="John Doe" required />
+				</div>
+				<div class="mb-5">
+					<label for="email" class="block mb-2 text-sm font-medium text-gray-900">Your email</label>
+					<input type="email" id="email" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="name@company.com" required />
+				</div>
+				<div class="mb-5">
+					<label for="message" class="block mb-2 text-sm font-medium text-gray-900">Your message</label>
+					<textarea id="message" rows="4" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5" placeholder="Write your thoughts here..."></textarea>
+				</div>
+				<div class="flex items-start mb-5">
+					<div class="flex items-center h-5">
+						<input id="terms" type="checkbox" class="w-4 h-4 border border-gray-300 rounded-sm bg-gray-50 focus:ring-3 focus:ring-blue-300" required />
+					</div>
+					<label for="terms" class="ms-2 text-sm font-medium text-gray-900">I agree with the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a></label>
+				</div>
+				<button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm w-full px-5 py-2.5 text-center">Submit</button>
+			</form>
+		</section>
+
+		<!-- CODE COMPARISON NOTE -->
+		<section class="py-10 text-center border-t border-gray-200 mt-10">
+			<p class="text-gray-500 text-sm">
+				This page uses <strong>~0 lines of custom CSS</strong>. All styling comes from Tailwind utility classes and Flowbite components.
+				<br />
+				<a href="/vanilla" class="text-green-600 hover:underline font-medium">See the same page built with plain HTML/CSS &rarr;</a>
+			</p>
+		</section>
+
+	</main>
+</Layout>

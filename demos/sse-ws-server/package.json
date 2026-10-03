@@ -1,0 +1,14 @@
+{
+  "name": "sse-webhooks-demo",
+  "version": "1.0.0",
+  "description": "Interactive demo showcasing SSE and Webhooks for class presentation",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.21.0"
+  }
+}

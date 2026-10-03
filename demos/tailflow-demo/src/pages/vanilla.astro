@@ -1,0 +1,331 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="Plain HTML/CSS Demo">
+	<main class="vanilla">
+
+		<!-- Badge -->
+		<div class="vanilla-badge-wrap">
+			<span class="vanilla-badge">Plain HTML / CSS</span>
+		</div>
+
+		<!-- HERO SECTION -->
+		<section class="vanilla-hero">
+			<h1 class="vanilla-hero-title">
+				Build with <span class="vanilla-hero-accent">Plain</span> HTML/CSS
+			</h1>
+			<p class="vanilla-hero-subtitle">
+				The same layout and content, but every style is hand-written in a traditional stylesheet.
+			</p>
+			<div class="vanilla-hero-buttons">
+				<button class="vanilla-btn vanilla-btn-primary">Get Started</button>
+				<button class="vanilla-btn vanilla-btn-secondary">Learn More</button>
+			</div>
+		</section>
+
+		<!-- CARD GRID -->
+		<section class="vanilla-section">
+			<h2 class="vanilla-section-title">Features</h2>
+			<div class="vanilla-card-grid">
+				<div class="vanilla-card">
+					<h3 class="vanilla-card-title">Rapid Prototyping</h3>
+					<p class="vanilla-card-text">Use pre-built components to go from idea to prototype in minutes, not hours.</p>
+					<a href="#" class="vanilla-card-link">
+						Read more &rarr;
+					</a>
+				</div>
+				<div class="vanilla-card">
+					<h3 class="vanilla-card-title">Consistent Design</h3>
+					<p class="vanilla-card-text">Flowbite's design system ensures visual consistency across all your pages.</p>
+					<a href="#" class="vanilla-card-link">
+						Read more &rarr;
+					</a>
+				</div>
+				<div class="vanilla-card">
+					<h3 class="vanilla-card-title">Interactive UI</h3>
+					<p class="vanilla-card-text">Dropdowns, modals, tooltips — interactive components with zero custom JS.</p>
+					<a href="#" class="vanilla-card-link">
+						Read more &rarr;
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<!-- FAQ / ACCORDION (manual JS) -->
+		<section class="vanilla-section">
+			<h2 class="vanilla-section-title">FAQ</h2>
+			<div class="vanilla-accordion">
+				<div class="vanilla-accordion-item">
+					<button class="vanilla-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+						<span>What is Flowbite?</span>
+						<span class="vanilla-accordion-icon">&#9662;</span>
+					</button>
+					<div class="vanilla-accordion-body">
+						<p>Flowbite is an open-source library of UI components built on top of Tailwind CSS. It provides ready-to-use elements like buttons, cards, modals, and more.</p>
+					</div>
+				</div>
+				<div class="vanilla-accordion-item">
+					<button class="vanilla-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+						<span>Why use Tailwind instead of plain CSS?</span>
+						<span class="vanilla-accordion-icon">&#9662;</span>
+					</button>
+					<div class="vanilla-accordion-body">
+						<p>Tailwind provides utility classes that let you style elements directly in HTML, reducing context-switching and making designs easier to maintain and iterate on.</p>
+					</div>
+				</div>
+				<div class="vanilla-accordion-item">
+					<button class="vanilla-accordion-btn" onclick="this.parentElement.classList.toggle('open')">
+						<span>Can I customize the components?</span>
+						<span class="vanilla-accordion-icon">&#9662;</span>
+					</button>
+					<div class="vanilla-accordion-body">
+						<p>Absolutely! Every Flowbite component is built with Tailwind utility classes, so you can override or extend any style by simply changing the classes.</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<!-- CONTACT FORM -->
+		<section class="vanilla-section vanilla-form-section">
+			<h2 class="vanilla-section-title">Contact Us</h2>
+			<form class="vanilla-form">
+				<div class="vanilla-form-group">
+					<label for="v-name">Your name</label>
+					<input type="text" id="v-name" placeholder="John Doe" required />
+				</div>
+				<div class="vanilla-form-group">
+					<label for="v-email">Your email</label>
+					<input type="email" id="v-email" placeholder="name@company.com" required />
+				</div>
+				<div class="vanilla-form-group">
+					<label for="v-message">Your message</label>
+					<textarea id="v-message" rows="4" placeholder="Write your thoughts here..."></textarea>
+				</div>
+				<div class="vanilla-form-check">
+					<input type="checkbox" id="v-terms" required />
+					<label for="v-terms">I agree with the <a href="#">terms and conditions</a></label>
+				</div>
+				<button type="submit" class="vanilla-btn vanilla-btn-primary vanilla-btn-full">Submit</button>
+			</form>
+		</section>
+
+		<!-- CODE COMPARISON NOTE -->
+		<section class="vanilla-footer-note">
+			<p>
+				This page uses <strong>~180 lines of custom CSS</strong> to achieve the same result.
+				<br />
+				<a href="/flowbite">See the same page built with Flowbite + Tailwind &rarr;</a>
+			</p>
+		</section>
+
+	</main>
+</Layout>
+
+<style>
+	/* ===== BASE ===== */
+	.vanilla {
+		max-width: 72rem;
+		margin: 0 auto;
+		padding: 2.5rem 1.5rem;
+		font-family: system-ui, -apple-system, sans-serif;
+		color: #111827;
+	}
+
+	/* ===== BADGE ===== */
+	.vanilla-badge-wrap { margin-bottom: 0.5rem; }
+	.vanilla-badge {
+		display: inline-block;
+		background: #dcfce7;
+		color: #166534;
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding: 0.25rem 0.75rem;
+		border-radius: 9999px;
+	}
+
+	/* ===== HERO ===== */
+	.vanilla-hero {
+		padding: 4rem 0;
+		text-align: center;
+	}
+	.vanilla-hero-title {
+		font-size: 2.5rem;
+		font-weight: 800;
+		letter-spacing: -0.025em;
+		margin-bottom: 1rem;
+	}
+	@media (min-width: 768px) { .vanilla-hero-title { font-size: 3rem; } }
+	@media (min-width: 1024px) { .vanilla-hero-title { font-size: 3.75rem; } }
+	.vanilla-hero-accent { color: #16a34a; }
+	.vanilla-hero-subtitle {
+		font-size: 1.125rem;
+		color: #6b7280;
+		max-width: 42rem;
+		margin: 0 auto 2rem;
+	}
+	.vanilla-hero-buttons {
+		display: flex;
+		justify-content: center;
+		gap: 1rem;
+	}
+
+	/* ===== BUTTONS ===== */
+	.vanilla-btn {
+		font-size: 0.875rem;
+		font-weight: 500;
+		padding: 0.625rem 1.25rem;
+		border-radius: 0.5rem;
+		cursor: pointer;
+		border: none;
+		transition: background 0.15s;
+	}
+	.vanilla-btn-primary {
+		background: #1d4ed8;
+		color: #fff;
+	}
+	.vanilla-btn-primary:hover { background: #1e40af; }
+	.vanilla-btn-secondary {
+		background: #fff;
+		color: #111827;
+		border: 1px solid #d1d5db;
+	}
+	.vanilla-btn-secondary:hover { background: #f3f4f6; }
+	.vanilla-btn-full { width: 100%; }
+
+	/* ===== SECTIONS ===== */
+	.vanilla-section { padding: 2.5rem 0; }
+	.vanilla-section-title {
+		font-size: 1.875rem;
+		font-weight: 700;
+		text-align: center;
+		margin-bottom: 2rem;
+	}
+
+	/* ===== CARD GRID ===== */
+	.vanilla-card-grid {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1.5rem;
+	}
+	@media (min-width: 768px) {
+		.vanilla-card-grid { grid-template-columns: repeat(3, 1fr); }
+	}
+	.vanilla-card {
+		padding: 1.5rem;
+		background: #fff;
+		border: 1px solid #e5e7eb;
+		border-radius: 0.5rem;
+		box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+	}
+	.vanilla-card-title {
+		font-size: 1.5rem;
+		font-weight: 700;
+		margin-bottom: 0.5rem;
+	}
+	.vanilla-card-text {
+		color: #374151;
+		margin-bottom: 0.75rem;
+	}
+	.vanilla-card-link {
+		display: inline-flex;
+		align-items: center;
+		font-size: 0.875rem;
+		font-weight: 500;
+		color: #fff;
+		background: #1d4ed8;
+		padding: 0.5rem 0.75rem;
+		border-radius: 0.5rem;
+		text-decoration: none;
+	}
+	.vanilla-card-link:hover { background: #1e40af; }
+
+	/* ===== ACCORDION ===== */
+	.vanilla-accordion { max-width: 48rem; margin: 0 auto; }
+	.vanilla-accordion-item { border-bottom: 1px solid #e5e7eb; }
+	.vanilla-accordion-btn {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		width: 100%;
+		padding: 1.25rem 0;
+		background: none;
+		border: none;
+		font-size: 1rem;
+		font-weight: 500;
+		color: #6b7280;
+		cursor: pointer;
+		text-align: left;
+	}
+	.vanilla-accordion-icon {
+		transition: transform 0.2s;
+	}
+	.vanilla-accordion-item.open .vanilla-accordion-icon {
+		transform: rotate(180deg);
+	}
+	.vanilla-accordion-body {
+		max-height: 0;
+		overflow: hidden;
+		transition: max-height 0.3s ease;
+	}
+	.vanilla-accordion-item.open .vanilla-accordion-body {
+		max-height: 10rem;
+	}
+	.vanilla-accordion-body p {
+		padding: 0 0 1.25rem;
+		color: #6b7280;
+	}
+
+	/* ===== FORM ===== */
+	.vanilla-form-section { max-width: 32rem; margin: 0 auto; }
+	.vanilla-form-group {
+		margin-bottom: 1.25rem;
+	}
+	.vanilla-form-group label {
+		display: block;
+		margin-bottom: 0.5rem;
+		font-size: 0.875rem;
+		font-weight: 500;
+	}
+	.vanilla-form-group input,
+	.vanilla-form-group textarea {
+		width: 100%;
+		padding: 0.625rem;
+		font-size: 0.875rem;
+		border: 1px solid #d1d5db;
+		border-radius: 0.5rem;
+		background: #f9fafb;
+		box-sizing: border-box;
+	}
+	.vanilla-form-group input:focus,
+	.vanilla-form-group textarea:focus {
+		outline: none;
+		border-color: #3b82f6;
+		box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+	}
+	.vanilla-form-check {
+		display: flex;
+		align-items: center;
+		gap: 0.5rem;
+		margin-bottom: 1.25rem;
+		font-size: 0.875rem;
+	}
+	.vanilla-form-check a { color: #2563eb; }
+
+	/* ===== FOOTER NOTE ===== */
+	.vanilla-footer-note {
+		padding: 2.5rem 0;
+		text-align: center;
+		border-top: 1px solid #e5e7eb;
+		margin-top: 2.5rem;
+	}
+	.vanilla-footer-note p {
+		font-size: 0.875rem;
+		color: #6b7280;
+	}
+	.vanilla-footer-note a {
+		color: #2563eb;
+		font-weight: 500;
+	}
+	.vanilla-footer-note a:hover { text-decoration: underline; }
+</style>
