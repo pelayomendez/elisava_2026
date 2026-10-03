@@ -59,3 +59,6 @@ coverage/
 
 # Office lock files
 ~$*
+
+# git internals of the archived public course repo (kept on disk, not versioned)
+archive/**/git-metadata-nested/
