@@ -9,6 +9,13 @@
   if (!C.isOpen(chapter.id)) { location.replace('../index.html'); return; }
   const prevCh = C.chapters[idx - 1];
   const nextCh = C.chapters[idx + 1] && C.isOpen(C.chapters[idx + 1].id) ? C.chapters[idx + 1] : null;
+  // The closing "Next · …" note names the next chapter: keep only its number while it is locked.
+  const upcoming = C.chapters[idx + 1];
+  if (upcoming && !C.isOpen(upcoming.id)) {
+    document.querySelectorAll('.note').forEach((n) => {
+      if (n.textContent.trim().startsWith('Next ·')) n.innerHTML = `<strong>Next · Chapter ${upcoming.id}</strong>`;
+    });
+  }
   const slides = [...document.querySelectorAll('section.slide')];
   const n = slides.length;
 

@@ -3,8 +3,9 @@
 const C = window.COURSE;
 const SITE_DIR = '2026-27/';
 
-// Reading order: course README, then per chapter its plan and guide.
-const PAGES = [{ path: 'README.md', title: 'About this edition' }];
+// Reading order: living guides, then per open chapter its plan and guide.
+// The edition README is the teacher's planning doc: it stays on GitHub, not on the site.
+const PAGES = [];
 C.living.forEach((g) => PAGES.push({ path: g.path, title: g.title }));
 C.chapters.filter((c) => C.isOpen(c.id)).forEach((c) => {
   PAGES.push({ path: `${c.dir}/README.md`, title: `${c.id} · ${c.title}`, kind: 'Plan', chapter: c });
@@ -50,11 +51,10 @@ function renderNav(current) {
   const item = (path, label, icon) =>
     `<a class="${path === current ? 'active' : ''}" href="#/${path}"><i class="fas ${icon}"></i>${label}</a>`;
   sidebar.innerHTML = `
-    <div class="nav-group">${item('README.md', 'About this edition', 'fa-circle-info')}
-      ${C.living.map((g) => item(g.path, g.title, g.icon)).join('')}</div>
+    <div class="nav-group">${C.living.map((g) => item(g.path, g.title, g.icon)).join('')}</div>
     ${C.chapters.map((c) => !C.isOpen(c.id) ? `
       <div class="nav-group locked" style="--accent:${c.color}">
-        <div class="nav-chapter"><span class="dot"><i class="fas fa-lock"></i></span>${c.title}</div>
+        <div class="nav-chapter"><span class="dot"><i class="fas fa-lock"></i></span>Chapter ${c.id}</div>
       </div>` : `
       <div class="nav-group ${current.startsWith(c.dir + '/') ? 'open' : ''}" style="--accent:${c.color}">
         <div class="nav-chapter"><span class="dot">${c.id}</span>${c.title}</div>
@@ -91,17 +91,16 @@ function renderHero(page) {
 }
 
 async function load() {
-  const path = decodeURIComponent(location.hash.replace(/^#\/?/, '')) || 'README.md';
+  const path = decodeURIComponent(location.hash.replace(/^#\/?/, '')) || PAGES[0].path;
   const page = PAGES.find((p) => p.path === path);
   renderNav(path);
   renderHero(page);
   document.body.classList.remove('nav-open');
   toggle.setAttribute('aria-expanded', 'false');
 
-  const locked = C.chapters.find((c) => !C.isOpen(c.id) && path.startsWith(c.dir + '/'));
-  if (locked) {
+  if (!page) {
     content.innerHTML = `<h1><i class="fas fa-lock"></i> Coming soon</h1>
-      <p>Chapter ${locked.id} · ${locked.title} opens after its class.</p>
+      <p>This page opens later in the course.</p>
       <p><a href="index.html">Back to the course</a></p>`;
     return;
   }

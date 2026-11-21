@@ -16,21 +16,25 @@ $('path').innerHTML = C.chapters.map((c) => C.isOpen(c.id) ? `
     <span class="dot">${c.id}</span><span class="name">${c.short}</span>
   </a>` : `
   <span class="locked ${c.core ? 'core' : ''}" style="--accent:${c.color}" title="Coming soon">
-    <span class="dot">${icon('fa-lock')}</span><span class="name">${c.short}</span>
+    <span class="dot">${icon('fa-lock')}</span><span class="name">${c.id}</span>
   </span>`).join('');
 
-$('chapters').innerHTML = C.chapters.map((c) => `
-  <article class="card ${C.isOpen(c.id) ? '' : 'locked'}" style="--accent:${c.color}">
+$('chapters').innerHTML = C.chapters.map((c) => !C.isOpen(c.id) ? `
+  <article class="card locked" style="--accent:${c.color}">
+    <div class="top"><span class="num">${c.id}</span><span class="icon">${icon('fa-lock')}</span></div>
+    <h3>Chapter ${c.id}</h3>${soon}
+  </article>` : `
+  <article class="card" style="--accent:${c.color}">
     ${c.core ? '<span class="badge">New core</span>' : ''}
     <div class="top"><span class="num">${c.id}</span><span class="icon">${icon(c.icon)}</span></div>
     <h3>${c.title}</h3>
     <ul>${c.bullets.map((b) => `<li>${icon('fa-check-circle')}${b}</li>`).join('')}</ul>
-    ${C.isOpen(c.id) ? `<div class="meta" data-count="${c.dir}">Slides</div>
+    <div class="meta" data-count="${c.dir}">Slides</div>
     <div class="actions">
       <a class="btn" href="${c.dir}/slides.html">${icon('fa-play')} Slides</a>
       <a class="btn ghost" href="doc.html#/${c.dir}/guide.md">${icon('fa-book-open')} Guide</a>
       <a class="btn ghost" href="doc.html#/${c.dir}/README.md">${icon('fa-list-check')} Plan</a>
-    </div>` : soon}
+    </div>
   </article>`).join('');
 
 // Chapter guides are on the chapter cards; this section holds the reference guides.
@@ -50,8 +54,7 @@ $('exercises').innerHTML = C.exercises.map((e) => {
   if (!C.isOpen(c.id)) return `
   <div class="card compact locked" style="--accent:${c.color}">
     <span class="icon">${icon('fa-lock')}</span>
-    <div class="meta">${e.id} · Chapter ${c.id}</div>
-    <h3>${e.title}</h3>${soon}
+    <h3>${e.id}</h3>${soon}
   </div>`;
   return `
   <a class="card compact" style="--accent:${c.color}" href="project.html#${e.slug}">
@@ -63,12 +66,7 @@ $('exercises').innerHTML = C.exercises.map((e) => {
 
 $('decks').innerHTML = C.decks.map((d) => {
   const c = chapterOf(d.chapter);
-  if (!C.isOpen(c.id)) return `
-  <div class="card compact locked" style="--accent:${c.color}">
-    <span class="icon">${icon('fa-lock')}</span>
-    <div class="meta">PDF · Chapter ${c.id}</div>
-    <h3>${d.title}</h3>${soon}
-  </div>`;
+  if (!C.isOpen(c.id)) return '';
   return `
   <a class="card compact" style="--accent:${c.color}" href="${d.href}" target="_blank" rel="noopener">
     <span class="icon">${icon(d.icon)}</span>
@@ -76,6 +74,7 @@ $('decks').innerHTML = C.decks.map((d) => {
     <h3>${d.title}</h3><p>${d.text}</p>
   </a>`;
 }).join('');
+$('decks').closest('section').hidden = !$('decks').innerHTML.trim();
 
 // Slide counts come from the decks themselves, so they never go stale.
 let total = 0;
