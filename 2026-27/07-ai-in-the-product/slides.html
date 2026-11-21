@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>07 · AI in the Product</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="07">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 07</div>
+  <h1>AI in the<br>product</h1>
+  <p class="lead">Chapter 02 was AI that builds the software. This one is AI that is part of it: your app calls a model.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-key"></i>LLM APIs and keeping keys safe</li>
+    <li><i class="fas fa-code"></i>Structured output</li>
+    <li><i class="fas fa-image"></i>Image generation</li>
+    <li><i class="fas fa-server"></i>A backend proxy</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-key"></i>Keys</div>
+  <h1>Never in<br>the browser</h1>
+  <div class="split">
+<pre><span class="c"># .env  (in .gitignore!)</span>
+AI_API_KEY=sk-…</pre>
+    <p class="lead">Anything in front-end code is public. The key stays on the server; the browser asks your server.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide03.html">2025-26 · API keys with astro:env</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-paper-plane"></i>First request</div>
+  <h1>Prompt in,<br>text out</h1>
+  <div class="todo">Rewrite with the current SDK and model names — 2025-26 slides use the old <code>@google/generative-ai</code> SDK. Decide the provider(s).</div>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide02.html">2025-26 · Gemini API</a> · <a href="../../content/section2-slide04.html">First request</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-table-list"></i>Structured output</div>
+  <h1>Ask for JSON,<br>get JSON</h1>
+  <div class="split">
+<pre>{
+  "name": "Flamander",
+  "type": "fire",
+  "description": "…",
+  "stats": { "hp": 45, "attack": 60 }
+}</pre>
+    <p class="lead">Give the model a schema and it returns data your UI can render — no parsing guesswork.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide06.html">2025-26 · Structured output</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-server"></i>Backend</div>
+  <h1>Your server<br>in the middle</h1>
+  <ol class="steps">
+    <li><b>Browser</b>Clicks “Generate”.</li>
+    <li><b>Your API</b>Adds the key, calls the model.</li>
+    <li><b>Model</b>Returns text or an image.</li>
+    <li><b>Browser</b>Renders the result.</li>
+  </ol>
+  <div class="todo">One backend language for the course (Python or Node) — pending decision. Covers routes, CORS and deploy.</div>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide10.html">2025-26 · API routes</a> · <a href="../../content/section3-slide06.html">Frontend ↔ backend</a> · <a href="../../content/section3-slide09.html">CORS</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-image"></i>Images</div>
+  <h1>Generate<br>pictures</h1>
+  <p class="lead">Image models return binary data; send it to the browser as base64 or a stored file URL.</p>
+  <div class="todo">Update the image model and example.</div>
+  <div class="reuse">Reuses: <a href="../../content/section3-slide07.html">2025-26 · Image generation</a> · <a href="../../content/section3-slide08.html">Base64</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-comments"></i>Interactive</div>
+  <h1>A chatbot in<br>your page</h1>
+  <p class="lead">An island component that talks to your API, streams the answer and keeps the conversation.</p>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide11.html">2025-26 · Chatbot</a> · Demo: <a href="../../demos/autonomous-game-studio">autonomous-game-studio</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-cloud-arrow-up"></i>Production</div>
+  <h1>Ship both<br>halves</h1>
+  <div class="split">
+    <div class="box"><h2>Frontend</h2><p>Static host, points at your API URL.</p></div>
+    <div class="box"><h2>Backend</h2><p>Server host with the key as an environment variable; CORS allows your frontend only.</p></div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section3-slide11.html">2025-26 · Deployment strategies</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>AI is now<br>a feature</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>Keys stay on the server</li>
+    <li><i class="fas fa-check-circle"></i>You get structured data back from a model</li>
+    <li><i class="fas fa-check-circle"></i>You run a small backend and deploy the full stack</li>
+  </ul>
+  <div class="note"><strong>Next · 08 Realtime &amp; agents</strong> — live data and agents that run on their own.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

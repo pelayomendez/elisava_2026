@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>03 · Spec-Driven Development</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="03">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 03 · New</div>
+  <h1>Spec-driven<br>development</h1>
+  <p class="lead">Agree on what to build, in writing, before any code exists. The spec is the contract between you and the agent.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-triangle-exclamation"></i>Why prompts drift</li>
+    <li><i class="fas fa-folder-tree"></i>OpenSpec: specs and changes in the repo</li>
+    <li><i class="fas fa-list-check"></i>Requirements and scenarios</li>
+    <li><i class="fas fa-rotate"></i>Propose → apply → archive</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-triangle-exclamation"></i>The problem</div>
+  <h1>The chat is not<br>a plan</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><i class="fas fa-shuffle big"></i><h2>Drift</h2><p>Each prompt nudges the result further from what you meant, and nobody wrote down what that was.</p></div>
+    <div class="box"><i class="fas fa-scale-unbalanced big"></i><h2>No baseline</h2><p>You can't judge a diff if there is nothing to judge it against.</p></div>
+    <div class="box"><i class="fas fa-ghost big"></i><h2>Lost context</h2><p>Close the chat and the reasons are gone. The next agent starts from zero.</p></div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide02.html">2025-26 §4 · The vibe-coding problem</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-code-compare"></i>Two ways to build</div>
+  <h1>Review the intent<br>before the code</h1>
+  <div class="cols" style="--n:2">
+    <div class="box" style="--accent:#F08030"><h2>Vibe coding</h2>
+      <ul><li>Prompt → code → “looks fine”</li><li>The chat is the record</li><li>You review only the result</li><li>Fast to start, hard to change</li></ul></div>
+    <div class="box"><h2>Spec-driven</h2>
+      <ul><li>Proposal → spec → tasks → code</li><li>The repo is the record</li><li>You review the intent, then the result</li><li>Slower to start, safe to change</li></ul></div>
+  </div>
+  <div class="note accent">It is cheaper to fix a sentence than a feature.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-file-signature"></i>OpenSpec</div>
+  <h1>Specs that live<br>in your repo</h1>
+  <div class="split">
+<pre>openspec/
+├── config.yaml   <span class="c"># what the project is</span>
+├── specs/        <span class="c"># how it behaves today</span>
+└── changes/      <span class="c"># what is changing</span>
+    └── archive/  <span class="c"># finished, dated</span></pre>
+    <ul class="ticks">
+      <li><i class="fas fa-check-circle"></i>Open source, works with 30+ agents</li>
+      <li><i class="fas fa-check-circle"></i>Plain Markdown you can read on GitHub</li>
+      <li><i class="fas fa-check-circle"></i>Skills for the agent, a CLI for you</li>
+    </ul>
+  </div>
+  <div class="todo">Screenshot of <code>openspec init</code> in the class tool, once the 2.x skill names are confirmed.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-rotate"></i>The loop</div>
+  <h1>Explore, propose,<br>apply, archive</h1>
+  <ol class="steps">
+    <li><b>Explore</b>Talk options through. The agent writes nothing.</li>
+    <li><b>Propose</b>Proposal, spec, design and tasks in <code>changes/</code>. <strong>You edit them.</strong></li>
+    <li><b>Apply</b>In a fresh chat, the agent follows <code>tasks.md</code>.</li>
+    <li><b>Archive</b>After you verify: the spec becomes the new truth.</li>
+  </ol>
+  <div class="note">Skills: <code>openspec-explore</code> · <code>openspec-propose</code> · <code>openspec-apply-change</code> · <code>openspec-archive-change</code></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-folder-open"></i>Anatomy of a change</div>
+  <h1>One folder<br>per change</h1>
+  <div class="cols" style="--n:4">
+    <div class="box"><i class="fas fa-lightbulb big"></i><h2>proposal.md</h2><p>Why, and what is in and out of scope.</p></div>
+    <div class="box"><i class="fas fa-list-check big"></i><h2>specs/</h2><p>What must be true: requirements and scenarios.</p></div>
+    <div class="box"><i class="fas fa-compass-drafting big"></i><h2>design.md</h2><p>How: decisions and files touched. Optional.</p></div>
+    <div class="box"><i class="fas fa-square-check big"></i><h2>tasks.md</h2><p>The checklist the agent follows, each task with its check.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-list-check"></i>Writing specs</div>
+  <h1>Requirements you<br>can check</h1>
+<pre><span class="c">## ADDED Requirements</span>
+
+### Requirement: Type filter
+The gallery SHALL let the user show only Pokémon of one type.
+
+#### Scenario: Pick a type
+- GIVEN the gallery shows all Pokémon
+- WHEN the user selects "Fire"
+- THEN only Fire-type Pokémon are shown
+- AND the URL contains ?type=fire</pre>
+  <div class="note">SHALL / MUST = mandatory. Every requirement gets a scenario; every THEN must be observable.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-pen"></i>Practice</div>
+  <h1>Make it<br>testable</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>“It should be fast”</h2><p>Fast for whom, measured how?</p></div>
+    <div class="box"><h2>“Nice error messages”</h2><p>Which errors, what does the user see?</p></div>
+    <div class="box"><h2>“Works on mobile”</h2><p>Which widths, which interactions?</p></div>
+  </div>
+  <div class="todo">Pick three vague requirements from last year's student projects for this exercise.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-magnifying-glass"></i>Reviewing a proposal</div>
+  <h1>Before you say<br>“apply”</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>The intent fits in two sentences</li>
+    <li><i class="fas fa-check-circle"></i><strong>Out of scope</strong> is written down — agents love extras</li>
+    <li><i class="fas fa-check-circle"></i>Every scenario has a THEN you can see</li>
+    <li><i class="fas fa-check-circle"></i>One task = one commit</li>
+    <li><i class="fas fa-check-circle"></i>Nothing touches secrets or other people's data</li>
+  </ul>
+  <div class="note accent">After apply: review the diff against the scenarios, not against your memory of the chat.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-scale-balanced"></i>When</div>
+  <h1>Spec it,<br>or skip it?</h1>
+  <div class="cols" style="--n:2">
+    <div class="box"><h2>Spec it</h2><ul><li>A new feature</li><li>An API or data model</li><li>Anything someone will rely on</li></ul></div>
+    <div class="box" style="--accent:#7A8BAD"><h2>Skip it</h2><ul><li>Typos and styling tweaks</li><li>Throwaway prototypes</li><li>You don't know yet what you want — explore first</li></ul></div>
+  </div>
+  <div class="note"><strong>Course rule:</strong> from this chapter on, every exercise ships with its <code>openspec/</code> folder.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Exercise 3</div>
+  <h1>First<br>spec</h1>
+  <ol class="steps">
+    <li><b>Set up</b><code>openspec init</code> and write <code>config.yaml</code>.</li>
+    <li><b>Propose</b>One small feature. Edit until the checklist passes.</li>
+    <li><b>Apply</b>In a fresh chat. Stop it if it drifts.</li>
+    <li><b>Archive</b>After checking every scenario by hand.</li>
+  </ol>
+  <div class="note"><strong>Deliver:</strong> repo with <code>openspec/</code> and three commits — plan, code, archive.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>The plan lives<br>in the repo</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You write what must be true before code exists</li>
+    <li><i class="fas fa-check-circle"></i>You review the plan, then the diff against it</li>
+    <li><i class="fas fa-check-circle"></i>Specs grow with every archived change</li>
+  </ul>
+  <div class="note"><strong>Next · 04 Design to code</strong> — from a Figma file to components, by hand and with the Figma MCP.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>00 · Setup &amp; Mental Model</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="00">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 00</div>
+  <h1>Setup &amp;<br>mental model</h1>
+  <p class="lead">The tools every web developer uses — and a first look at the one that changes everything: a coding agent.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-globe"></i>How the web works</li>
+    <li><i class="fas fa-terminal"></i>Terminal and git</li>
+    <li><i class="fab fa-github"></i>GitHub and Pages</li>
+    <li><i class="fas fa-robot"></i>What a coding agent is</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-compass"></i>This course</div>
+  <h1>Build with agents.<br>Understand everything.</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><i class="fas fa-hand big"></i><h2>Hand-made core</h2><p>You build the basics yourself, once, so you can judge what an agent writes.</p></div>
+    <div class="box"><i class="fas fa-robot big"></i><h2>Agents from day one</h2><p>After that, you build with an agent — using a method, not luck.</p></div>
+    <div class="box"><i class="fas fa-comments big"></i><h2>Explain your work</h2><p>Every project ends with you explaining your code. That's what we grade.</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-quote-left"></i>Why we work this way</div>
+  <blockquote class="quote">
+    <p>Software is an apprenticeship industry — you can only learn by doing. The industry changes fast, so developers have to keep learning. It takes many years to forge a competent software engineer.</p>
+    <p>Senior software engineers don't only write code — they have to be able to understand, maintain, explain, and manage a large body of software in production over time and translate business needs into technical implementation.</p>
+    <p>Writing code is the easiest part of software engineering, and it's getting easier every day. AI can help generate lots of code really fast, but it can't aid in the work of managing, understanding, or operating that code.</p>
+    <p>Generated code can't be trusted — it needs to be reviewed before it can be committed and shipped to production.</p>
+  </blockquote>
+  <div class="cite"><b>Charity Majors</b> · CTO, honeycomb.io</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-globe"></i>How the web works</div>
+  <h1>From a URL<br>to a page</h1>
+  <ol class="steps">
+    <li><b>URL</b>You type an address in the browser.</li>
+    <li><b>DNS</b>The name becomes a server's address.</li>
+    <li><b>HTTP</b>The browser asks; the server answers with HTML, CSS, JS.</li>
+    <li><b>Render</b>The browser builds and paints the page.</li>
+  </ol>
+  <div class="note">Steps 1–3 are the <strong>client–server pattern</strong>. The next slides open it up.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-network-wired"></i>The client–server pattern</div>
+  <h1>One asks,<br>one answers</h1>
+  <div class="cs">
+    <div class="cs-node"><i class="fas fa-laptop"></i><b>Client</b><span>Your browser, an app, a script</span></div>
+    <div class="cs-wire">
+      <div class="cs-msg req"><span>Request</span><code>GET /pokemon/25</code></div>
+      <div class="cs-msg res"><span>Response</span><code>200 OK · JSON / HTML</code></div>
+    </div>
+    <div class="cs-node"><i class="fas fa-server"></i><b>Server</b><span>A computer that is always on, waiting</span></div>
+  </div>
+  <div class="note">The client always starts the conversation. The server never calls you first — it only answers. (Chapter 08 shows the exceptions.)</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-people-arrows"></i>Who does what</div>
+  <h1>Split the work,<br>split the trust</h1>
+  <div class="cols" style="--n:2">
+    <div class="box"><i class="fas fa-laptop big"></i><h2>Client</h2>
+      <ul><li>Shows the page and reacts to clicks</li><li>Runs HTML, CSS and JavaScript</li><li>Anyone can read and change it: <strong>never trust it</strong></li><li>No secrets here — not even API keys</li></ul></div>
+    <div class="box"><i class="fas fa-server big"></i><h2>Server</h2>
+      <ul><li>Stores the data and the files</li><li>Runs the rules: who can see or change what</li><li>Keeps the secrets: keys, passwords</li><li>Answers many clients at once</li></ul></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-envelope-open-text"></i>HTTP</div>
+  <h1>A request is<br>just text</h1>
+  <div class="split">
+<pre><span class="c"># the client sends</span>
+GET /api/v2/pokemon/pikachu HTTP/1.1
+Host: pokeapi.co
+Accept: application/json</pre>
+<pre><span class="c"># the server answers</span>
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{ "name": "pikachu", "id": 25, … }</pre>
+  </div>
+  <div class="cols" style="--n:4">
+    <div class="box"><h2>Method</h2><p>GET read · POST create · PUT/PATCH change · DELETE. More in chapter 06.</p></div>
+    <div class="box"><h2>Path</h2><p>What you want: <code>/pokemon/25</code></p></div>
+    <div class="box"><h2>Headers</h2><p>Extra info: format, auth, cache</p></div>
+    <div class="box"><h2>Status</h2><p>200 ok · 404 not found · 500 server broke</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-diagram-project"></i>The same pattern everywhere</div>
+  <h1>Every chapter is<br>client ↔ server</h1>
+  <div class="cols" style="--n:4">
+    <div class="box"><i class="fas fa-globe big"></i><h2>Web page</h2><p>Browser ↔ GitHub Pages. Chapter 01.</p></div>
+    <div class="box"><i class="fas fa-database big"></i><h2>Data</h2><p>Your app ↔ API and database. Chapter 06.</p></div>
+    <div class="box"><i class="fas fa-wand-magic-sparkles big"></i><h2>AI</h2><p>Your server ↔ model provider. Chapter 07.</p></div>
+    <div class="box"><i class="fas fa-robot big"></i><h2>Your agent</h2><p>The IDE is a client of a model on someone else's server. Chapter 02.</p></div>
+  </div>
+  <div class="note accent"><strong>Try it:</strong> open DevTools → Network, reload any site and read the requests.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-terminal"></i>Terminal</div>
+  <h1>Talk to your<br>computer</h1>
+  <div class="split">
+    <p class="lead">Agents, servers, git and package managers all live in the terminal. Ten commands cover most of what you'll need.</p>
+<pre><span class="c"># where am I, what's here</span>
+pwd
+ls
+<span class="c"># move around</span>
+cd projects/pokedex
+cd ..
+<span class="c"># make things</span>
+mkdir my-site
+touch index.html</pre>
+  </div>
+  <div class="reuse">Guide: <a href="../../content/guides/terminal-basics/index.html">Terminal basics</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-code-branch"></i>Git</div>
+  <h1>Save points<br>for your code</h1>
+  <div class="split">
+<pre>git init
+git add .
+git commit -m "Add header"
+git push</pre>
+    <div>
+      <p class="lead">Git is how you undo an agent's mistake. Small commits = small, safe steps.</p>
+      <div class="note">Rule for the course: <strong>commit before you let an agent change anything.</strong></div>
+    </div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide08.html">2025-26 · Git basics</a> · Guide: <a href="../../content/guides/git-basics/index.html">Git basics</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fab fa-github"></i>GitHub</div>
+  <h1>Share, review,<br>publish</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>Repositories</h2><p>Your project in the cloud, with its full history.</p></div>
+    <div class="box"><h2>Pull requests</h2><p>Propose a change and review it — yours or an agent's.</p></div>
+    <div class="box"><h2>Pages</h2><p>Publish a static site straight from a repo.</p></div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide09.html">2025-26 · GitHub UI</a> · <a href="../../content/section0-slide10.html">GitHub Pages</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-robot"></i>First look</div>
+  <h1>What is a<br>coding agent?</h1>
+  <p class="lead">A model in a loop that reads your files, runs commands and edits code until the task is done. We'll take it apart in chapter 02.</p>
+  <div class="note">Today you only <strong>ask</strong> it things about a repo. No building yet.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-screwdriver-wrench"></i>Hands-on</div>
+  <h1>Set up your<br>machine</h1>
+  <ol class="steps">
+    <li><b>Editor</b>Install the course IDE.</li>
+    <li><b>Git</b>Install git, create a GitHub account.</li>
+    <li><b>Agent</b>Sign in to the course agent.</li>
+    <li><b>Ask</b>Clone a repo and ask the agent to explain it.</li>
+  </ol>
+  <div class="todo">Per-OS install checklist and the course's default tool (pending decision).</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>Ready<br>to build</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You know what happens between a URL and a page</li>
+    <li><i class="fas fa-check-circle"></i>You can move around a terminal and commit with git</li>
+    <li><i class="fas fa-check-circle"></i>Your machine and your agent are set up</li>
+  </ul>
+  <div class="note"><strong>Next · 01 Web fundamentals</strong> — build a Pokédex by hand.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

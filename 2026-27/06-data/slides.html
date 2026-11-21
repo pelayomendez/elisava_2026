@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>06 · Data</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="06">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 06</div>
+  <h1>Data</h1>
+  <p class="lead">Every app needs to remember things. APIs, databases and data that updates itself — and how far to let an agent into your database.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-arrows-left-right"></i>REST APIs</li>
+    <li><i class="fas fa-table"></i>SQL and NoSQL</li>
+    <li><i class="fas fa-bolt"></i>Supabase CRUD and realtime</li>
+    <li><i class="fas fa-plug"></i>Database MCP, read-only first</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-arrows-left-right"></i>APIs</div>
+  <h1>An API is<br>a contract</h1>
+  <p class="lead">A server's promise: send me <em>this</em> request, and I'll answer with <em>that</em> data. You don't see its code; you only see the contract.</p>
+  <div class="cols" style="--n:3">
+    <div class="box"><i class="fas fa-link big"></i><h2>Where</h2><p>A URL per resource: <code>/pokemon/25</code>, <code>/favorites</code>.</p></div>
+    <div class="box"><i class="fas fa-hand-pointer big"></i><h2>What</h2><p>A verb that says what to do with it: read, create, change, delete.</p></div>
+    <div class="box"><i class="fas fa-file-code big"></i><h2>How</h2><p>A data format both sides agree on — almost always JSON.</p></div>
+  </div>
+  <div class="reuse">Deck: <a href="../../content/presentations/Frontend_Data_Cartridges.pdf">Frontend Data Cartridges</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-arrows-left-right"></i>HTTP verbs</div>
+  <h1>Nouns in the URL,<br>verbs in the method</h1>
+  <div class="cols" style="--n:5">
+    <div class="box"><h2>GET</h2><p><b>Read.</b><br><code>GET /favorites</code><br>No body. Safe to repeat.</p></div>
+    <div class="box"><h2>POST</h2><p><b>Create.</b><br><code>POST /favorites</code><br>Body: the new item. Repeat = duplicates.</p></div>
+    <div class="box"><h2>PUT</h2><p><b>Replace.</b><br><code>PUT /favorites/7</code><br>Body: the whole item.</p></div>
+    <div class="box"><h2>PATCH</h2><p><b>Change part.</b><br><code>PATCH /favorites/7</code><br>Body: only the fields that change.</p></div>
+    <div class="box"><h2>DELETE</h2><p><b>Remove.</b><br><code>DELETE /favorites/7</code><br>No body.</p></div>
+  </div>
+  <div class="note">REST in one line: <strong>the URL names the thing, the verb says what to do with it.</strong> Not <code>/getFavorites</code> or <code>/deleteFavorite?id=7</code>.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-traffic-light"></i>Status codes</div>
+  <h1>Read the first<br>digit</h1>
+  <div class="cols" style="--n:4">
+    <div class="box" style="--accent:#78C850"><h2>2xx · OK</h2><p>200 ok · 201 created · 204 done, nothing to return</p></div>
+    <div class="box" style="--accent:#6890F0"><h2>3xx · Elsewhere</h2><p>301 moved · 304 not modified, use your cache</p></div>
+    <div class="box" style="--accent:#F08030"><h2>4xx · Your fault</h2><p>400 bad request · 401 who are you? · 403 not allowed · 404 not found</p></div>
+    <div class="box" style="--accent:#EE1515"><h2>5xx · Server's fault</h2><p>500 it broke · 503 overloaded or down</p></div>
+  </div>
+  <div class="note">When an agent says “it works”, check the Network tab: a page can look fine while every request returns 4xx.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-code"></i>Calling an API</div>
+  <h1>fetch, with<br>a verb</h1>
+  <div class="split">
+<pre><span class="c">// read</span>
+const res = await fetch("/api/favorites");
+if (!res.ok) throw new Error(res.status);
+const favorites = await res.json();</pre>
+<pre><span class="c">// create</span>
+await fetch("/api/favorites", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({ pokemon: 25 }),
+});</pre>
+  </div>
+  <div class="note">Same pattern from the terminal: <code>curl -X POST -H "Content-Type: application/json" -d '{"pokemon":25}' …/api/favorites</code></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-database"></i>Why a database</div>
+  <h1>Where your<br>data lives</h1>
+  <div class="split">
+<pre>let favourites = [];   <span class="c">// gone on refresh</span></pre>
+    <p class="lead">A database stores, queries and updates data so it survives refreshes, devices and users.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section5-slide02.html">2025-26 · Where your data lives</a> · Deck: <a href="../../content/presentations/Database_Level_Up.pdf">Database Level Up</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-table"></i>SQL</div>
+  <h1>Four verbs<br>cover most of it</h1>
+<pre>SELECT * FROM pokemon WHERE type = 'fire';
+INSERT INTO favourites (pokemon_id) VALUES (25);
+UPDATE favourites SET note = 'best' WHERE id = 1;
+DELETE FROM favourites WHERE id = 1;</pre>
+  <div class="reuse">Reuses: <a href="../../content/section5-slide03.html">2025-26 · SQL basics</a> · <a href="../../content/section5-slide04.html">PostgreSQL</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-code-fork"></i>SQL or NoSQL</div>
+  <h1>Pick by the<br>shape of your data</h1>
+  <div class="split">
+    <div class="box" style="--accent:#6890F0"><h2>SQL</h2><ul><li>Tables with relationships</li><li>Users, orders, favourites</li><li>Strict, consistent</li></ul></div>
+    <div class="box" style="--accent:#F08030"><h2>NoSQL</h2><ul><li>Documents, flexible shape</li><li>Content, logs, settings</li><li>Easy to change</li></ul></div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section5-slide05.html">2025-26 · NoSQL</a> · <a href="../../content/section5-slide06.html">Choosing your database</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-bolt"></i>Supabase</div>
+  <h1>A database<br>in minutes</h1>
+  <div class="split">
+<pre>const { data } = await supabase
+  .from('favourites')
+  .select('*');
+
+supabase.channel('favs')
+  .on('postgres_changes', { event: '*',
+      schema: 'public' }, render)
+  .subscribe();</pre>
+    <p class="lead">Postgres, an API, auth and realtime updates — without running a server.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section5-slide07.html">2025-26 · Supabase</a> · <a href="../../content/section5-slide09.html">Realtime</a> · <a href="../../content/section5-slide10.html">CRUD</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-plug"></i>Agents and databases</div>
+  <h1>Read-only<br>first</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>Inspect</h2><p>Let the agent read the schema and sample rows through MCP.</p></div>
+    <div class="box"><h2>Propose</h2><p>It writes the migration; you read it.</p></div>
+    <div class="box"><h2>Apply</h2><p>You run it — on a test project, never on real users' data.</p></div>
+  </div>
+  <div class="todo">Database MCP demo against a throwaway Supabase project.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Project time</div>
+  <h1>Favourites for<br>your Pokédex</h1>
+  <p class="lead">Click a star, save it to Supabase, see it again on any device — live.</p>
+  <div class="reuse">Reuses: <a href="../../content/section5-slide11.html">2025-26 · Connect your Pokédex</a> · Example: <a href="../../examples/07-db-studio/">examples/07-db-studio</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>Your app<br>remembers</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You talk to APIs with the right verbs</li>
+    <li><i class="fas fa-check-circle"></i>You choose SQL or NoSQL for a reason</li>
+    <li><i class="fas fa-check-circle"></i>You persist and sync data with Supabase</li>
+  </ul>
+  <div class="note"><strong>Next · 07 AI in the product</strong> — when the app itself calls a model.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

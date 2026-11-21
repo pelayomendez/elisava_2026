@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>04 · Design to Code</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="04">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 04</div>
+  <h1>Design<br>to code</h1>
+  <p class="lead">You're designers. This is where your design file becomes working components — by hand, then through the Figma MCP.</p>
+  <ul class="ticks">
+    <li><i class="fab fa-figma"></i>Reading a design: tokens, grid, components</li>
+    <li><i class="fas fa-plug"></i>Figma MCP</li>
+    <li><i class="fas fa-wind"></i>Tailwind v4 and component libraries</li>
+    <li><i class="fas fa-eye"></i>Checking the result in the browser</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fab fa-figma"></i>Read the design</div>
+  <h1>Tokens before<br>pixels</h1>
+  <div class="cols" style="--n:4">
+    <div class="box"><h2>Colour</h2><p>Named roles, not hex codes everywhere.</p></div>
+    <div class="box"><h2>Type</h2><p>A scale: sizes, weights, line heights.</p></div>
+    <div class="box"><h2>Spacing</h2><p>A rhythm: 4, 8, 16, 24…</p></div>
+    <div class="box"><h2>Components</h2><p>Repeated pieces with variants.</p></div>
+  </div>
+  <div class="note">An agent copies whatever it sees. Clean tokens in Figma → clean variables in code.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-hand"></i>By hand</div>
+  <h1>Figma → CSS</h1>
+  <p class="lead">Take one card from the design and build it yourself: measure, name the tokens, write the CSS.</p>
+  <div class="todo">Design file for the exercise (card + list + header).</div>
+  <div class="reuse">Reuses: <a href="../../demos/figma-html">demos/figma-html</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-plug"></i>With MCP</div>
+  <h1>The agent<br>reads Figma</h1>
+  <div class="split">
+    <div>
+      <p class="lead">With the Figma MCP server, the agent reads the frame you select — layout, tokens, assets — and generates components.</p>
+      <div class="note">Then you compare: does it match the design? Did it reuse your tokens or invent new ones?</div>
+    </div>
+    <div class="todo">Live demo: select a frame, generate, diff against the hand-made card.</div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide07.html">2025-26 · Figma &amp; MCP tools</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-wind"></i>Tailwind v4</div>
+  <h1>Utilities vs<br>vanilla CSS</h1>
+  <div class="split">
+<pre>&lt;button class="px-4 py-2 rounded-full
+  bg-black text-white
+  hover:scale-105"&gt;
+  Start
+&lt;/button&gt;</pre>
+    <div class="box"><h2>Trade-offs</h2><ul><li>Fast, consistent, agents write it well</li><li>Noisy markup</li><li>You still need the design tokens</li></ul></div>
+  </div>
+  <div class="reuse">Reuses: <a href="../../demos/tailflow-demo">demos/tailflow-demo</a> (vanilla vs Flowbite, theming)</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-eye"></i>Verify</div>
+  <h1>Let the agent<br>look at it</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><i class="fas fa-camera big"></i><h2>Screenshot</h2><p>Compare the page with the design at each breakpoint.</p></div>
+    <div class="box"><i class="fas fa-universal-access big"></i><h2>Accessibility</h2><p>Contrast, focus, labels, headings.</p></div>
+    <div class="box"><i class="fas fa-gauge big"></i><h2>Lighthouse</h2><p>Performance and best practices.</p></div>
+  </div>
+  <div class="note">A browser MCP lets the agent open the page and check its own work. You still decide.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-comments"></i>Discussion</div>
+  <h1>Who pays for<br>the docs?</h1>
+  <p class="lead">In 2026 Tailwind's makers laid off most of their engineers: agents answer the questions people used to search the docs for.</p>
+  <div class="todo">Verify the facts and prepare two discussion questions.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>Design you<br>can ship</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You read a design as tokens and components</li>
+    <li><i class="fas fa-check-circle"></i>You can build it by hand or via the Figma MCP</li>
+    <li><i class="fas fa-check-circle"></i>You check the result in a real browser</li>
+  </ul>
+  <div class="note"><strong>Next · 05 Astro with agents</strong> — from one page to a real site, spec-first.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

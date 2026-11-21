@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>02 · Agentic IDEs</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="02">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 02 · New core</div>
+  <h1>Agentic<br>IDEs</h1>
+  <p class="lead">From here on, everything is built with an agent. This chapter is the method: how to give it context, tools and a plan — and how to check what it did.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-map"></i>The tool landscape</li>
+    <li><i class="fas fa-file-lines"></i>Context: AGENTS.md and skills</li>
+    <li><i class="fas fa-plug"></i>MCP servers</li>
+    <li><i class="fas fa-list-check"></i>Plan → build → verify</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-rotate"></i>The idea</div>
+  <h1>An agent is a<br>model in a loop</h1>
+  <ol class="steps">
+    <li><b>Read</b>Your files, your instructions, the error on screen.</li>
+    <li><b>Plan</b>Decides the next step towards the goal.</li>
+    <li><b>Act</b>Edits files, runs commands, calls tools.</li>
+    <li><b>Observe</b>Reads the result and loops again — until done or stuck.</li>
+  </ol>
+  <div class="note">Autocomplete suggests a line. Chat answers a question. An agent <strong>changes your project</strong>.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-scale-balanced"></i>Two ways to work</div>
+  <h1>Vibe coding vs<br>agentic engineering</h1>
+  <div class="split">
+    <div class="box" style="--accent:#F08030">
+      <h2>Vibe coding</h2>
+      <ul><li>Prompt, accept, repeat</li><li>Fast for a throwaway prototype</li><li>Breaks when the project grows</li><li>You can't explain the result</li></ul>
+    </div>
+    <div class="box" style="--accent:#78C850">
+      <h2>Agentic engineering</h2>
+      <ul><li>You own the spec, the review and the checks</li><li>The agent types; you decide</li><li>Small steps you can verify</li><li>You can defend every line</li></ul>
+    </div>
+  </div>
+  <div class="note">“Vibe coding raises the floor. Agentic engineering raises the ceiling.”</div>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide02.html">2025-26 §4 · Vibe coding falls apart</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-map"></i>Landscape · November 2026</div>
+  <h1>Where agents live</h1>
+  <div class="cols" style="--n:4">
+    <div class="box"><i class="fas fa-laptop-code big"></i><h2>In the IDE</h2><p>Cursor, GitHub Copilot agent mode, Kiro, Zed, Antigravity</p></div>
+    <div class="box"><i class="fas fa-terminal big"></i><h2>In the terminal</h2><p>Claude Code, OpenAI Codex, Antigravity CLI</p></div>
+    <div class="box"><i class="fas fa-cloud big"></i><h2>In the cloud</h2><p>Background agents that work alone and open a pull request</p></div>
+    <div class="box"><i class="fas fa-wand-magic-sparkles big"></i><h2>App builders</h2><p>Lovable, Bolt, v0, Replit, Figma Make — fast, little control</p></div>
+  </div>
+  <div class="todo">Verify names, prices and student access on official pages before class. Decide the course's default tool.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-layer-group"></i>Same ideas everywhere</div>
+  <h1>Learn the concepts,<br>not the buttons</h1>
+  <p class="lead">Every major tool now shares the same vocabulary. Learn it once, switch tools any time.</p>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>AGENTS.md</h2><p>The project brief every agent reads first</p></div>
+    <div class="box"><h2>Skills</h2><p>Reusable, named workflows loaded on demand</p></div>
+    <div class="box"><h2>MCP</h2><p>A standard plug for giving agents new tools</p></div>
+    <div class="box"><h2>Plan mode</h2><p>Think and agree before touching files</p></div>
+    <div class="box"><h2>Subagents</h2><p>Helpers that take a side task in parallel</p></div>
+    <div class="box"><h2>Hooks</h2><p>Rules that run automatically before or after actions</p></div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-file-lines"></i>Context engineering</div>
+  <h1>Output follows<br>context</h1>
+  <div class="split">
+    <div>
+      <p class="lead">The agent only knows what you give it. <code>AGENTS.md</code> sits at the root of the repo and tells every agent what this project is and how to work in it.</p>
+      <div class="note">Keep it short and true. Delete what's stale — wrong context is worse than none.</div>
+    </div>
+<pre><span class="c"># Project context</span>
+## Why
+A Pokédex for designers learning the web.
+
+## Principles
+- keep it simple, optimise for clarity
+
+## Constraints
+- plain HTML, CSS and JS — no frameworks
+- PokéAPI only, no API keys
+
+## How to run
+open index.html with a local server</pre>
+  </div>
+  <div class="reuse">Reuses: <a href="../../tools/agent-wars-client/AGENTS.md">agent-wars-client/AGENTS.md</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-puzzle-piece"></i>Skills</div>
+  <h1>Teach it a<br>workflow once</h1>
+  <div class="split">
+    <div>
+      <p class="lead">A skill is a folder with a <code>SKILL.md</code>: a name, when to use it, and the steps. The agent loads it only when the task matches.</p>
+      <ul class="ticks">
+        <li><i class="fas fa-check"></i>Review my CSS against the course rules</li>
+        <li><i class="fas fa-check"></i>Deploy to GitHub Pages</li>
+        <li><i class="fas fa-check"></i>Write a spec from my notes</li>
+      </ul>
+    </div>
+<pre>---
+name: css-review
+description: Review CSS for the course
+  rules. Use when asked to review styles.
+---
+1. List every colour and spacing value.
+2. Flag values that aren't variables.
+3. Check contrast and focus states.
+4. Report; don't edit.</pre>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide06.html">2025-26 §4 · Skills &amp; slash commands</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-plug"></i>Model Context Protocol</div>
+  <h1>MCP gives the<br>agent new hands</h1>
+  <div class="cols" style="--n:3">
+    <div class="box" style="--accent:#F85888"><i class="fab fa-figma big"></i><h2>Figma</h2><p>Read a design and generate matching components</p></div>
+    <div class="box" style="--accent:#6890F0"><i class="fas fa-globe big"></i><h2>Browser</h2><p>Open the page, click, screenshot, read the console (Chrome DevTools, Playwright)</p></div>
+    <div class="box" style="--accent:#78C850"><i class="fas fa-database big"></i><h2>Database</h2><p>Inspect tables and data — read-only first</p></div>
+  </div>
+  <div class="note accent"><i class="fas fa-triangle-exclamation"></i>&nbsp; Every server is a new door. Only connect what you trust, and give it the least access it needs.</div>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide07.html">2025-26 §4 · MCP basics</a> · <a href="../../content/section4-slide08.html">MCP examples</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-list-check"></i>The method</div>
+  <h1>Plan → spec →<br>build → verify</h1>
+  <ol class="steps">
+    <li><b>Plan</b>Plan mode. Ask the agent to explain its approach before it edits anything.</li>
+    <li><b>Spec</b>Goal, user, constraints, acceptance criteria, edge cases.</li>
+    <li><b>Build</b>One small change at a time. One change, one commit.</li>
+    <li><b>Verify</b>Read the diff, run it, test it, look at it in the browser. Reject and rework.</li>
+  </ol>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide04.html">2025-26 §4 · Workflow</a> · <a href="../../content/presentations/Augmented_Engineering.pdf">Augmented Engineering deck</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-magnifying-glass"></i>Verify</div>
+  <h1>Review every<br>change</h1>
+  <div class="split">
+    <ul class="ticks">
+      <li><i class="fas fa-square-check"></i>Does it do what the spec says — and nothing else?</li>
+      <li><i class="fas fa-square-check"></i>Can I explain every line?</li>
+      <li><i class="fas fa-square-check"></i>Did it add files, packages or config I didn't ask for?</li>
+      <li><i class="fas fa-square-check"></i>Does it run, pass the tests, look right in the browser?</li>
+    </ul>
+    <div class="todo">Live demo: the agent makes a change with one hidden problem; the class finds it in the diff.</div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-hand"></i>Judgement</div>
+  <h1>When not to<br>use an agent</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><i class="fas fa-graduation-cap big"></i><h2>Learning it</h2><p>The first time you meet a concept, write it yourself. Ask the agent to explain, not to do.</p></div>
+    <div class="box"><i class="fas fa-eye-slash big"></i><h2>Can't check it</h2><p>If you can't verify the result, you can't accept it.</p></div>
+    <div class="box"><i class="fas fa-key big"></i><h2>Secrets &amp; people</h2><p>Keys, personal data, someone else's system: you decide, by hand.</p></div>
+  </div>
+  <div class="note">In a 2026 study, students who delegated code generation understood far less than those who coded by hand — those who used AI to ask questions did well.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-shield-halved"></i>Cost, privacy, security</div>
+  <h1>What leaves<br>your machine</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>Cost</h2><p>Free tiers run out. Credits, limits and why long sessions are expensive.</p></div>
+    <div class="box"><h2>Privacy</h2><p>Your code goes to a provider. Never paste secrets; use <code>.env</code> and <code>.gitignore</code>.</p></div>
+    <div class="box"><h2>Prompt injection</h2><p>Web pages, issues and tool output can carry instructions. Approve actions; don't auto-accept everything.</p></div>
+  </div>
+  <div class="todo">Add one concrete prompt-injection example students can try safely.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Exercise 2</div>
+  <h1>Agent<br>onboarding</h1>
+  <ol class="steps">
+    <li><b>Context</b>Add an <code>AGENTS.md</code> to your Ex.1 Pokédex.</li>
+    <li><b>Skill</b>Write one skill you'll reuse.</li>
+    <li><b>Tool</b>Connect one MCP server (browser or Figma).</li>
+    <li><b>Feature</b>Ship one feature through plan → spec → build → verify.</li>
+  </ol>
+  <div class="note"><strong>Deliver:</strong> repo, spec, a summary of the session and “what I rejected and why”.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>You now work<br>with an agent</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You know where agents run and what they share</li>
+    <li><i class="fas fa-check-circle"></i>You give them context with AGENTS.md and skills</li>
+    <li><i class="fas fa-check-circle"></i>You extend them with MCP — carefully</li>
+    <li><i class="fas fa-check-circle"></i>You plan, build small and verify everything</li>
+  </ul>
+  <div class="note"><strong>Next · 03 Spec-driven development</strong> — turn plan → build → verify into a method with OpenSpec.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

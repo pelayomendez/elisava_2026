@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>01 · Web Fundamentals</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="01">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 01</div>
+  <h1>Web<br>fundamentals</h1>
+  <p class="lead">HTML, CSS and JavaScript, by hand. Then the same project built by an agent — and you judge the difference.</p>
+  <ul class="ticks">
+    <li><i class="fab fa-html5"></i>Semantic HTML</li>
+    <li><i class="fab fa-css3-alt"></i>Modern CSS: variables, Grid, Flexbox</li>
+    <li><i class="fab fa-js"></i>Fetch, the DOM and events</li>
+    <li><i class="fas fa-code-compare"></i>Hand-made vs agent-made</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fab fa-html5"></i>HTML</div>
+  <h1>Structure<br>with meaning</h1>
+  <div class="split">
+<pre>&lt;header&gt;
+  &lt;nav&gt;…type filters…&lt;/nav&gt;
+&lt;/header&gt;
+&lt;main&gt;
+  &lt;div id="list"&gt;&lt;/div&gt;
+&lt;/main&gt;</pre>
+    <p class="lead">Semantic tags tell browsers, screen readers — and agents — what each part of the page is.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide02.html">2025-26 · HTML5 structure</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fab fa-css3-alt"></i>CSS</div>
+  <h1>Design as<br>variables</h1>
+  <div class="split">
+<pre>:root {
+  --clr-black: #1c1c1c;
+  --clr-fire: #F08030;
+}
+#list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}</pre>
+    <p class="lead">Variables are your design tokens. Grid and Flexbox do the layout. Same ideas you'll ask an agent to respect later.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide03.html">2025-26 · CSS3 styling</a> · Guides: <a href="../../content/guides/css-basics/index.html">CSS basics</a>, <a href="../../content/guides/css-arquitecture/index.html">CSS architecture</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fab fa-js"></i>JavaScript</div>
+  <h1>Data into<br>the page</h1>
+  <div class="split">
+<pre>const res = await fetch(
+  "https://pokeapi.co/api/v2/pokemon/1"
+);
+const poke = await res.json();
+
+const card = document.createElement("div");
+card.textContent = poke.name;
+list.append(card);</pre>
+    <p class="lead">Ask an API, get JSON, turn it into elements. This loop is the heart of every web app.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide04.html">2025-26 · Fetch API</a> · Guide: <a href="../../content/guides/js-basics/index.html">JS basics</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-hand-pointer"></i>Events</div>
+  <h1>React to<br>the user</h1>
+  <div class="split">
+<pre>buttons.forEach(btn =&gt;
+  btn.addEventListener("click", () =&gt; {
+    showOnly(btn.id); <span class="c">// "fire", "water"…</span>
+  })
+);</pre>
+    <p class="lead">Filters by type: listen for a click, change what's on screen.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section0-slide06.html">2025-26 · Event listeners</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-code-compare"></i>The twist</div>
+  <h1>Rebuild it<br>with an agent</h1>
+  <ol class="steps" style="--n:3">
+    <li><b>Brief</b>Write an <code>AGENTS.md</code>: what the Pokédex does, the API, your design rules. The agent reads it first.</li>
+    <li><b>Diff</b>Put its version next to yours.</li>
+    <li><b>Judge</b>What's better, worse, redundant, inaccessible? Why?</li>
+  </ol>
+  <div class="note">You can only judge the agent because you built it yourself first.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Exercise 1</div>
+  <h1>HTML<br>Pokédex</h1>
+  <div class="split">
+    <ul class="ticks">
+      <li><i class="fas fa-check"></i>List from the PokéAPI</li>
+      <li><i class="fas fa-check"></i>Filter by type</li>
+      <li><i class="fas fa-check"></i>Your own design</li>
+      <li><i class="fas fa-check"></i>Published on GitHub Pages</li>
+    </ul>
+    <div class="box"><h2>Deliver</h2><p>Your hand-made repo, the agent's version with its <code>AGENTS.md</code>, and a one-page comparison.</p></div>
+  </div>
+  <div class="reuse">Starter: <a href="../../examples/01-html-pokedex">examples/01-html-pokedex</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>You know<br>the material</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>HTML gives structure, CSS gives design, JS gives behaviour</li>
+    <li><i class="fas fa-check-circle"></i>You can fetch data and render it</li>
+    <li><i class="fas fa-check-circle"></i>You can tell good front-end code from bad</li>
+  </ul>
+  <div class="note"><strong>Next · 02 Agentic IDEs</strong> — the method for building everything else.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

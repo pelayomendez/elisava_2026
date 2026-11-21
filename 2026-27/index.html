@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agentic Product Development — 2026-27</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@500;600;700;900&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/theme.css">
+</head>
+<body class="landing">
+  <canvas id="bg" aria-hidden="true"></canvas>
+  <div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+  <div class="page">
+  <header class="hero">
+    <span class="pill"><span class="live"></span>Full Stack + AI · Edition 2026–27</span>
+    <h1>Agentic<br>Product Development<span class="caret"></span></h1>
+    <p class="lead">Build real products with coding agents from day one, while learning how the web works
+      well enough to steer them, review what they write and own the result.</p>
+    <div class="stats">
+      <div class="stat"><b id="stat-chapters">9</b><span>Chapters</span></div>
+      <div class="stat"><b id="stat-slides">–</b><span>Slides</span></div>
+      <div class="stat"><b id="stat-exercises">5</b><span>Projects</span></div>
+      <div class="stat"><b id="stat-guides">14</b><span>Guides</span></div>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section class="block">
+      <figure class="quote">
+        <i class="fas fa-quote-left mark"></i>
+        <blockquote>
+        <p>Software is an apprenticeship industry — you can only learn by doing. The industry changes fast, so developers have to keep learning. It takes many years to forge a competent software engineer.</p>
+        <p>Senior software engineers don't only write code — they have to be able to understand, maintain, explain, and manage a large body of software in production over time and translate business needs into technical implementation.</p>
+        <p>Writing code is the easiest part of software engineering, and it's getting easier every day. AI can help generate lots of code really fast, but it can't aid in the work of managing, understanding, or operating that code.</p>
+        <p>Generated code can't be trusted — it needs to be reviewed before it can be committed and shipped to production.</p>
+        </blockquote>
+        <figcaption><b>Charity Majors</b><span>CTO, honeycomb.io</span></figcaption>
+      </figure>
+    </section>
+
+    <section class="block">
+      <h2 data-n="// 01">Learning Path</h2>
+      <p class="sub">From the hand-made web to products built and run with agents</p>
+      <nav class="path" id="path" aria-label="Learning path"></nav>
+    </section>
+
+    <section class="block">
+      <h2 data-n="// 02">Chapters</h2>
+      <p class="sub">Each chapter has its slides, a guide and a session plan</p>
+      <div class="grid" id="chapters"></div>
+    </section>
+
+    <section class="block" id="projects">
+      <h2 data-n="// 03">Projects</h2>
+      <p class="sub">What you build and deliver: open a card for the full brief</p>
+      <div class="grid small" id="exercises"></div>
+    </section>
+
+    <section class="block">
+      <h2 data-n="// 04">Reference Guides</h2>
+      <p class="sub">The basics from last year, still valid. Each chapter's own guide is on its card.</p>
+      <div class="grid small" id="guides"></div>
+    </section>
+
+    <section class="block">
+      <h2 data-n="// 05">Presentations</h2>
+      <p class="sub">Visual decks that go with the chapters</p>
+      <div class="grid small" id="decks"></div>
+    </section>
+  </main>
+
+  <footer class="wrap">
+    <p><strong id="instructor"></strong> · <span id="school"></span> · 2026–27 ·
+      <a href="doc.html#/README.md">About this edition</a></p>
+    <p>In the slides: <kbd>←</kbd> <kbd>→</kbd> to move, <kbd>Esc</kbd> to come back here</p>
+  </footer>
+  </div>
+
+  <script src="assets/course.js"></script>
+  <script src="assets/landing.js"></script>
+  <script src="assets/bg.js"></script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>05 · Astro with Agents</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="05">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 05</div>
+  <h1>Astro with<br>agents</h1>
+  <p class="lead">From one page to a real site with components and routes — written as a spec first, built by an agent in small steps.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-cubes"></i>Components, layouts and props</li>
+    <li><i class="fas fa-route"></i>Routing and dynamic pages</li>
+    <li><i class="fas fa-file-signature"></i>Spec-first builds</li>
+    <li><i class="fas fa-rocket"></i>Islands and deploy</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-rocket"></i>Why Astro</div>
+  <h1>Zero JavaScript<br>by default</h1>
+  <div class="cols" style="--n:3">
+    <div class="box"><h2>Fast</h2><p>Pages are HTML unless a part needs interactivity.</p></div>
+    <div class="box"><h2>Familiar</h2><p>HTML, CSS and JS you already know, split into components.</p></div>
+    <div class="box"><h2>Agent-friendly</h2><p>Clear file conventions agents follow well.</p></div>
+  </div>
+  <div class="todo">Update for Astro 6 (Cloudflare-owned, Content Layer required) after checking the examples.</div>
+  <div class="reuse">Reuses: <a href="../../content/section1-slide02.html">2025-26 · What is Astro</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-cubes"></i>Components</div>
+  <h1>Code on top,<br>HTML below</h1>
+  <div class="split">
+<pre>---
+<span class="c">// runs on the server</span>
+interface Props { name: string }
+const { name } = Astro.props;
+---
+&lt;article class="card"&gt;
+  &lt;h3&gt;{name}&lt;/h3&gt;
+&lt;/article&gt;</pre>
+    <p class="lead">Read before you build: you should be able to explain any component the agent writes.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section1-slide04.html">2025-26 · Components</a> · <a href="../../content/section1-slide06.html">Layouts</a> · <a href="../../content/section1-slide09.html">Props</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-route"></i>Routing</div>
+  <h1>Files become<br>pages</h1>
+  <div class="split">
+<pre>src/pages/
+├── index.astro        → /
+├── pokedex.astro      → /pokedex
+└── pokemon/
+    └── [id].astro     → /pokemon/25</pre>
+    <p class="lead">Dynamic routes generate a page per Pokémon from the same template.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section1-slide07.html">2025-26 · Routing</a> · <a href="../../content/section1-slide08.html">Dynamic routes</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-file-signature"></i>Spec first</div>
+  <h1>Write it down<br>before the prompt</h1>
+  <div class="cols" style="--n:5">
+    <div class="box"><h2>Goal</h2><p>One sentence.</p></div>
+    <div class="box"><h2>User</h2><p>Who, and what they know.</p></div>
+    <div class="box"><h2>Constraints</h2><p>Stack, design, limits.</p></div>
+    <div class="box"><h2>Criteria</h2><p>How we know it's done.</p></div>
+    <div class="box"><h2>Edge cases</h2><p>What could go wrong.</p></div>
+  </div>
+  <div class="note">The spec and <code>AGENTS.md</code> live in the repo, next to the code.</div>
+  <div class="reuse">Reuses: <a href="../../content/section4-slide03.html">2025-26 · A spec is a contract</a> · <a href="../../content/section4-slide05.html">Anatomy of a spec</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-stairs"></i>Build in steps</div>
+  <h1>One feature,<br>one commit</h1>
+  <ol class="steps">
+    <li><b>Gallery</b>List from the PokéAPI.</li>
+    <li><b>Detail</b>A page per Pokémon.</li>
+    <li><b>Pagination</b>Next / previous pages.</li>
+    <li><b>Filters</b>Type, generation…</li>
+  </ol>
+  <div class="note">Plan → build → verify for each step. Never all four in one prompt.</div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-umbrella-beach"></i>Islands</div>
+  <h1>Interactive<br>only where needed</h1>
+  <div class="split">
+<pre>&lt;Search client:load /&gt;
+&lt;Gallery /&gt;   <span class="c">&lt;!-- static HTML --&gt;</span></pre>
+    <p class="lead">Only the parts that need JavaScript are hydrated in the browser.</p>
+  </div>
+  <div class="reuse">Reuses: <a href="../../content/section2-slide07.html">2025-26 · Islands</a> · <a href="../../content/section2-slide08.html">Client directives</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-cloud-arrow-up"></i>Deploy</div>
+  <h1>Build and<br>publish</h1>
+  <div class="split">
+<pre>npm run build   <span class="c"># → dist/</span></pre>
+    <div class="cols" style="--n:2">
+      <div class="box"><h2>GitHub Pages</h2><p>Static, free, simple.</p></div>
+      <div class="box"><h2>Cloudflare / Vercel / Netlify</h2><p>Server features, free tiers with limits.</p></div>
+    </div>
+  </div>
+  <div class="todo">Check current free-tier limits before class.</div>
+  <div class="reuse">Reuses: <a href="../../content/section1-slide11.html">2025-26 · Build &amp; deploy</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Exercise 3</div>
+  <h1>Astro<br>Pokédex</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check"></i>Landing page, header and navigation</li>
+    <li><i class="fas fa-check"></i>Gallery with pagination</li>
+    <li><i class="fas fa-check"></i>Detail page per Pokémon</li>
+    <li><i class="fas fa-check"></i>Delivered with spec, AGENTS.md and review notes</li>
+  </ul>
+  <div class="reuse">Brief: <a href="../../deliverables/Front%20End%20Ex.3%20-%20Astro%20Pokedex.pptx">Ex.3 Astro Pokédex</a> · Starter: <a href="../../examples/02-astro-intro/">examples/02-astro-intro</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>A real site,<br>built your way</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You structure sites with components and routes</li>
+    <li><i class="fas fa-check-circle"></i>You write the spec; the agent builds in steps</li>
+    <li><i class="fas fa-check-circle"></i>You ship it</li>
+  </ul>
+  <div class="note"><strong>Next · 06 Data</strong> — store things, not just show them.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>

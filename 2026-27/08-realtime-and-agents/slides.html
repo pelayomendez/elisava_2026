@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>08 · Realtime &amp; Agents</title>
+  <link rel="icon" href="data:,">
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;600;700&family=Saira+Condensed:wght@700;900&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/deck.css">
+</head>
+<body class="deck" data-chapter="08">
+
+<section class="slide cover">
+  <div class="kicker">Chapter 08</div>
+  <h1>Realtime &amp;<br>agents</h1>
+  <p class="lead">Data that arrives on its own, a shared board for the whole class, and agents you program to play for you.</p>
+  <ul class="ticks">
+    <li><i class="fas fa-tower-broadcast"></i>SSE, webhooks and WebSockets</li>
+    <li><i class="fas fa-gamepad"></i>The Agent Wars client</li>
+    <li><i class="fas fa-robot"></i>Autonomous agents</li>
+    <li><i class="fas fa-diagram-project"></i>Workflows and background agents</li>
+  </ul>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-tower-broadcast"></i>The spectrum</div>
+  <h1>Who talks<br>first?</h1>
+  <div class="cols" style="--n:4">
+    <div class="box"><h2>Polling</h2><p>The browser keeps asking.</p></div>
+    <div class="box"><h2>Webhooks</h2><p>A server calls another server when something happens.</p></div>
+    <div class="box"><h2>SSE</h2><p>The server streams to the browser, one way.</p></div>
+    <div class="box"><h2>WebSockets</h2><p>Both sides talk, any time.</p></div>
+  </div>
+  <div class="reuse">Deck: <a href="../../content/presentations/The_Realtime_Spectrum.pdf">The Realtime Spectrum</a> · Demo: <a href="../../demos/sse-ws-server/">sse-ws-server</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-gamepad"></i>Agent Wars</div>
+  <h1>One board,<br>the whole class</h1>
+  <div class="split">
+<pre><span class="c">// you send</span>
+socket.emit("agent:join", { name });
+socket.emit("agent:move", { x, y });
+socket.emit("zone:claim", { id });
+
+<span class="c">// you receive</span>
+socket.on("zone:spawned", drawZone);</pre>
+    <p class="lead">A shared 1200×800 board over Socket.IO. Read the protocol first — it is your spec.</p>
+  </div>
+  <div class="reuse">Server: <a href="../../tools/agent-wars-server/">tools/agent-wars-server</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-layer-group"></i>Three phases</div>
+  <h1>Move, repair,<br>automate</h1>
+  <ol class="steps" style="--n:3">
+    <li><b>Move</b>Join the board and see everyone in real time.</li>
+    <li><b>Repair</b>Red zones appear; reach them and hold to repair.</li>
+    <li><b>Automate</b>You stop playing. Your code plays for you.</li>
+  </ol>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-robot"></i>Autonomous agent</div>
+  <h1>Write the<br>decision loop</h1>
+  <div class="split">
+<pre>every tick:
+  zones = active zones
+  target = pick(zones)   <span class="c">// closest? worst?</span>
+  move towards target
+  if inside: claim and hold</pre>
+    <p class="lead">Your agent is a tiny version of a coding agent: observe, decide, act, repeat.</p>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-flask"></i>Exercise 4</div>
+  <h1>Agent Wars</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check"></i>Your own client design</li>
+    <li><i class="fas fa-check"></i>All three phases working</li>
+    <li><i class="fas fa-check"></i>An autonomous strategy you can explain</li>
+    <li><i class="fas fa-check"></i>Delivered as a pull request</li>
+  </ul>
+  <div class="reuse">Brief: <a href="../../deliverables/Front%20End%20Ex.4%20-%20Agent%20Wars.pdf">Ex.4 Agent Wars</a> · Starter: <a href="../../tools/agent-wars-client/">agent-wars-client</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-diagram-project"></i>Workflows</div>
+  <h1>Automate<br>without code</h1>
+  <p class="lead">A device posts a temperature; an n8n workflow decides whether to send an alert email.</p>
+  <div class="reuse">Demo: <a href="../../demos/n8n-temperature-alert/">n8n-temperature-alert</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker"><i class="fas fa-clock"></i>Background agents</div>
+  <h1>An agent that<br>runs on its own</h1>
+  <ol class="steps">
+    <li><b>Contract</b>The agent defined in Markdown.</li>
+    <li><b>Backend</b>Reads it, calls a model, logs runs.</li>
+    <li><b>Proactive</b>Sends reminders on a schedule.</li>
+    <li><b>Deployed</b>Runs in the cloud with memory.</li>
+  </ol>
+  <div class="todo">Pick the stages of Better Me Agent that fit the calendar.</div>
+  <div class="reuse">Example: <a href="../../examples/08-agent-interaction/">examples/08-agent-interaction</a></div>
+</section>
+
+<section class="slide">
+  <div class="kicker">Summary</div>
+  <h1>Live data,<br>living agents</h1>
+  <ul class="ticks">
+    <li><i class="fas fa-check-circle"></i>You choose the right realtime pattern</li>
+    <li><i class="fas fa-check-circle"></i>You built a client and an autonomous agent</li>
+    <li><i class="fas fa-check-circle"></i>You know how background agents are put together</li>
+  </ul>
+  <div class="note"><strong>Next · 09 Final project</strong> — your own product, end to end.</div>
+</section>
+
+<script src="../assets/course.js"></script>
+<script src="../assets/deck.js"></script>
+</body>
+</html>
